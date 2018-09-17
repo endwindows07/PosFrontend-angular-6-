@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ProfileComponent } from './components/profile/profile.component';
 import { AccountRouting } from './account.routing';
 import { LayoutModule } from '../layout/layout.module';
+import { MembersComponent } from './components/members/members.component';
 
 @NgModule({
   imports: [
@@ -10,6 +11,6 @@ import { LayoutModule } from '../layout/layout.module';
     AccountRouting,
     LayoutModule
   ],
-  declarations: [ProfileComponent]
+  declarations: [ProfileComponent, MembersComponent]
 })
 export class AccountModule { }

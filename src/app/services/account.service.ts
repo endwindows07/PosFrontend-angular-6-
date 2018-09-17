@@ -3,36 +3,41 @@ import { HttpService } from "./http.service";
 import { ILogin } from "../interfaces/login.interface";
 import { IAccount } from "../interfaces/account.interface";
 import { AccessTokenService } from "./accesstoken.service";
+import { IProfile } from "../interfaces/profile.interface";
+import { IMember } from "../interfaces/member.interface";
 
 @Injectable()
 
 export class AccontService {
-    constructor 
-    (
+    constructor (
         private http: HttpService,
         private accessToekenService: AccessTokenService
     ) { }
 
-    onLogin (model: ILogin){
+    onLogin(model: ILogin) {
         return this.http
-                    .requestPost("api/account/login", model)
-                    .toPromise() as Promise<{ accessToken: string }>;
+            .requestPost("api/account/login", model)
+            .toPromise() as Promise<{ accessToken: string }>;
     }
     
-    onGetProfile (){
-
+    onGetProfile(accessToken: string) {
+        return this.http.requestGet("api/member/data", accessToken)
+            .toPromise() as Promise<IProfile>;
     }
 
-    onUpdateProfile(){
 
+    onUpdateProfile(){
+        
     }
     
     onChangePassword(){
 
     }
 
-    onGetAllMember (){
-
+    onGetAllMember(accessToken: string) {
+        return this.http
+            .requestGet("api/member/all-member", accessToken)
+            .toPromise() as Promise<IMember>;
     }
 
     onRegister (){

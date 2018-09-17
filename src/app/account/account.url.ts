@@ -1,3 +1,4 @@
 export const AccountUrl = {
-    Profile: 'profile'
+    Profile: 'profile',
+    Members: 'members'
 };
