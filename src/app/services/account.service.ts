@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
-import { HttpService } from "./http.service";
-import { ILogin } from "../interfaces/login.interface";
-import { IAccount } from "../interfaces/account.interface";
-import { AccessTokenService } from "./accesstoken.service";
-import { IProfile } from "../interfaces/profile.interface";
-import { IMember } from "../interfaces/member.interface";
+import { Injectable } from '@angular/core';
+import { HttpService } from './http.service';
+import { ILogin } from '../interfaces/login.interface';
+import { IAccount } from '../interfaces/account.interface';
+import { AccessTokenService } from './accesstoken.service';
+import { IProfile } from '../interfaces/profile.interface';
+import { IMember } from '../interfaces/member.interface';
 
 @Injectable()
 
@@ -16,35 +16,35 @@ export class AccontService {
 
     onLogin(model: ILogin) {
         return this.http
-            .requestPost("api/account/login", model)
+            .requestPost('api/account/login', model)
             .toPromise() as Promise<{ accessToken: string }>;
     }
-    
+
     onGetProfile(accessToken: string) {
-        return this.http.requestGet("api/member/data", accessToken)
+        return this.http.requestGet('api/member/data', accessToken)
             .toPromise() as Promise<IProfile>;
     }
 
 
-    onUpdateProfile(){
-        
+    onUpdateProfile() {
+
     }
-    
-    onChangePassword(){
+
+    onChangePassword() {
 
     }
 
     onGetAllMember(accessToken: string) {
         return this.http
-            .requestGet("api/member/all-member", accessToken)
+            .requestGet('api/member/all-member', accessToken)
             .toPromise() as Promise<IMember>;
     }
 
-    onRegister (){
+    onRegister () {
 
     }
 
-    onUpdateMember (){
+    onUpdateMember () {
 
     }
 }

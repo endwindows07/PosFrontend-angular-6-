@@ -4,13 +4,13 @@ import { AccontService } from '../../../services/account.service';
 import { AccessTokenService } from '../../../services/accesstoken.service';
 import { IMember } from '../../../interfaces/member.interface';
 import { Router } from '@angular/router';
-import { AppUrl } from '../../../app.url'
+import { AppUrl } from '../../../app.url';
 import { AccountUrl } from '../../account.url';
 
 @Component({
-  selector: "app-profile",
-  templateUrl: "./profile.component.html",
-  styleUrls: ["./profile.component.css"]
+  selector: 'app-profile',
+  templateUrl: './profile.component.html',
+  styleUrls: ['./profile.component.css']
 })
 export class ProfileComponent implements OnInit {
   constructor(
@@ -35,10 +35,10 @@ export class ProfileComponent implements OnInit {
       .onGetProfile(this.accessTokenService.getAccesstokenStore())
       .then(profile => {
         this.MemberProfile = profile;
-        console.log("load profile success", profile);
+        console.log('load profile success', profile);
       })
       .catch(err => {
-        this.router.navigate(["/", AppUrl.Login]);
+        this.router.navigate(['/', AppUrl.Login]);
       });
   }
 

@@ -1,5 +1,5 @@
-import { IAccount } from "./account.interface";
+import { IAccount } from './account.interface';
 export interface IMember {
-    Members: IAccount[],
-    MemberTotal: number
+    Members: IAccount[];
+    MemberTotal: number;
 }

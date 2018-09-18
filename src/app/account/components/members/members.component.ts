@@ -7,9 +7,9 @@ import { AppUrl } from '../../../app.url';
 import { AccountUrl } from '../../account.url';
 
 @Component({
-  selector: "app-members",
-  templateUrl: "./members.component.html",
-  styleUrls: ["./members.component.css"]
+  selector: 'app-members',
+  templateUrl: './members.component.html',
+  styleUrls: ['./members.component.css']
 })
 export class MembersComponent implements OnInit {
   constructor(
@@ -23,15 +23,15 @@ export class MembersComponent implements OnInit {
   MemberList: IMember;
   AppUrl = AppUrl;
   AccountUrl = AccountUrl;
-  
+
   ngOnInit() {}
   initLoadAllMember() {
     this.account
       .onGetAllMember(this.accessTokenService.getAccesstokenStore())
       .then(members => {
         this.MemberList = members;
-        console.log(members, "this");
+        console.log(members, 'this');
       })
-      .catch(err => console.log("load false"));
+      .catch(err => console.log('load false'));
   }
 }

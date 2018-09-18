@@ -1,4 +1,4 @@
-import { Routes, RouterModule} from '@angular/router'
+import { Routes, RouterModule} from '@angular/router';
 import { AppUrl } from './app.url';
 import { LoginComponent } from './components/login/login.component';
 const RouteLists: Routes = [

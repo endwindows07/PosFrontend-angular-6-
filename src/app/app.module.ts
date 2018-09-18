@@ -22,7 +22,7 @@ import { AccontService } from './services/account.service';
     LayoutModule,
     FormsModule,
     ReactiveFormsModule,
-  ],  
+  ],
   providers: [
     AccontService
   ],

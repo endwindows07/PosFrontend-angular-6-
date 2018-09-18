@@ -1,10 +1,10 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
 export class AccessTokenService {
-  private accessKey = "AccessToken";
+  private accessKey = 'AccessToken';
 
   setAccesstokenStore(accesstoken: string): void {
     localStorage.setItem(this.accessKey, accesstoken);

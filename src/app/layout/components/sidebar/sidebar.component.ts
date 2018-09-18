@@ -6,9 +6,9 @@ import { AccessTokenService } from '../../../services/accesstoken.service';
 import { IProfile } from '../../../interfaces/profile.interface';
 declare const App: any;
 @Component({
-  selector: "app-sidebar",
-  templateUrl: "./sidebar.component.html",
-  styleUrls: ["./sidebar.component.css"]
+  selector: 'app-sidebar',
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
   constructor(
@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit {
     private accessTokenService: AccessTokenService
   ) {
     this.inittalLoadForm();
-    
+
     setTimeout(() => App.loadCommonScript(), 100);
   }
 
@@ -33,7 +33,7 @@ export class SidebarComponent implements OnInit {
       .then(profile => {
         this.MemberProfile = profile;
         console.log(profile);
-        console.log("load profile success");
+        console.log('load profile success');
       })
       .catch(err => console.log(err.Message));
   }
