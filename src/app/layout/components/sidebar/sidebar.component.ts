@@ -16,7 +16,6 @@ export class SidebarComponent implements OnInit {
     private accessTokenService: AccessTokenService
   ) {
     this.inittalLoadForm();
-
     setTimeout(() => App.loadCommonScript(), 100);
   }
 
@@ -32,8 +31,6 @@ export class SidebarComponent implements OnInit {
       .onGetProfile(this.accessTokenService.getAccesstokenStore())
       .then(profile => {
         this.MemberProfile = profile;
-        console.log(profile);
-        console.log('load profile success');
       })
       .catch(err => console.log(err.Message));
   }

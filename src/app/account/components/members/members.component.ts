@@ -5,6 +5,7 @@ import { AccessTokenService } from '../../../services/accesstoken.service';
 import { IMember } from '../../../interfaces/member.interface';
 import { AppUrl } from '../../../app.url';
 import { AccountUrl } from '../../account.url';
+import { IAccount } from '../../../interfaces/account.interface';
 
 @Component({
   selector: 'app-members',
@@ -25,13 +26,16 @@ export class MembersComponent implements OnInit {
   AccountUrl = AccountUrl;
 
   ngOnInit() {}
+
   initLoadAllMember() {
     this.account
       .onGetAllMember(this.accessTokenService.getAccesstokenStore())
       .then(members => {
         this.MemberList = members;
-        console.log(members, 'this');
       })
       .catch(err => console.log('load false'));
+  }
+  onUpdate(member: IAccount) {
+    this.router.navigate(['/', AppUrl.Account, AccountUrl.UpdateMember, member.Id]);
   }
 }

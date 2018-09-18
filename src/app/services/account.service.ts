@@ -5,46 +5,54 @@ import { IAccount } from '../interfaces/account.interface';
 import { AccessTokenService } from './accesstoken.service';
 import { IProfile } from '../interfaces/profile.interface';
 import { IMember } from '../interfaces/member.interface';
-
+declare let $;
 @Injectable()
-
 export class AccontService {
-    constructor (
-        private http: HttpService,
-        private accessToekenService: AccessTokenService
-    ) { }
+  constructor(
+    private http: HttpService,
+    private accessToekenService: AccessTokenService
+  ) {}
 
-    onLogin(model: ILogin) {
+  onLogin(model: ILogin) {
+    return this.http
+      .requestPost('api/account/login', model)
+      .toPromise() as Promise<{ accessToken: string }>;
+  }
+
+  onGetProfile(accessToken: string) {
+    return this.http
+      .requestGet('api/member/data', accessToken)
+      .toPromise() as Promise<IProfile>;
+  }
+
+  onUpdateMember(accessToken: string) {
+    return this.http
+      .requestPost('api/member/profile', accessToken)
+      .toPromise() as Promise<IProfile>;
+  }
+
+    onGetMemberByID(id: any, accessToken: string) {
         return this.http
-            .requestPost('api/account/login', model)
-            .toPromise() as Promise<{ accessToken: string }>;
-    }
+        .requestGet(`api/member/get-member/${id}`, accessToken)
+        .toPromise() as Promise<IProfile>;
+  }
+  onChangePassword() {}
 
-    onGetProfile(accessToken: string) {
-        return this.http.requestGet('api/member/data', accessToken)
-            .toPromise() as Promise<IProfile>;
-    }
+  onGetAllMember(accessToken: string) {
+    return this.http
+      .requestGet('api/member/all-member', accessToken)
+      .toPromise() as Promise<IMember>;
+  }
 
+  onRegister(model: IProfile, id: any, accessToken: string) {
+    return this.http
+      .requestPost(`api/Member/update-member/${id}`, model, accessToken)
+      .toPromise() as Promise<IProfile>;
+  }
 
-    onUpdateProfile() {
-
-    }
-
-    onChangePassword() {
-
-    }
-
-    onGetAllMember(accessToken: string) {
-        return this.http
-            .requestGet('api/member/all-member', accessToken)
-            .toPromise() as Promise<IMember>;
-    }
-
-    onRegister () {
-
-    }
-
-    onUpdateMember () {
-
-    }
+  onUpdateProfile(model: IProfile, accessToken: string) {
+    return this.http
+      .requestPost('api/member/profile', model, accessToken)
+      .toPromise() as Promise<IProfile>;
+  }
 }

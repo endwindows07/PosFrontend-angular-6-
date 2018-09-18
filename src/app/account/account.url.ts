@@ -1,4 +1,5 @@
 export const AccountUrl = {
     Profile: 'profile',
-    Members: 'members'
+    Members: 'members',
+    UpdateMember: 'update-member'
 };

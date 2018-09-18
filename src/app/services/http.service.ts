@@ -9,9 +9,6 @@ import { Observable } from 'rxjs';
 })
 export class HttpService {
   constructor(private http: HttpClient) {
-    this.http
-      .get('http://localhost:8080/api/values')
-      .subscribe(res => console.log(res));
   }
 
   private address = 'http://localhost:8080/';
@@ -53,14 +50,11 @@ export class HttpService {
 
   // Error: ดัก error เพือ่ปรับแต่ง
   private errorHandler(errorResponse: HttpErrorResponse): Observable<any> {
-    console.log(errorResponse.error.text, 'err');
-
     errorResponse['Message'] = errorResponse.message;
 
     if (errorResponse.error && errorResponse.message) {
-      errorResponse['Message'] = errorResponse.error.message;
+      errorResponse['Message'] = errorResponse.error;
     }
-
     throw errorResponse;
   }
 
