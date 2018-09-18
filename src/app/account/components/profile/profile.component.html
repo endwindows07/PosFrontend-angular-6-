@@ -35,6 +35,9 @@
           <li>
             <a data-toggle="tab" href="#edit">Edit Profile</a>
           </li>
+          <li>
+            <a data-toggle="tab" href="#password">Change Password</a>
+          </li>
         </ul>
       </div>
       <!-- /panel-heading -->
@@ -104,6 +107,45 @@
                     <div class="col-lg-6">
                       <input type="text" placeholder=" " id="lives-in" class="form-control" formControlName="lastname"
                         placeholder="นามสกุล">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <div class=" col-lg-1">
+                      <button class="btn btn-info" type="submit">บันทึก</button>
+                    </div>
+                    <div class="col-md-1">
+                      <button class="btn">ยกเลิก</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+              <!-- /col-lg-8 -->
+            </div>
+            <!-- /row -->
+          </div>
+          <div id="password" class="tab-pane">
+            <div class="row">
+              <div class="col-lg-8 col-lg-offset-2 detailed">
+                <h4 class="mb">แก้ไขรหัสผ่าน</h4>
+                <form role="form" class="form-horizontal" [formGroup]="formPassword" (submit)="onChangePassword()">
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">รหัสผ่านเดิม</label>
+                    <div class="col-lg-6">
+                      <input type="text" id="c-name" placeholder="รหัสผ่านเดิม" class="form-control" formControlName="old_Password">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">รหัสผ่านใหม่</label>
+                    <div class="col-lg-6">
+                      <input type="text" id="c-name" placeholder="รหัสผ่านใหม่" class="form-control" formControlName="new_Password">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-lg-2 control-label">ยืนยันรหัสผ่าน</label>
+                    <div class="col-lg-6">
+                      <input type="text" id="lives-in" placeholder="ยืนยันรหัสผ่าน" class="form-control"
+                        formControlName="cnew_password">
                     </div>
                   </div>
                   <div class="form-group">

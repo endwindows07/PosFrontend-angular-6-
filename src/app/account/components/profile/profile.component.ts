@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   ) {
     this.initialLoadProfile();
     this.initialLoadFromUpdate();
+    this.initailLoadFormChangePassword();
   }
 
   MemberProfile: IProfile;
@@ -29,6 +30,7 @@ export class ProfileComponent implements OnInit {
   AppUrl = AppUrl;
   AccountUrl = AccountUrl;
   form: FormGroup;
+  formPassword: FormGroup;
   ngOnInit() {}
 
   initialLoadProfile() {
@@ -62,6 +64,24 @@ export class ProfileComponent implements OnInit {
       fristname: [],
       lastname: [],
       image: []
+    });
+  }
+
+  // change password form
+  onChangePassword() {
+    this.account.onChangePassword(this.formPassword.value, this.accessTokenService.getAccesstokenStore())
+    .then(res => {
+      this.router.navigate(['/', AppUrl.Account, AccountUrl.Profile]);
+      console.log('change password success');
+    })
+    .catch(err => console.log(err.Message));
+  }
+
+  initailLoadFormChangePassword(){
+    this.formPassword = this.builder.group({
+      new_Password: [],
+      old_Password: [],
+      cnew_password: []
     });
   }
 }
