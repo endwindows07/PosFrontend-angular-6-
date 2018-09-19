@@ -1,5 +1,9 @@
 ﻿import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpHeaders,
+  HttpErrorResponse
+} from '@angular/common/http';
 // เอาใว้ดัก error จาก backend
 import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
@@ -8,9 +12,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class HttpService {
-  constructor(private http: HttpClient) {
-  }
-
+  constructor(private http: HttpClient) {}
   private address = 'http://localhost:8080/';
 
   requestPost(url: string, body: any, accessToken?: string) {
@@ -50,8 +52,9 @@ export class HttpService {
 
   // Error: ดัก error เพือ่ปรับแต่ง
   private errorHandler(errorResponse: HttpErrorResponse): Observable<any> {
-    errorResponse['Message'] = errorResponse.message;
+    console.log(errorResponse);
 
+    errorResponse['Message'] = errorResponse.message;
     if (errorResponse.error && errorResponse.message) {
       errorResponse['Message'] = errorResponse.error;
     }

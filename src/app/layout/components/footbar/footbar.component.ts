@@ -7,7 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FootbarComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+
+  ) { }
 
   ngOnInit() {
   }

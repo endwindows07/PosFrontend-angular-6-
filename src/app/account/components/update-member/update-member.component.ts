@@ -5,6 +5,7 @@ import { AccountUrl } from '../../account.url';
 import { AccontService } from '../../../services/account.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { AccessTokenService } from '../../../services/accesstoken.service';
+import { AlertService } from '../../../layout/components/services/alert.service';
 
 @Component({
   selector: 'app-update-member',
@@ -17,7 +18,8 @@ export class UpdateMemberComponent implements OnInit {
     private router: Router,
     private account: AccontService,
     private builder: FormBuilder,
-    private accessTokenService: AccessTokenService
+    private accessTokenService: AccessTokenService,
+    private alert: AlertService
   ) {
     this.nativeRoute.params.forEach(query => {
       this.MemberId = query.id;
@@ -51,6 +53,7 @@ export class UpdateMemberComponent implements OnInit {
       image: []
     });
   }
+
   onSubmitUpdate() {
     this.account
       .onRegister(
@@ -60,8 +63,8 @@ export class UpdateMemberComponent implements OnInit {
       )
       .then(res => {
         this.router.navigate(['/', AppUrl.Account, AccountUrl.Members]);
-        console.log('update member success');
+        this.alert.success_alert('update member success');
       })
-      .catch(err => console.log(err.Message));
+      .catch(err => this.alert.error_alert(err.Message));
   }
 }

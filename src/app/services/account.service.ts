@@ -1,17 +1,15 @@
-import { Injectable } from '@angular/core';
-import { HttpService } from './http.service';
-import { ILogin } from '../interfaces/login.interface';
-import { AccessTokenService } from './accesstoken.service';
-import { IProfile } from '../interfaces/profile.interface';
-import { IMember } from '../interfaces/member.interface';
-import { IChangePassword } from '../interfaces/change-password.interface';
+import { Injectable } from "@angular/core";
+import { HttpService } from "./http.service";
+import { ILogin } from "../interfaces/login.interface";
+import { AccessTokenService } from "./accesstoken.service";
+import { IProfile } from "../interfaces/profile.interface";
+import { IMember } from "../interfaces/member.interface";
+import { IChangePassword } from "../interfaces/change-password.interface";
 declare let $;
 
 @Injectable()
 export class AccontService {
-  constructor(
-    private http: HttpService,
-  ) {}
+  constructor(private http: HttpService) {}
 
   onLogin(model: ILogin) {
     return this.http
@@ -31,10 +29,10 @@ export class AccontService {
       .toPromise() as Promise<IProfile>;
   }
 
-    onGetMemberByID(id: any, accessToken: string) {
-        return this.http
-        .requestGet(`api/member/get-member/${id}`, accessToken)
-        .toPromise() as Promise<IProfile>;
+  onGetMemberByID(id: any, accessToken: string) {
+    return this.http
+      .requestGet(`api/member/get-member/${id}`, accessToken)
+      .toPromise() as Promise<IProfile>;
   }
 
   onChangePassword(model: IChangePassword, accesstoken: string) {
