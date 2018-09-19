@@ -4,6 +4,7 @@ import { AccountUrl } from '../../../account/account.url';
 import { AccontService } from '../../../services/account.service';
 import { AccessTokenService } from '../../../services/accesstoken.service';
 import { IProfile } from '../../../interfaces/profile.interface';
+import { IRoleAccount } from '../../../interfaces/role';
 declare const App: any;
 @Component({
   selector: 'app-sidebar',
@@ -22,7 +23,8 @@ export class SidebarComponent implements OnInit {
   MemberProfile: IProfile;
   AppUrl = AppUrl;
   AccountUrl = AccountUrl;
-
+  roleAccount = IRoleAccount;
+  
   ngOnInit() {
   }
 

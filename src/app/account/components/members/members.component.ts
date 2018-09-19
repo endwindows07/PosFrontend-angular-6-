@@ -1,12 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { AccontService } from "../../../services/account.service";
-import { Router } from "@angular/router";
-import { AccessTokenService } from "../../../services/accesstoken.service";
-import { IMember } from "../../../interfaces/member.interface";
-import { AppUrl } from "../../../app.url";
+import { Component, OnInit } from '@angular/core';
+import { AccontService } from '../../../services/account.service';
+import { Router } from '@angular/router';
+import { AccessTokenService } from '../../../services/accesstoken.service';
+import { IMember } from '../../../interfaces/member.interface';
+import { AppUrl } from '../../../app.url';
 import { AccountUrl } from '../../account.url';
 import { IAccount } from '../../../interfaces/account.interface';
-import { AlertService } from "../../../layout/components/services/alert.service";
+import { AlertService } from '../../../layout/components/services/alert.service';
+import { IRoleAccount } from '../../../interfaces/role';
 
 @Component({
   selector: 'app-members',
@@ -29,6 +30,10 @@ export class MembersComponent implements OnInit {
 
   ngOnInit() { }
 
+  getRoleName(role: IRoleAccount) {
+    return IRoleAccount[role];
+  }
+
   initLoadAllMember() {
     this.account
       .onGetAllMember(this.accessTokenService.getAccesstokenStore())
@@ -37,6 +42,7 @@ export class MembersComponent implements OnInit {
       })
       .catch(err => console.log('load false'));
   }
+
   onUpdate(member: IAccount) {
     this.router.navigate(['/', AppUrl.Account, AccountUrl.UpdateMember, member.Id])
       .then(() => this.alert.success_alert('update success'))

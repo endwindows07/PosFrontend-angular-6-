@@ -26,7 +26,7 @@
             <li><a href="buttons.html">คืนสินค้า</a></li>
           </ul>
         </li>
-        <li class="sub-menu">
+<li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
           <a href="javascript:;">
             <i class="fa fa-tasks"></i>
             <span>จัดการสินค้า</span>
@@ -37,7 +37,7 @@
             <li><a href="gallery.html">แก้ไขรายการสินค้า</a></li>
           </ul>
         </li>
-        <li class="sub-menu">
+<li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
           <a href="javascript:;">
             <i class="fa fa-th-large"></i>
             <span>คลังสินค้า</span>
@@ -48,7 +48,7 @@
             <li><a href="form_validation.html">Form Validation</a></li>
           </ul>
         </li>
-        <li class="sub-menu">
+        <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
           <a href="javascript:;">
             <i class="fa fa-users"></i>
             <span>จัดการสมาชิก</span>

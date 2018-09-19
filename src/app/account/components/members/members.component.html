@@ -22,7 +22,7 @@
               </td>
               <td class="hidden-phone"> {{ item.username }} </td>
               <td> {{ item.fristname }} {{ item.lastname }}</td>
-              <td> {{ item.role }} </td>
+              <td> {{ getRoleName(item.role) }} </td>
               <td><span class="label label-info label-mini"> {{ item.status }} </span></td>
               <td>
                 <a class="btn btn-primary btn-xs" [routerLink]="[ '/', AppUrl.Account, AccountUrl.UpdateMember, item.id ]"><i
