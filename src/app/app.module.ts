@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AppRouting } from './app.routing';
 import { LayoutModule } from './layout/layout.module';
 import { AccontService } from './services/account.service';
+import { ProductService } from './services/product.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { AccontService } from './services/account.service';
     ReactiveFormsModule,
   ],
   providers: [
-    AccontService
+    AccontService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
