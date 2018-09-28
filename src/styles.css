@@ -1,4 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-[data-notify="progressbar"] {
+/* [data-notify="progressbar"] {
     color: blue;
+}; */
+.bs-datepicker {
+  background-color: wheat;
+  padding: 10%;
+  width: 400px;
 }

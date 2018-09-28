@@ -5,6 +5,7 @@ import { AccontService } from '../../../services/account.service';
 import { AccessTokenService } from '../../../services/accesstoken.service';
 import { IProfile } from '../../../interfaces/profile.interface';
 import { IRoleAccount } from '../../../interfaces/role';
+import { ProductUrl } from '../../../Product/product.url';
 declare const App: any;
 @Component({
   selector: 'app-sidebar',
@@ -17,12 +18,13 @@ export class SidebarComponent implements OnInit {
     private accessTokenService: AccessTokenService
   ) {
     this.inittalLoadForm();
-    setTimeout(() => App.loadCommonScript(), 100);
+    setTimeout(() => App.loadCommonScript(), 200);
   }
 
   MemberProfile: IProfile;
   AppUrl = AppUrl;
   AccountUrl = AccountUrl;
+  ProductUrl = ProductUrl;
   roleAccount = IRoleAccount;
   
   ngOnInit() {

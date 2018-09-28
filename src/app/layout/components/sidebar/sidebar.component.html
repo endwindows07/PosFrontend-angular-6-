@@ -10,12 +10,6 @@
           </a>
         </p>
         <h5 class="centered"> {{ MemberProfile.fristname }} </h5>
-        <li class="mt">
-          <a class="active" href="index.html">
-            <i class="fa fa-dashboard"></i>
-            <span>รายงาน</span>
-          </a>
-        </li>
         <li class="sub-menu">
           <a href="javascript:;">
             <i class="fa fa-desktop"></i>
@@ -26,26 +20,56 @@
             <li><a href="buttons.html">คืนสินค้า</a></li>
           </ul>
         </li>
-<li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
+        <li class="mt">
+          <a class="" href="index.html">
+            <i class="fa fa-dashboard"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
+          <a href="javascript:;">
+            <i class="fa fa-tasks"></i>
+            <span>รายงาน</span>
+          </a>
+          <ul class="sub">
+            <li><a href="grids.html">รายงานขายสินค้า</a></li>
+            <li><a href="grids.html">รายงานยอดขาย</a></li>
+            <li><a href="calendar.html">รายงานยอดขายสินค้า</a></li>
+            <li><a href="gallery.html">รายงานเปรียบเทียบยอดขายสินค้า</a></li>
+          </ul>
+        </li>
+        <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
           <a href="javascript:;">
             <i class="fa fa-tasks"></i>
             <span>จัดการสินค้า</span>
           </a>
           <ul class="sub">
-            <li><a href="grids.html">รายการสินค้า</a></li>
-            <li><a href="calendar.html">เพิ่มรายการสินค้า</a></li>
-            <li><a href="gallery.html">แก้ไขรายการสินค้า</a></li>
+            <li><a [routerLink]="[ '/', AppUrl.Product, ProductUrl.Products]">รายการสินค้า</a></li>
+            <li><a [routerLink]="[ '/', AppUrl.Product, ProductUrl.AddProduct]">เพิ่มรายการสินค้า</a></li>
           </ul>
         </li>
-<li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
+        <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
+          <a href="javascript:;">
+            <i class="fa fa-tasks"></i>
+            <span>จัดการหมวดหมู่สินค้า</span>
+          </a>
+          <ul class="sub">
+            <li><a href="grids.html">รายการหมวดหมู่สินค้า</a></li>
+            <li><a href="calendar.html">เพิ่มหมวดหมู่สินค้า</a></li>
+            <li><a href="gallery.html">แก้ไขหมวดหมู่สินค้า</a></li>
+          </ul>
+        </li>
+        <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
           <a href="javascript:;">
             <i class="fa fa-th-large"></i>
             <span>คลังสินค้า</span>
           </a>
           <ul class="sub">
-            <li><a href="form_component.html">คลังสินค้า</a></li>
-            <li><a href="advanced_form_components.html">Advanced Components</a></li>
-            <li><a href="form_validation.html">Form Validation</a></li>
+            <li><a href="form_component.html">รายการสินค้าคงคลัง</a></li>
+            <li><a href="advanced_form_components.html">ปรับจำนวนสินค้าคงคลัง</a></li>
+            <li><a href="form_validation.html">สินค้าใกล้หมดจากคลัง</a></li>
+            <li><a href="form_validation.html">สินค้าใกล้หมดอายุ</a></li>
+            <li><a href="form_validation.html">สินนค้ามีปัญหาติดลบ</a></li>
           </ul>
         </li>
         <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">

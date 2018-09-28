@@ -1,4 +1,5 @@
 export const AppUrl = {
     Login: 'login',
-    Account: 'account'
+    Account: 'account',
+    Product: 'product'
 };

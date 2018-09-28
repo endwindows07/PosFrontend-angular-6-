@@ -5,21 +5,28 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FootbarComponent } from './components/footbar/footbar.component';
 import { ContentComponent } from './components/content/content.component';
 import { RouterModule } from '@angular/router';
-import { AlertModule } from 'ngx-bootstrap';
+import { AlertModule, BsDropdownModule, PaginationModule, BsDatepickerModule } from 'ngx-bootstrap';
 import { AlertService } from './components/services/alert.service';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    AlertModule.forRoot()
+    AlertModule.forRoot(),
+    PaginationModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   exports: [
     TopbarComponent,
     SidebarComponent,
     FootbarComponent,
     ContentComponent,
-    AlertModule
+    BsDropdownModule,
+    AlertModule,
+    PaginationModule,
+    BsDropdownModule,
+    BsDatepickerModule
   ],
   declarations: [TopbarComponent, SidebarComponent, FootbarComponent, ContentComponent],
   providers: [

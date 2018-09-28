@@ -22,7 +22,7 @@ export class UserRoleGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
 
       const role: IRoleAccount[] = next.data.role;
 

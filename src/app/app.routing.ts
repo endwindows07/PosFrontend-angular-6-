@@ -3,6 +3,7 @@ import { AppUrl } from './app.url';
 import { LoginComponent } from './components/login/login.component';
 import { AuthenticationGuard } from './guard.services/authentication.guard';
 import { UnAuthenticationGuard } from './guard.services/un-authentication.guard';
+
 const RouteLists: Routes = [
     { path: '', redirectTo: AppUrl.Login, pathMatch: 'full'},
     {
@@ -14,6 +15,10 @@ const RouteLists: Routes = [
         path: AppUrl.Account,
         loadChildren: './account/account.module#AccountModule',
         canActivate: [AuthenticationGuard]
+    },
+    {
+        path: AppUrl.Product,
+        loadChildren: './Product/product.module#ProductModule',
     }
 ];
 
