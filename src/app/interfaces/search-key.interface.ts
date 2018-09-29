@@ -1,4 +1,4 @@
-export interface ISearchKey{
+export interface IOptionKey{
     key: string;
     value: string;
 }

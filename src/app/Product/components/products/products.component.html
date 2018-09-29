@@ -1,38 +1,31 @@
 <app-content>
-  <div class="col-lg-12">
-    <h1>รายการสินค้า</h1>
-    <div class="row content-panel">
+  <div class="">
+    <div class="content-panel" *ngIf="Products">
+      <h1>รายการสินค้า</h1>
       <label for="exampleInputName2"></label>
-      <div class="form-group">
-        <div class="input-group">
-          <!-- drop down -->
-          <div class="input-group-prepend" dropdown>
-
-            <button id="button-basic" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
-              aria-controls="dropdown-basic">
-              {{ search_Type.value}}
-              <span class="caret"></span>
-            </button>
-            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-              <li role="menuitem" *ngFor="let item of search_TypeItem">
-                <a class="dropdown-item" (click)="search_Type = item">
-                  {{ item.value }}
-                </a>
-              </li>
-            </ul>
-          </div>
-          <!-- search input -->
+      <div class="row">
+        <div class="form-group col-lg-6">
           <span [ngSwitch]="search_Type.key">
-            <input *ngSwitchCase="'updated'" [(ngModel)]="search_Text" type="text" class="form-control" placeholder="date piger"
-              bsDaterangepicker placeholder="เลือกวันที่">
-            <input *ngSwitchDefault [(ngModel)]="search_Text" type="text" class="form-control" placeholder="ค้นหาข้อมูล">
+            <input *ngSwitchDefault [(ngModel)]="search_Text" type="text" class="form-control" placeholder=" {{ search_Type.value}}">
           </span>
-          <!-- search submit -->
-          <div class="input-group-append">
-            <button class="form-control" class="btn btn-primary" type="button" (click)="onClickSearch()">
-              <i class="fa fa-search"></i>
-            </button>
-          </div>
+        </div>
+        <div class="form-group col-lg-2" dropdown>
+          <button id="button-basic" dropdownToggle type="button" class="btn btn-defaul dropdown-toggle" aria-controls="dropdown-basic">
+            {{ search_Type.value}}
+            <span class="caret"></span>
+          </button>
+          <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+            <li role="menuitem" *ngFor="let item of search_TypeItem">
+              <a class="dropdown-item" (click)="search_Type = item">
+                {{ item.value }}
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="input-group-append col-lg-2 ">
+          <button class="form-control" class="btn btn-info" type="button" (click)="onClickSearch()">
+            <i class="fa fa-search"></i>
+          </button>
         </div>
       </div>
       <br>
@@ -58,7 +51,8 @@
             <td>{{item.name}}</td>
             <td>{{item.status}}</td>
             <td>
-              <button class="btn btn-success btn-xs"><i class="fa fa-check">details</i></button>
+              <a class="btn btn-success btn-xs" [routerLink]="[ '/', AppUrl.Product, ProductUrl.DetailProduct, item.id ]"><i
+                  class="fa fa-pencil">details</i></a>
             </td>
           </tr>
         </tbody>

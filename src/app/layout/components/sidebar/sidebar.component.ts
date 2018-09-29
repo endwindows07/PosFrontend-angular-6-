@@ -36,6 +36,6 @@ export class SidebarComponent implements OnInit {
       .then(profile => {
         this.MemberProfile = profile;
       })
-      .catch(err => console.log(err.Message));
+      .catch(err => this.accessTokenService.clearAccesstokenStore());
   }
 }

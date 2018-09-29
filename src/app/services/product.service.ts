@@ -8,17 +8,19 @@ declare let $;
 export class ProductService {
     constructor(private http: HttpService) { }
 
-    onGetProduct(options: ISearchOption, asccessToken: string){
-        return this.http.requestGet(`api/product/products?${$.param(options)}`, asccessToken)
+    onGetProduct(options: ISearchOption, accessToken: string){
+        return this.http.requestGet(`api/product/products?${$.param(options)}`, accessToken)
                         .toPromise() as Promise<IProduct>;
     }
 
-    onGetProductById(){
-
+    onGetProductById(id: any, accessToken: string){
+        return this.http.requestGet(`api/product/product/${id}`, accessToken)
+                        .toPromise() as Promise<IProduct>;
     }
 
-    onAddProduct(){
-
+    onAddProduct(model: IProduct, accessToken: string){
+        return this.http.requestPost(`api/product/add-product`, model, accessToken)
+                        .toPromise() as Promise<IProduct>;
     }
 
     onUpdateProduct(){

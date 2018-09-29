@@ -6,52 +6,54 @@ import { IProduct } from '../../../interfaces/Product/product.interface';
 import { AccessTokenService } from '../../../services/accesstoken.service';
 import { ISearchOption } from '../../../interfaces/search-option.interface';
 import { PageChangedEvent } from 'ngx-bootstrap';
-import { ISearchKey } from '../../../interfaces/search-key.interface';
+import { IOptionKey } from '../../../interfaces/search-key.interface';
+import { AppUrl } from '../../../app.url';
+import { ProductUrl } from '../../product.url';
 
 @Component({
-  selector: 'app-products',
-  templateUrl: './products.component.html',
-  styleUrls: ['./products.component.css']
+  selector: "app-products",
+  templateUrl: "./products.component.html",
+  styleUrls: ["./products.component.css"]
 })
-export class ProductsComponent implements OnInit {
 
-  constructor
-    (
+export class ProductsComponent {
+  constructor(
     private productService: ProductService,
     private alert: AlertService,
     private router: RouterModule,
     private accessTokenService: AccessTokenService
-    ) {
+  ) {
     this.search_Type = this.search_TypeItem[0];
     this.initailLoadProducts({
       Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page,
+      Limit_Page: this.limit_Page
     });
   }
-  search_Text = '';
-  search_Type: ISearchKey;
-  search_TypeItem: ISearchKey[] = [
-    { key: 'Name', value: 'search by name' },
-    { key: 'Barcode', value: 'search by barcode' },
-    { key: 'Barcode_Custom', value: 'search by barcode custom' },
-    { key: 'Cost_Product', value: 'search by cost product' },
-    { key: 'Price', value: 'search by price' },
-    { key: 'Amount_Product', value: 'search by amount product' },
-    { key: 'Status', value: 'search by status' },
-  ]
+
+  AppUrl = AppUrl;
+  ProductUrl = ProductUrl;
+
+  search_Text = "";
+  search_Type: IOptionKey;
+  search_TypeItem: IOptionKey[] = [
+    { key: "Name", value: "search by name" },
+    { key: "Barcode", value: "search by barcode" },
+    { key: "Barcode_Custom", value: "search by barcode custom" },
+    { key: "Cost_Product", value: "search by cost product" },
+    { key: "Price", value: "search by price" },
+    { key: "Amount_Product", value: "search by amount product" },
+    { key: "Status", value: "search by status" }
+  ];
 
   start_Page = 1;
   limit_Page = 10;
   Products: IProduct;
   SearchOption: ISearchOption;
 
-  ngOnInit() {
-  }
-
   private get getSearchtext() {
     let responseSearch = null;
     switch (this.search_Type.key) {
-      case 'updated':
+      case "updated":
         console.log(this.search_Text[0], "this");
         responseSearch = { from: this.search_Text[0], to: this.search_Text[1] };
         break;
@@ -67,7 +69,7 @@ export class ProductsComponent implements OnInit {
       Search_Text: this.getSearchtext,
       Search_Type: this.search_Type.key,
       Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page,
+      Limit_Page: this.limit_Page
     });
   }
 
@@ -76,12 +78,13 @@ export class ProductsComponent implements OnInit {
       Search_Text: this.getSearchtext,
       Search_Type: this.search_Type.key,
       Start_Page: page.page,
-      Limit_Page: page.itemsPerPage,
+      Limit_Page: page.itemsPerPage
     });
   }
 
   initailLoadProducts(option?: ISearchOption) {
-    this.productService.onGetProduct(option, this.accessTokenService.getAccesstokenStore())
+    this.productService
+      .onGetProduct(option, this.accessTokenService.getAccesstokenStore())
       .then(products => {
         this.Products = products;
         console.log(products);

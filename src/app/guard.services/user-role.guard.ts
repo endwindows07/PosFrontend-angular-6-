@@ -3,8 +3,6 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angul
 import { Observable } from 'rxjs';
 import { AccessTokenService } from '../services/accesstoken.service';
 import { AccontService } from '../services/account.service';
-import { resolve } from 'path';
-import { reject } from 'q';
 import { IRoleAccount } from '../interfaces/role';
 
 @Injectable({

@@ -1,5 +1,6 @@
 import { TypeProduct } from "./product-type.interface";
 
+
 export interface IProduct {
     id: string,
     barcode: string,
