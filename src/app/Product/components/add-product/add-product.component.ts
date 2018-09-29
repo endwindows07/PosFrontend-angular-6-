@@ -24,8 +24,8 @@ export class AddProductComponent {
     private builder: FormBuilder,
     private alert: AlertService
   ) {
-    this.typeProductKey = this.typeProductItem[0];
-    this.categorySelection = this.categoryItem[0];
+    this.typeSelected = this.typeItem[0];
+    this.categorySelected = this.categoryItem[0];
     this.initailLoadFormCreateProduct();
   }
 
@@ -33,14 +33,14 @@ export class AddProductComponent {
   type = TypeProduct;
   category = ICategory;
 
-  typeProductKey: IOptionKey;
-  typeProductItem: IOptionKey[] = [
+  typeSelected: IOptionKey;
+  typeItem: IOptionKey[] = [
     { key: this.type.ชิ้น.toString(), value: 'ชิ้น' },
     { key: this.type.อัน.toString(), value: 'อัน' },
     { key: this.type.แท่ง.toString(), value: 'แท่ง' }
   ]
 
-  categorySelection: IOptionKey;
+  categorySelected: IOptionKey;
   categoryItem: IOptionKey[] = [
     { key: this.category.Game.toString(), value: 'Game' },
     { key: this.category.Food.toString(), value: 'Food' },
@@ -58,8 +58,8 @@ export class AddProductComponent {
   }
 
   onSetOption() {
-    this.form.controls["type"].setValue(this.typeProductKey.key);
-    this.form.controls["productCategoryId"].setValue(this.categorySelection.key);
+    this.form.controls["type"].setValue(this.typeSelected.key);
+    this.form.controls["productCategoryId"].setValue(this.categorySelected.key);
   }
 
   initailLoadFormCreateProduct() {

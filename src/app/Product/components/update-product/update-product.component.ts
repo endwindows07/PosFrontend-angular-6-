@@ -28,28 +28,28 @@ export class UpdateProductComponent {
     this.nativeRoute.params.forEach(query => {
       this.ProductId = query.id;
     });
-    this.typeProductKey = this.typeProductItem[0];
-    this.categorySelection = this.categoryItem[0];
+    this.typeSelected = this.typeItem[0];
+    this.categorySelected = this.categoryItem[0];
     this.initailLoadFormCreateProduct();
     this.onLoadProduct(this.ProductId);
   }
-  
+
   form: FormGroup;
   ProductId: number;
   Product: IProduct;
-  
+
   expired: string[];
-  
+
   type = TypeProduct;
-  typeProductKey: IOptionKey;
-  typeProductItem: IOptionKey[] = [
+  typeSelected: IOptionKey;
+  typeItem: IOptionKey[] = [
     { key: this.type.ชิ้น.toString(), value: "ชิ้น" },
     { key: this.type.อัน.toString(), value: "อัน" },
     { key: this.type.แท่ง.toString(), value: "แท่ง" }
   ];
-  
+
   category = ICategory;
-  categorySelection: IOptionKey;
+  categorySelected: IOptionKey;
   categoryItem: IOptionKey[] = [
     { key: this.category.Game.toString(), value: "Game" },
     { key: this.category.Food.toString(), value: "Food" },
@@ -60,9 +60,14 @@ export class UpdateProductComponent {
     this.productService
       .onGetProductById(id, this.accessTokenService.getAccesstokenStore())
       .then(product => {
+
+        this.typeSelected = this.typeItem[product.type];
+        this.categorySelected = this.categoryItem[product.productCategoryId];
+
         this.expired = product.expired.split("T");
         this.expired = this.expired[0].split("-");
-        this.form.controls["expired"].setValue( this.expired[1] + "/" + this.expired[2] + "/" + this.expired[0]);
+
+        this.form.controls["expired"].setValue( this.expired[1] + "/" + this.expired[2] + "/" + this.expired[0] );
         this.form.controls["name"].setValue(product.name);
         this.form.controls["barcode"].setValue(product.barcode);
         this.form.controls["barcode_Custom"].setValue(product.barcode_Custom);
@@ -70,13 +75,34 @@ export class UpdateProductComponent {
         this.form.controls["cost_Product"].setValue(product.cost_Product);
         this.form.controls["price"].setValue(product.price);
         this.form.controls["amount_Product"].setValue(product.amount_Product);
-        this.typeProductKey.key = product.type.toString();
-        this.categorySelection.key = product.productCategoryId.toString();
+        this.form.controls["type"].setValue(this.typeSelected.key);
+        this.form.controls["productCategoryId"].setValue( this.categorySelected.key );
       })
       .catch(err => {
         this.alert.error_alert(err.Message);
         this.router.navigate(["", AppUrl.Product, ProductUrl.Products]);
       });
+  }
+
+  onUpdateProduct() {
+    this.onSetOption();
+    this.productService
+      .onUpdateProduct(this.form.value, this.ProductId, this.accessTokenService.getAccesstokenStore())
+        .then(res => {
+          this.alert.success_alert("update product success");
+          this.router.navigate(["/", AppUrl.Product, ProductUrl.Products]);
+        })
+        .catch(err => {
+          this.alert.error_alert(err.Message);
+          this.router.navigate(["/", AppUrl.Product, ProductUrl.Products]);
+        });
+  }
+
+  onSetOption() {
+    this.form.controls["type"].setValue(this.typeSelected.key);
+    this.form.controls["productCategoryId"].setValue(
+      this.categorySelected.key
+    );
   }
 
   initailLoadFormCreateProduct() {

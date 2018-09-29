@@ -23,7 +23,8 @@ export class ProductService {
                         .toPromise() as Promise<IProduct>;
     }
 
-    onUpdateProduct(){
-
+    onUpdateProduct(model: IProduct,id: any, accessToken: string) {
+        return this.http.requestPost(`api/product/update-product/${id}`, model, accessToken)
+                    .toPromise() as Promise<IProduct>;
     }
 }

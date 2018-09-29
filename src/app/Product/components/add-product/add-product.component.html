@@ -61,11 +61,11 @@
                 <div class="btn-group" dropdown>
                   <button id="button-basic" dropdownToggle type="button" class="btn btn-defaul dropdown-toggle"
                     aria-controls="dropdown-basic">
-                    {{typeProductKey.value}} <span class="caret"></span>
+                    {{typeSelected.value}} <span class="caret"></span>
                   </button>
                   <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                    <li role="menuitem" formControlName="type" *ngFor="let item of typeProductItem">
-                      <a class="dropdown-item" (click)="typeProductKey = item">{{ item.value }}</a>
+                    <li role="menuitem" formControlName="type" *ngFor="let item of typeItem">
+                      <a class="dropdown-item" (click)="typeSelected = item">{{ item.value }}</a>
                     </li>
                   </ul>
                 </div>
@@ -74,11 +74,11 @@
                 <div class="btn-group" dropdown>
                   <button id="button-basic" dropdownToggle type="button" class="btn btn-defaul dropdown-toggle"
                     aria-controls="dropdown-basic">
-                    {{ categorySelection.value }}<span class="caret"></span>
+                    {{ categorySelected.value }}<span class="caret"></span>
                   </button>
                   <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                     <li role="menuitem" *ngFor="let item of categoryItem">
-                      <a class="dropdown-item" (click)="categorySelection = item">{{ item.value }}</a>
+                      <a class="dropdown-item" (click)="categorySelected = item">{{ item.value }}</a>
                     </li>
                   </ul>
                 </div>
