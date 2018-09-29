@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
 import { AccessTokenService } from '../../../services/accesstoken.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, RequiredValidator } from '@angular/forms';
 import { AlertService } from '../../../layout/components/services/alert.service';
 import { TypeProduct } from '../../../interfaces/Product/product-type.interface';
 import { IOptionKey } from '../../../interfaces/search-key.interface';

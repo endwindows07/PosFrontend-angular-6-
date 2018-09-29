@@ -42,7 +42,8 @@ export class ProfileComponent implements OnInit {
         this.MemberProfile = profile;
         this.form.controls['username'].setValue(profile.username);
         this.form.controls['fristname'].setValue(profile.fristname);
-        this.form.controls['lastname'].setValue(profile.lastname);
+        this.form.controls["lastname"].setValue(profile.lastname);
+        this.form.controls['role'].setValue(profile.role);
       })
       .catch(err => {
         this.router.navigate(['/', AppUrl.Login]);
@@ -65,6 +66,7 @@ export class ProfileComponent implements OnInit {
       username: [],
       fristname: [],
       lastname: [],
+      role: [],
       image: []
     });
   }
