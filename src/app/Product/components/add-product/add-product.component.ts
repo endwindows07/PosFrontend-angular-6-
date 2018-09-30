@@ -25,7 +25,6 @@ export class AddProductComponent {
   ) {
     this.typeSelected = this.typeItem[0];
     this.categorySelected = this.categoryItem[0];
-    this.onSetOption();
     this.initailLoadFormCreateProduct();
   }
 

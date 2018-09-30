@@ -1,5 +1,62 @@
 <app-content>
-  <p>
-    out-ofstock works!
-  </p>
+  <div class="content-panel row" *ngIf="Products">
+    <h1>รายการสินค้าใกล้หมด</h1>
+    <label for="exampleInputName2"></label>
+    <div class="row">
+      <div class="form-group col-lg-6">
+        <span [ngSwitch]="search_Type.key">
+          <input *ngSwitchDefault [(ngModel)]="search_Text" type="text" class="form-control" placeholder=" {{ search_Type.value}}">
+        </span>
+      </div>
+      <div class="form-group col-lg-2" dropdown>
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-defaul dropdown-toggle" aria-controls="dropdown-basic">
+          {{ search_Type.value}}
+          <span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <li role="menuitem" *ngFor="let item of search_TypeItem">
+            <a class="dropdown-item" (click)="search_Type = item">
+              {{ item.value }}
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="input-group-append col-lg-2 ">
+        <button class="form-control" class="btn btn-info" type="button" (click)="onClickSearch()">
+          <i class="fa fa-search"></i>
+        </button>
+      </div>
+    </div>
+    <br>
+    <table class="table table-striped table-advance table-bordered table-hover">
+      <thead>
+        <tr>
+          <th>ลำดับ</th>
+          <th class="hidden-phone">รหัสแท่ง</th>
+          <th>รูปสินค้า</th>
+          <th>ชื่อสินค้า</th>
+          <th>จำนวนสินค้า</th>
+          <th>เครื่องมือ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of Products.product_List; let i = index">
+          <td>
+            <p>{{ i + 1 }}</p>
+          </td>
+          <td class="
+          hidden-phone"> {{item.barcode}} ({{ item.barcode_Custom }}) </td>
+          <td>image</td>
+          <td>{{item.name}}</td>
+          <td>{{item.status}}</td>
+          <td>
+            <a class="btn btn-success btn-xs" [routerLink]="[ '/', AppUrl.Product, ProductUrl.DetailProduct, item.id ]"><i
+                class="fa fa-pencil">details</i></a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <pagination [(ngModel)]="start_Page" [itemsPerPage]="limit_Page" (pageChanged)="onPageChanged($event)" [rotate]="false"
+      [maxSize]="10" previousText="หน้าก่อนหน้า" nextText="หน้าถัดไป" [totalItems]="Products.product_Total"></pagination>
+  </div>
 </app-content>

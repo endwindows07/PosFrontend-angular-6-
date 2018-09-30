@@ -15,7 +15,6 @@ import { ProductUrl } from '../../product.url';
   templateUrl: "./products.component.html",
   styleUrls: ["./products.component.css"]
 })
-
 export class ProductsComponent {
   constructor(
     private productService: ProductService,
@@ -36,13 +35,13 @@ export class ProductsComponent {
   search_Text = "";
   search_Type: IOptionKey;
   search_TypeItem: IOptionKey[] = [
-    { key: "Name", value: "search by name" },
-    { key: "Barcode", value: "search by barcode" },
-    { key: "Barcode_Custom", value: "search by barcode custom" },
-    { key: "Cost_Product", value: "search by cost product" },
-    { key: "Price", value: "search by price" },
-    { key: "Amount_Product", value: "search by amount product" },
-    { key: "Status", value: "search by status" }
+    { key: "Name", value: "ค้นหาด้วย ชื่อสินค้า" },
+    { key: "Barcode", value: "ค้นหาด้วย รหัสแท่ง" },
+    { key: "Barcode_Custom", value: "ค้นหาด้วย รหัสกำหนดเอง" },
+    { key: "Cost_Product", value: "ค้นหาด้วย ราคาทุนสินค้า" },
+    { key: "Price", value: "ค้นหาด้วย ราคาขายสินค้า" },
+    { key: "Amount_Product", value: "ค้นหาด้วย จำนวนสินค้า" },
+    { key: "Status", value: "ค้นหาด้วย สถานะ" }
   ];
 
   start_Page = 1;
@@ -54,7 +53,6 @@ export class ProductsComponent {
     let responseSearch = null;
     switch (this.search_Type.key) {
       case "updated":
-        console.log(this.search_Text[0], "this");
         responseSearch = { from: this.search_Text[0], to: this.search_Text[1] };
         break;
       default:
