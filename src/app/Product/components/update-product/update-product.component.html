@@ -63,8 +63,8 @@
                     aria-controls="dropdown-basic">
                     {{typeSelected.value}} <span class="caret"></span>
                   </button>
-                  <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                    <li role="menuitem" formControlName="type" *ngFor="let item of typeItem">
+                  <ul id="dropdown-basic" formControlName="type" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                    <li role="menuitem"  *ngFor="let item of typeItem">
                       <a class="dropdown-item" (click)="typeSelected = item">{{ item.value }}</a>
                     </li>
                   </ul>

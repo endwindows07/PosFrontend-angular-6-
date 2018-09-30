@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 declare let $: any;
 @Injectable()
+
 export class AlertService {
   notify(message: string, type: string = 'info', title: string = '') {
     $.notify(

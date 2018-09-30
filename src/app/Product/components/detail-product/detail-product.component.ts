@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../../services/product.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService } from '../../../layout/components/services/alert.service';
-import { AccessTokenService } from '../../../services/accesstoken.service';
-import { IProduct } from '../../../interfaces/Product/product.interface';
-import { AppUrl } from '../../../app.url';
-import { ProductUrl } from '../../product.url';
+import { Component, OnInit } from "@angular/core";
+import { ProductService } from "../../../services/product.service";
+import { Router, ActivatedRoute } from "@angular/router";
+import { AlertService } from "../../../layout/components/services/alert.service";
+import { AccessTokenService } from "../../../services/accesstoken.service";
+import { IProduct } from "../../../interfaces/Product/product.interface";
+import { AppUrl } from "../../../app.url";
+import { ProductUrl } from "../../product.url";
+import { ICategory } from "../../../interfaces/Product/product-category.interface";
+import { TypeProduct } from "../../../interfaces/Product/product-type.interface";
 
 @Component({
   selector: "app-detail-product",
@@ -38,5 +40,12 @@ export class DetailProductComponent {
         this.Product = product;
       })
       .catch(err => this.alert.error_alert(err.Message));
+  }
+
+  getCategory(categoryNumber: ICategory) {
+    return ICategory[categoryNumber];
+  }
+  getType(typeNumber: TypeProduct) {
+    return TypeProduct[typeNumber];
   }
 }

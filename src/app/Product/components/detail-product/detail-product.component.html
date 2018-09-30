@@ -39,12 +39,12 @@
         </div>
         <div class="row">
           <h4>Amount :
-            <small> {{ Product.amount_Product }} ชิ้น</small>
+            <small> {{ Product.amount_Product }} {{ getType(Product.type) }}</small>
           </h4>
         </div>
         <div class="row">
           <h4>Category :
-            <small> {{ Product.productCategoryId }} </small>
+            <small> {{ getCategory(Product.productCategoryId) }} </small>
           </h4>
         </div>
         <div class="row">
