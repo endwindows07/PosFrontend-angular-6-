@@ -1,5 +1,6 @@
 export const AppUrl = {
     Login: 'login',
     Account: 'account',
-    Product: 'product'
+    Product: 'product',
+    Stock: 'stock'
 };
