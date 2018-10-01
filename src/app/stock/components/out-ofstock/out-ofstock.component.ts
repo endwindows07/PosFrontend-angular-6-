@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../../services/product.service';
-import { AlertService } from '../../../layout/components/services/alert.service';
-import { RouterModule } from '@angular/router';
-import { AccessTokenService } from '../../../services/accesstoken.service';
-import { AppUrl } from '../../../app.url';
-import { ProductUrl } from '../../../Product/product.url';
-import { IOptionKey } from '../../../interfaces/search-key.interface';
-import { IProduct } from '../../../interfaces/Product/product.interface';
-import { ISearchOption } from '../../../interfaces/search-option.interface';
-import { PageChangedEvent } from 'ngx-bootstrap';
+import { Component, OnInit } from "@angular/core";
+import { ProductService } from "../../../services/product.service";
+import { AlertService } from "../../../layout/components/services/alert.service";
+import { RouterModule } from "@angular/router";
+import { AccessTokenService } from "../../../services/accesstoken.service";
+import { AppUrl } from "../../../app.url";
+import { ProductUrl } from "../../../Product/product.url";
+import { IOptionKey } from "../../../interfaces/search-key.interface";
+import { IProduct } from "../../../interfaces/Product/product.interface";
+import { ISearchOption } from "../../../interfaces/search-option.interface";
+import { PageChangedEvent } from "ngx-bootstrap";
 
 @Component({
   selector: "app-out-ofstock",
   templateUrl: "./out-ofstock.component.html",
   styleUrls: ["./out-ofstock.component.css"]
 })
-export class OutOfstockComponent  {
+export class OutOfstockComponent {
   constructor(
     private productService: ProductService,
     private alert: AlertService,
@@ -25,12 +25,21 @@ export class OutOfstockComponent  {
     this.search_Type = this.search_TypeItem[0];
     this.initailLoadProducts({
       Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page
+      Limit_Page: this.limit_Page,
+      Search_DefaultType: this.searchDefaultType,
+      Search_DefaultText: this.searchDefaultText
     });
   }
 
   AppUrl = AppUrl;
   ProductUrl = ProductUrl;
+  start_Page = 1;
+  limit_Page = 10;
+
+  Products: IProduct;
+  SearchOption: ISearchOption;
+  searchDefaultType = "Amount_Product";
+  searchDefaultText = 10;
 
   search_Text = "";
   search_Type: IOptionKey;
@@ -44,10 +53,15 @@ export class OutOfstockComponent  {
     { key: "Status", value: "ค้นหาด้วย สถานะ" }
   ];
 
-  start_Page = 1;
-  limit_Page = 10;
-  Products: IProduct;
-  SearchOption: ISearchOption;
+  initailLoadProducts(option?: ISearchOption) {
+    this.productService
+      .onGetProduct(option, this.accessTokenService.getAccesstokenStore())
+      .then(products => {
+        this.Products = products;
+        console.log(products);
+      })
+      .catch(err => this.alert.error_alert(err.Message));
+  }
 
   private get getSearchtext() {
     let responseSearch = null;
@@ -67,26 +81,20 @@ export class OutOfstockComponent  {
       Search_Text: this.getSearchtext,
       Search_Type: this.search_Type.key,
       Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page
+      Limit_Page: this.limit_Page,
+      Search_DefaultType: this.searchDefaultType,
+      Search_DefaultText: this.searchDefaultText
     });
   }
 
   onPageChanged(page: PageChangedEvent) {
     this.initailLoadProducts({
+      Start_Page: page.page,
+      Limit_Page: page.itemsPerPage,
       Search_Text: this.getSearchtext,
       Search_Type: this.search_Type.key,
-      Start_Page: page.page,
-      Limit_Page: page.itemsPerPage
+      Search_DefaultType: this.searchDefaultType,
+      Search_DefaultText: this.searchDefaultText
     });
-  }
-
-  initailLoadProducts(option?: ISearchOption) {
-    this.productService
-      .onGetProduct(option, this.accessTokenService.getAccesstokenStore())
-      .then(products => {
-        this.Products = products;
-        console.log(products);
-      })
-      .catch(err => this.alert.error_alert(err.Message));
   }
 }
