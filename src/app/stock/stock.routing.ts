@@ -8,22 +8,30 @@ import { NagativeProductComponent } from "./components/nagative-product/nagative
 
 
 const RouteLists: Routes = [
-    { path: '', redirectTo: StockUrl.Stocks, pathMatch: 'full' },
-    {
-        path: StockUrl.Stocks, component: StocksComponent
-    },
-    {
-        path: StockUrl.AdjsutStock, component: AdjustStockComponent
-    },
-    {
-        path: StockUrl.OutOfStock, component: OutOfstockComponent
-    },
-    {
-        path: StockUrl.ProductsNearExpired, component: ProductExpiredComponent
-    },
-    {
-        path: StockUrl.NegativeProducts, component: NagativeProductComponent
-    },
-]
+  { path: "", redirectTo: StockUrl.Stocks, pathMatch: "full" },
+  {
+    path: StockUrl.Stocks,
+    component: StocksComponent
+  },
+  {
+    path: StockUrl.AdjsutStock,
+    children: [
+      { path: "", component: AdjustStockComponent },
+      { path: ":id", component: AdjustStockComponent }
+    ]
+  },
+  {
+    path: StockUrl.OutOfStock,
+    component: OutOfstockComponent
+  },
+  {
+    path: StockUrl.ProductsNearExpired,
+    component: ProductExpiredComponent
+  },
+  {
+    path: StockUrl.NegativeProducts,
+    component: NagativeProductComponent
+  }
+];
 
 export const StockRouting = RouterModule.forChild(RouteLists);

@@ -120,7 +120,6 @@ export class ProductsComponent {
       .onGetProduct(option, this.accessTokenService.getAccesstokenStore())
       .then(products => {
         this.Products = products;
-        console.log(products);
       })
       .catch(err => this.alert.error_alert(err.Message));
   }

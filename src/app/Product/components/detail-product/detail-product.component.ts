@@ -8,6 +8,7 @@ import { AppUrl } from "../../../app.url";
 import { ProductUrl } from "../../product.url";
 import { ICategory } from "../../../interfaces/Product/product-category.interface";
 import { TypeProduct } from "../../../interfaces/Product/product-type.interface";
+import { StockUrl } from "../../../stock/stock.url";
 
 @Component({
   selector: "app-detail-product",
@@ -30,6 +31,7 @@ export class DetailProductComponent {
 
   AppUrl = AppUrl;
   ProductUrl = ProductUrl;
+  StockUrl = StockUrl;
   ProductId: number;
   Product: IProduct;
 
