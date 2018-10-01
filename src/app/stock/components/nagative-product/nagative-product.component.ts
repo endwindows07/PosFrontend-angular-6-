@@ -15,7 +15,7 @@ import { PageChangedEvent } from 'ngx-bootstrap';
   templateUrl: "./nagative-product.component.html",
   styleUrls: ["./nagative-product.component.css"]
 })
-export class NagativeProductComponent  {
+export class NagativeProductComponent {
   constructor(
     private productService: ProductService,
     private alert: AlertService,
@@ -25,12 +25,16 @@ export class NagativeProductComponent  {
     this.search_Type = this.search_TypeItem[0];
     this.initailLoadProducts({
       Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page
+      Limit_Page: this.limit_Page,
+      Search_DefaultType: this.searchDefaultType,
+      Search_DefaultText: this.searchDefaultText
     });
   }
 
   AppUrl = AppUrl;
   ProductUrl = ProductUrl;
+  searchDefaultType = "Amount_Product";
+  searchDefaultText = -1;
 
   search_Text = "";
   search_Type: IOptionKey;
@@ -45,7 +49,7 @@ export class NagativeProductComponent  {
   ];
 
   start_Page = 1;
-  limit_Page = 10;
+  limit_Page = 8;
   Products: IProduct;
   SearchOption: ISearchOption;
 
@@ -64,19 +68,23 @@ export class NagativeProductComponent  {
 
   onClickSearch() {
     this.initailLoadProducts({
+      Start_Page: this.start_Page,
+      Limit_Page: this.limit_Page,
       Search_Text: this.getSearchtext,
       Search_Type: this.search_Type.key,
-      Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page
+      Search_DefaultType: this.searchDefaultType,
+      Search_DefaultText: this.searchDefaultText
     });
   }
 
   onPageChanged(page: PageChangedEvent) {
     this.initailLoadProducts({
+      Start_Page: page.page,
+      Limit_Page: page.itemsPerPage,
       Search_Text: this.getSearchtext,
       Search_Type: this.search_Type.key,
-      Start_Page: page.page,
-      Limit_Page: page.itemsPerPage
+      Search_DefaultType: this.searchDefaultType,
+      Search_DefaultText: this.searchDefaultText
     });
   }
 
@@ -87,6 +95,6 @@ export class NagativeProductComponent  {
         this.Products = products;
         console.log(products);
       })
-      .catch(err => this.alert.error_alert(err.Message));
+      .catch(err => this.Products.cost_Product = "1");
   }
 }

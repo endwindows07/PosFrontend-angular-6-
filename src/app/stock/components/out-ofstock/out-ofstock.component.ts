@@ -34,7 +34,7 @@ export class OutOfstockComponent {
   AppUrl = AppUrl;
   ProductUrl = ProductUrl;
   start_Page = 1;
-  limit_Page = 10;
+  limit_Page = 8;
 
   Products: IProduct;
   SearchOption: ISearchOption;

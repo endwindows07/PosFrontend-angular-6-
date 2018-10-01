@@ -9,6 +9,7 @@ import { PageChangedEvent } from 'ngx-bootstrap';
 import { IOptionKey } from '../../../interfaces/search-key.interface';
 import { AppUrl } from '../../../app.url';
 import { ProductUrl } from '../../product.url';
+import { ICategory } from '../../../interfaces/Product/product-category.interface';
 
 @Component({
   selector: "app-products",
@@ -25,7 +26,7 @@ export class ProductsComponent {
     this.search_Type = this.search_TypeItem[0];
     this.initailLoadProducts({
       Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page
+      Limit_Page: this.limit_Page,
     });
   }
 
@@ -44,10 +45,40 @@ export class ProductsComponent {
     { key: "Status", value: "ค้นหาด้วย สถานะ" }
   ];
 
+  category = ICategory;
+  categorySelected: IOptionKey;
+  categoryItem: IOptionKey[] = [
+    { key: this.category.ของใช้ทั่วไป.toString(), value: "ของใช้ทั่วไป" },
+    { key: this.category.ขนม.toString(), value: "ขนม" },
+    { key: this.category.อาหารสำเร็จรูป.toString(), value: "อาหารสำเร็จรูป" },
+    { key: this.category.เครื่องดื่ม.toString(), value: "เครื่องดื่ม" },
+    { key: this.category.เครื่องครัว.toString(), value: "เครื่องครัว" },
+    { key: this.category.เครื่องสำอาง.toString(), value: "เครื่องสำอาง" },
+    { key: this.category.อุปกรณ์ห้องน้ำ.toString(), value: "อุปกรณ์ห้องน้ำ" },
+    { key: this.category.เครื่องเขียน.toString(), value: "เครื่องเขียน" },
+    { key: this.category.เครื่องมือ.toString(), value: "เครื่องมือ" },
+    { key: this.category.เครื่อใช้ไฟฟ้า.toString(), value: "เครื่อใช้ไฟฟ้า" },
+    { key: this.category.ยา.toString(), value: "ยา" },
+    { key: this.category.ของเล่นเด็ก.toString(), value: "ของเล่นเด็ก" },
+    { key: this.category.ไม่มีหมวดหมู่.toString(), value: "ไม่มีหมวดหมู่" }
+  ];
+
   start_Page = 1;
-  limit_Page = 10;
+  limit_Page = 8;
   Products: IProduct;
   SearchOption: ISearchOption;
+
+  searchDefaultType = "ProductCategoryId";
+  searchDefaultText;
+
+  getStatus(status: boolean) {
+    switch (status) {
+      case true:
+        return "พร้อมขาย";
+      case false:
+        return "ไม่พร้อมขาย";
+    }
+  }
 
   private get getSearchtext() {
     let responseSearch = null;
@@ -67,7 +98,9 @@ export class ProductsComponent {
       Search_Text: this.getSearchtext,
       Search_Type: this.search_Type.key,
       Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page
+      Limit_Page: this.limit_Page,
+      Search_DefaultType: this.searchDefaultType,
+      Search_DefaultText: this.categorySelected.value
     });
   }
 
@@ -76,7 +109,9 @@ export class ProductsComponent {
       Search_Text: this.getSearchtext,
       Search_Type: this.search_Type.key,
       Start_Page: page.page,
-      Limit_Page: page.itemsPerPage
+      Limit_Page: page.itemsPerPage,
+      Search_DefaultType: this.searchDefaultType,
+      Search_DefaultText: this.categorySelected.value
     });
   }
 

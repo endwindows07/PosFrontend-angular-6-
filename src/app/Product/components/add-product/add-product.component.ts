@@ -49,7 +49,6 @@ export class AddProductComponent {
 
   categorySelected: IOptionKey;
   categoryItem: IOptionKey[] = [
-    
     { key: this.category.ของใช้ทั่วไป.toString(), value: "ของใช้ทั่วไป" },
     { key: this.category.ขนม.toString(), value: "ขนม" },
     { key: this.category.อาหารสำเร็จรูป.toString(), value: "อาหารสำเร็จรูป" },
