@@ -7,6 +7,7 @@ import { IProfile } from '../../../interfaces/profile.interface';
 import { IRoleAccount } from '../../../interfaces/role';
 import { ProductUrl } from '../../../Product/product.url';
 import { StockUrl } from '../../../stock/stock.url';
+import { SalesUrl } from '../../../sales/sales.url';
 declare const App: any;
 @Component({
   selector: 'app-sidebar',
@@ -28,6 +29,7 @@ export class SidebarComponent implements OnInit {
   AccountUrl = AccountUrl;
   ProductUrl = ProductUrl;
   StockUrl = StockUrl;
+  SalesUrl = SalesUrl;
   
   roleAccount = IRoleAccount;
   

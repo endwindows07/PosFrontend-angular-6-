@@ -25,6 +25,11 @@ const RouteLists: Routes = [
     path: AppUrl.Stock,
     loadChildren: "./stock/stock.module#StockModule",
     canActivate: [AuthenticationGuard]
+  },
+  {
+    path: AppUrl.Sales,
+    loadChildren: "./sales/sales.module#SalesModule",
+    canActivate: [AuthenticationGuard]
   }
 ];
 
