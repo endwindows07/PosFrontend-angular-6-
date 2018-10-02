@@ -10,7 +10,7 @@
           </a>
         </p>
         <h5 class="centered"> {{ MemberProfile.fristname }} </h5>
-        <li class="sub-menu">
+        <li class="sub-menu mt">
           <a href="javascript:;">
             <i class="fa fa-desktop"></i>
             <span>หน้าร้าน</span>
@@ -29,21 +29,9 @@
         <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
           <a href="javascript:;">
             <i class="fa fa-tasks"></i>
-            <span>รายงาน</span>
-          </a>
-          <ul class="sub">
-            <li><a href="grids.html">รายงานขายสินค้า</a></li>
-            <li><a href="grids.html">รายงานยอดขาย</a></li>
-            <li><a href="calendar.html">รายงานยอดขายสินค้า</a></li>
-            <li><a href="gallery.html">รายงานเปรียบเทียบยอดขายสินค้า</a></li>
-          </ul>
-        </li>
-        <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
-          <a href="javascript:;">
-            <i class="fa fa-tasks"></i>
             <span>จัดการสินค้า</span>
           </a>
-          <ul class="sub">
+          <ul class="sub ">
             <li><a [routerLink]="[ '/', AppUrl.Product, ProductUrl.Products]">รายการสินค้า</a></li>
             <li><a [routerLink]="[ '/', AppUrl.Product, ProductUrl.AddProduct]">เพิ่มรายการสินค้า</a></li>
           </ul>
@@ -55,10 +43,21 @@
           </a>
           <ul class="sub">
             <li><a [routerLink]="[ '/', AppUrl.Stock, StockUrl.Stocks]">รายการสินค้าคงคลัง</a></li>
-            <li><a [routerLink]="[ '/', AppUrl.Stock, StockUrl.AdjsutStock]">ปรับจำนวนสินค้าคงคลัง</a></li>
             <li><a [routerLink]="[ '/', AppUrl.Stock, StockUrl.OutOfStock]">สินค้าใกล้หมดจากคลัง</a></li>
             <li><a [routerLink]="[ '/', AppUrl.Stock, StockUrl.ProductsNearExpired]">สินค้าใกล้หมดอายุ</a></li>
             <li><a [routerLink]="[ '/', AppUrl.Stock, StockUrl.NegativeProducts]">สินนค้ามีปัญหาติดลบ</a></li>
+          </ul>
+        </li>
+        <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
+          <a href="javascript:;">
+            <i class="fa fa-tasks"></i>
+            <span>รายงาน</span>
+          </a>
+          <ul class="sub">
+            <li><a href="grids.html">รายงานขายสินค้า</a></li>
+            <li><a href="grids.html">รายงานยอดขาย</a></li>
+            <li><a href="calendar.html">รายงานยอดขายสินค้า</a></li>
+            <li><a href="gallery.html">รายงานเปรียบเทียบยอดขายสินค้า</a></li>
           </ul>
         </li>
         <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">

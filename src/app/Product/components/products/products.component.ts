@@ -65,11 +65,12 @@ export class ProductsComponent {
 
   start_Page = 1;
   limit_Page = 8;
+
   Products: IProduct;
   SearchOption: ISearchOption;
 
   searchDefaultType = "ProductCategoryId";
-  searchDefaultText;
+  searchDefaultText: string;
 
   getStatus(status: boolean) {
     switch (status) {
@@ -94,25 +95,27 @@ export class ProductsComponent {
   }
 
   onClickSearch() {
-    this.initailLoadProducts({
-      Search_Text: this.getSearchtext,
-      Search_Type: this.search_Type.key,
-      Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page,
-      Search_DefaultType: this.searchDefaultType,
-      Search_DefaultText: this.categorySelected.value
-    });
+    if(this.categorySelected){
+      this.initailLoadProducts({
+        Search_Text: this.getSearchtext,
+        Search_Type: this.search_Type.key,
+        Start_Page: this.start_Page,
+        Limit_Page: this.limit_Page,
+        Search_DefaultType: this.searchDefaultType,
+        Search_DefaultText: this.categorySelected.value
+      });
+    }else{
+      this.initailLoadProducts({
+        Search_Text: this.getSearchtext,
+        Search_Type: this.search_Type.key,
+        Start_Page: this.start_Page,
+        Limit_Page: this.limit_Page,
+      });
+    }
   }
 
   onPageChanged(page: PageChangedEvent) {
-    this.initailLoadProducts({
-      Search_Text: this.getSearchtext,
-      Search_Type: this.search_Type.key,
-      Start_Page: page.page,
-      Limit_Page: page.itemsPerPage,
-      Search_DefaultType: this.searchDefaultType,
-      Search_DefaultText: this.categorySelected.value
-    });
+    this.onClickSearch();
   }
 
   initailLoadProducts(option?: ISearchOption) {

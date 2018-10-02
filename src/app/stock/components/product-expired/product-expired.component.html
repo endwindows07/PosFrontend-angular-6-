@@ -48,7 +48,7 @@
           hidden-phone"> {{item.barcode}} ({{ item.barcode_Custom }}) </td>
           <td>image</td>
           <td>{{item.name}}</td>
-          <td>{{item.expired}} (เหลืออีกกี่วัน)</td>
+<td>{{item.expired}} ( {{getTimeRemaining(item.expired)}} )</td>
           <td>
             <a class="btn btn-success btn-xs" [routerLink]="[ '/', AppUrl.Product, ProductUrl.DetailProduct, item.id ]"><i
                 class="fa fa-pencil">details</i></a>
@@ -56,6 +56,9 @@
         </tr>
       </tbody>
     </table>
+<div class="row col-lg-12">
+  <h5>จำนวนสินค้าทั้งหมด {{Products.product_Total}} รายการ</h5>
+</div>
     <pagination [(ngModel)]="start_Page" [itemsPerPage]="limit_Page" (pageChanged)="onPageChanged($event)" [rotate]="false"
       [maxSize]="10" previousText="หน้าก่อนหน้า" nextText="หน้าถัดไป" [totalItems]="Products.product_Total"></pagination>
   </div>
