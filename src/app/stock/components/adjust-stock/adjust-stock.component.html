@@ -1,5 +1,5 @@
 <app-content>
-  <div class="content-panel row" style="height: 500px">
+  <div class="content-panel row" style="height: 500px" *ngIf="product">
     <div class="row">
       <div class="col-lg-3">
         <div class="col-lg-1"></div>
@@ -12,7 +12,7 @@
           <br>
         </div>
       </div>
-<div class="col-lg-9" *ngIf="product">
+      <div class="col-lg-9">
         <div class="page-header">
           <h1>Name: {{ product.name }} <small></small></h1>
           <h3>Barcode: {{ product.barcode }} </h3>
@@ -20,7 +20,7 @@
         </div>
       </div>
     </div>
-    <form class="form-group" [formGroup]="form" (submit)="onAdjustAmountProduct()">
+    <form [formGroup]="form" (submit)="onAdjustAmountProduct()">
       <div class="row col-lg-12">
         <div class="col-lg-3"></div>
         <div class="col-lg-3">
@@ -35,7 +35,7 @@
         </div>
         <div class="col-lg-1">
           <h3>
-            <input type="text" formControlName="amount_Product" class="form-control">
+            <input class="form-control" formControlName="amount_Product" type="text" />
           </h3>
         </div>
         <div class="col-lg-1">

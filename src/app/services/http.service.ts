@@ -9,11 +9,12 @@ import { catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
 export class HttpService {
   constructor(private http: HttpClient) {}
   private address = 'http://localhost:8080/';
+  // private address = "https://localhost:44334/";
 
   requestPost(url: string, body: any, accessToken?: string) {
     return this.http
@@ -54,9 +55,9 @@ export class HttpService {
   private errorHandler(errorResponse: HttpErrorResponse): Observable<any> {
     console.log(errorResponse);
 
-    errorResponse['Message'] = errorResponse.message;
+    errorResponse["Message"] = errorResponse.message;
     if (errorResponse.error && errorResponse.message) {
-      errorResponse['Message'] = errorResponse.error;
+      errorResponse["Message"] = errorResponse.error;
     }
     throw errorResponse;
   }
@@ -65,7 +66,7 @@ export class HttpService {
   private appendHeaders(accessToken) {
     const headers = {};
     if (accessToken) {
-      headers['Authorization'] = `Bearer ${accessToken}`;
+      headers["Authorization"] = `Bearer ${accessToken}`;
     }
     return new HttpHeaders(headers);
   }

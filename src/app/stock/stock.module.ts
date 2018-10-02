@@ -13,9 +13,9 @@ import { NagativeProductComponent } from "./components/nagative-product/nagative
 @NgModule({
   imports: [
     CommonModule,
-    LayoutModule,
-    RouterModule,
     StockRouting,
+    RouterModule,
+    LayoutModule,
     FormsModule,
     ReactiveFormsModule,
   ],

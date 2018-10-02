@@ -26,7 +26,7 @@ import { ProductService } from './services/product.service';
   ],
   providers: [
     AccontService,
-    ProductService
+    ProductService,
   ],
   bootstrap: [AppComponent]
 })

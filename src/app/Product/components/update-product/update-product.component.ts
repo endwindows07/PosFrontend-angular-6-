@@ -87,6 +87,7 @@ export class UpdateProductComponent {
         this.form.controls["expired"].setValue(
           this.expired[1] + "/" + this.expired[2] + "/" + this.expired[0]
         );
+        
         this.form.controls["name"].setValue(product.name);
         this.form.controls["barcode"].setValue(product.barcode);
         this.form.controls["barcode_Custom"].setValue(product.barcode_Custom);

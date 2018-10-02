@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { IProduct } from "../interfaces/Product/product.interface";
 import { ISearchOption } from "../interfaces/search-option.interface";
+import { IProductAdJust } from "../interfaces/Product/product-adjust.interface";
 
 declare let $;
 
@@ -29,8 +30,8 @@ export class ProductService {
                     .toPromise() as Promise<IProduct>;
     }
 
-    onUpdateProductInStock(model: IProduct, id: any, accessToken: string){
-        return this.http.requestPost(`api/Product/update-productstock/${id}`, model, accessToken)
-                    .toPromise() as Promise<IProduct>;
+    onUpdateProductInStock(model: IProductAdJust, id: any, accessToken: string){
+        return this.http.requestPost(`api/product/update-productstock/${id}`, model, accessToken)
+            .toPromise() as Promise<IProductAdJust>;
     }
 }
