@@ -10,6 +10,7 @@ import { IOptionKey } from '../../../interfaces/search-key.interface';
 import { AppUrl } from '../../../app.url';
 import { ProductUrl } from '../../product.url';
 import { ICategory } from '../../../interfaces/Product/product-category.interface';
+import { IProductList } from '../../../interfaces/Product/product-list.interface';
 
 @Component({
   selector: "app-products",
@@ -66,7 +67,7 @@ export class ProductsComponent {
   start_Page = 1;
   limit_Page = 8;
 
-  Products: IProduct;
+  Products: IProductList;
   SearchOption: ISearchOption;
 
   searchDefaultType = "ProductCategoryId";
@@ -123,6 +124,7 @@ export class ProductsComponent {
       .onGetProduct(option, this.accessTokenService.getAccesstokenStore())
       .then(products => {
         this.Products = products;
+        console.log(products);
       })
       .catch(err => this.alert.error_alert(err.Message));
   }

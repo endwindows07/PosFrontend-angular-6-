@@ -5,7 +5,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { FootbarComponent } from './components/footbar/footbar.component';
 import { ContentComponent } from './components/content/content.component';
 import { RouterModule } from '@angular/router';
-import { AlertModule, BsDropdownModule, PaginationModule, BsDatepickerModule } from 'ngx-bootstrap';
+import { AlertModule, BsDropdownModule, PaginationModule, BsDatepickerModule, TypeaheadModule } from 'ngx-bootstrap';
 import { AlertService } from './components/services/alert.service';
 
 @NgModule({
@@ -15,7 +15,8 @@ import { AlertService } from './components/services/alert.service';
     AlertModule.forRoot(),
     PaginationModule.forRoot(),
     BsDropdownModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    TypeaheadModule.forRoot()
   ],
   exports: [
     TopbarComponent,
@@ -26,11 +27,15 @@ import { AlertService } from './components/services/alert.service';
     AlertModule,
     PaginationModule,
     BsDropdownModule,
-    BsDatepickerModule
+    BsDatepickerModule,
+    TypeaheadModule
   ],
-  declarations: [TopbarComponent, SidebarComponent, FootbarComponent, ContentComponent],
-  providers: [
-    AlertService
-  ]
+  declarations: [
+    TopbarComponent,
+    SidebarComponent,
+    FootbarComponent,
+    ContentComponent
+  ],
+  providers: [AlertService]
 })
-export class LayoutModule { }
+export class LayoutModule {}

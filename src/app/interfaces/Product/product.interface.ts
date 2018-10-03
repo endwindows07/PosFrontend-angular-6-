@@ -9,11 +9,12 @@ export interface IProduct {
     description: string,
     image_Url: string,
     expired: string,
-    cost_Product: string,
-    price: string,
-    amount_Product: string,
-    status: boolean,
-    type: TypeProduct,
-    productCategoryId: string,
+    cost_Product?: string,
+    price?: string,
+    amount_Product?: string,
+    status?: boolean,
+    type?: TypeProduct,
+    productCategoryId?: string,
+    countOrder?: number
 }
 

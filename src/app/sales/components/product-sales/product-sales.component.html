@@ -1,5 +1,76 @@
 <app-content>
-  <p>
-    product-sales works!
-  </p>
+  <div class="row mt">
+    <div class="form-panel row">
+      <div class="col-lg-12">
+        <div class="form-group col-lg-10">
+          <input [(ngModel)]="searchValueSelected" [typeahead]="product" typeaheadOptionField="name"
+          (typeaheadOnSelect)="onSelect($event)" class="form-control">
+        </div>
+        <div class="col-lg-1">
+          <button type="submit" (click)="onInsertCountOrder()" class="btn btn-theme">Drop</button>
+        </div>
+        <div class="col-lg-1">
+          <button type="submit" class="btn btn-theme">Search</button>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="col-lg-10">
+          <table class="table table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>รหัสแท่ง</th>
+                  <th>ชื่อสินค้า</th>
+                  <th>ราคาต่อหน่วย</th>
+                  <th>จำนวน</th>
+                  <th>option</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of productsSelect; let i = index">
+                  <td>{{i+1}}</td>
+                  <td>885002341252</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.price}}</td>
+                  <td>
+                    <button (click)="onMinusProductCount(item.id, i)"><span class="glyphicon glyphicon-minus"></span></button>
+                    {{item.countOrder}}
+                    <!-- <input type="text" value="" style="width: 30px"> -->
+                    <button (click)="onPlusProductCount(item.id)"><span class="glyphicon glyphicon-plus"></span></button>
+                  </td>
+                  <td><button (click)="onRemoveProduct(i, item.id)"><span class="glyphicon glyphicon-folder-close"></span></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </table>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="col-lg-7"></div>
+        <div class="col-lg-3">
+          <div class="well-small row">
+            <div class="pull-left"> ยอดขาย : </div>
+            <div class="pull-right"> {{totalPrice}} </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="well-small green row">
+            <div class="pull-left"> ยอดเงินชำระ : </div>
+            <div class="pull-right"> <input ng-change="onCalculate()" [(ngModel)]="calculateChange" type="text" class="pull-right"
+                name="" [(ngModel)]="payment" id=""> </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="well-small row">
+            <div class="pull-left"> เงินทอน : </div>
+            <div class="pull-right"> {{calculateChange}} USD </div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="well-small green row">
+            <button class="btn btn-large btn-block btn-primary" (click)="onAdjustSalesProduct()">ชำระเงิน : {{payment}}
+              บาท</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </app-content>

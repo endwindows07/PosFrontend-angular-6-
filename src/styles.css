@@ -8,10 +8,15 @@
   width: 100%;
 }
 .content-panel {
+  margin-top: 2%;
   padding-left: 5%;
   padding-right: 5%;
   height: 100%;
 }
 .content{
   padding: 1%;
+}
+.dropdown-menu {
+  margin-left: 10px;
+  width: 750px;
 }

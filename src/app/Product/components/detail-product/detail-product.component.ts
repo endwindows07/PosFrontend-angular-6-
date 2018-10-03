@@ -47,6 +47,7 @@ export class DetailProductComponent {
   getCategory(categoryNumber: ICategory) {
     return ICategory[categoryNumber];
   }
+
   getType(typeNumber: TypeProduct) {
     return TypeProduct[typeNumber];
   }
