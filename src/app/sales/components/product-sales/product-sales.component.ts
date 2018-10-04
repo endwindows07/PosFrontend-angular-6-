@@ -1,11 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { TypeaheadMatch } from "ngx-bootstrap";
-import { count } from "rxjs/operators";
-import { Key } from "protractor";
 import { IProduct } from "../../../interfaces/Product/product.interface";
 import { ISales } from "../../../interfaces/sales/sales.interface";
 import { ISalesOrder } from "../../../interfaces/sales/sales-order.interface";
-import { ICategory } from "../../../interfaces/Product/product-category.interface";
 import { ProductService } from "../../../services/product.service";
 import { AlertService } from "../../../layout/components/services/alert.service";
 import { Router } from "@angular/router";
@@ -48,8 +45,7 @@ export class ProductSalesComponent {
 
   productSales: ISales = {
     sales_List: null,
-    // sales_Time: Date.now.toString(),
-    payment: null,
+    payment: null
   };
 
   inittailLoadProductLocalStore(options: ISearchOption) {
@@ -60,26 +56,44 @@ export class ProductSalesComponent {
       });
   }
 
-  //  onGetCategory() {
-  //   console.log(ICategory[1]);
-  //   return ICategory[4].toString();
-  // }
+  onSearchBarcodeProduct() {
+    let product: IProduct;
+    product = this.product.find(
+      it => it.barcode == this.searchValueSelected.trim()
+    );
+    if (product.barcode != "") {
+      this.onInsertProductSelected(product);
+    }
+  }
 
   onSelect(event: TypeaheadMatch): void {
+    this.onInsertProductSelected(event.item);
+  }
+
+  onInsertProductSelected(product: IProduct) {
+    let productSelected = this.onSearchProductSelectedById(product.id);
+
     if (this.productsSelect.length == 0) {
-      event.item.countOrder = 1;
-      this.productsSelect.unshift(event.item);
-    } else {
-      this.productsSelect.forEach(it => {
-        if (it.id == event.item.id) {
-          return it.countOrder++;
-        } else {
-          event.item.countOrder = 1;
-          this.productsSelect.unshift(event.item);
-        }
-      });
+      product.countOrder = 1;
+      this.productsSelect.unshift(product);
     }
+
+    if (productSelected.barcode.length != 0) {
+      product.countOrder++;
+    } else {
+      product.countOrder = 1;
+      this.productsSelect.unshift(product);
+    }
+
     this.onGetTotalPrice();
+  }
+
+  onSearchProductById(id: string) {
+    return this.product.find(it => it.id == id);
+  }
+
+  onSearchProductSelectedById(id: string) {
+    return this.productsSelect.find(it => it.id == id);
   }
 
   // สินค้าที่ขายทั้งหมด ต้องเอาไปใส่ใน บิล
@@ -88,6 +102,7 @@ export class ProductSalesComponent {
       this.productsSelect.forEach(it => {
         let order: ISalesOrder = {
           productId: it.id,
+          // sales_Time: Date.now().toString(),
           sales_Count: it.countOrder.toString()
         };
         this.productOrders.push(order);
@@ -111,50 +126,45 @@ export class ProductSalesComponent {
     this.productSales.payment = this.payment.toString();
     // console.log(this.productSales);
     this.onGetTotalPrice();
-    this.salesService.onAdjustProduct(this.productSales, this.accessTokenService.getAccesstokenStore())
-                      .then(res => {
-                        this.alert.success_alert("sales product success");
-                        this.productsSelect = null;
-                        this.productOrders = null;
-                      })
-                      .catch(err => {
-                        this.productsSelect = null;
-                        this.productOrders = null;
-                        this.alert.error_alert(err.Message)
-                      });
+    this.salesService
+      .onAdjustProduct(
+        this.productSales,
+        this.accessTokenService.getAccesstokenStore()
+      )
+      .then(res => {
+        this.alert.success_alert("sales product success");
+        this.productsSelect = null;
+        this.productOrders = null;
+      })
+      .catch(err => {
+        this.productsSelect = null;
+        this.productOrders = null;
+        this.alert.error_alert(err.Message);
+      });
   }
 
   private onPlusProductCount(id: string) {
-    this.productsSelect.forEach(it => {
-      if (it.id == id) {
-        it.countOrder++;
-      }
-    });
+    this.onSearchProductSelectedById(id).countOrder++;
     this.onGetTotalPrice();
   }
 
   private onMinusProductCount(id: string, index: number) {
-    this.productsSelect.forEach(it => {
-      if (it.id == id) {
-        it.countOrder--;
-        if (it.countOrder <= 0) {
-          it.countOrder = 0;
-          this.productsSelect.splice(index, 1);
-          this.onGetTotalPrice();
-        }
-      }
-    });
+    let productSelect = this.onSearchProductSelectedById(id);
+
+    productSelect.countOrder--;
+
+    if (productSelect.countOrder <= 0){
+      productSelect.countOrder = 0;
+      this.productsSelect.splice(index, 1);
+      this.onGetTotalPrice();
+    }
     this.onGetTotalPrice();
   }
 
   onRemoveProduct(index: number, id: string) {
-    this.productsSelect.forEach(it => {
-      if (it.id == id) {
-        it.countOrder = 0;
-        this.onGetTotalPrice();
-        this.productsSelect.splice(index, 1);
-      }
-    });
+    this.onSearchProductSelectedById(id).countOrder = 0;
+    this.onGetTotalPrice();
+    this.productsSelect.splice(index, 1);
   }
 
   private onGetTotalPrice() {

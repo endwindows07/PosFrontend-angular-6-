@@ -7,6 +7,7 @@ import { LayoutModule } from "../layout/layout.module";
 import { SalesRounting } from "./sales.routing";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
+
 @NgModule({
   imports: [
     CommonModule,
@@ -14,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     LayoutModule,
     FormsModule,
     SalesRounting,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   declarations: [ProductSalesComponent, CancelBillsalesComponent]
 })
