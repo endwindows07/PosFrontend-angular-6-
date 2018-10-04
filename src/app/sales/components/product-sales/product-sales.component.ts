@@ -31,22 +31,26 @@ export class ProductSalesComponent {
 
   start_Page = 0;
   limit_Page = 0;
-
+  searchAdvandStatus: boolean = false;
   searchValueSelected: string;
+  searchProductAdvand: IProduct[] = [];
+
   payment: number = 0;
   totalPrice: number = 0;
   calculateChange: number = 0;
-
   productOrders: ISalesOrder[] = [];
-
   product: IProduct[] = [];
-
   productsSelect: IProduct[] = [];
-
   productSales: ISales = {
     sales_List: null,
     payment: null
   };
+
+  onSearchAdvand(){
+    let product = this.product.filter(it => it.name == this.searchValueSelected);
+    this.searchProductAdvand = product;
+    console.log(this.searchProductAdvand);
+  }
 
   inittailLoadProductLocalStore(options: ISearchOption) {
     this.salesService
@@ -72,19 +76,17 @@ export class ProductSalesComponent {
 
   onInsertProductSelected(product: IProduct) {
     let productSelected = this.onSearchProductSelectedById(product.id);
+    // if (this.productsSelect.length == 0) {
+    //   product.countOrder = 1;
+    //   this.productsSelect.unshift(product);
+    // }
 
-    if (this.productsSelect.length == 0) {
-      product.countOrder = 1;
-      this.productsSelect.unshift(product);
-    }
-
-    if (productSelected.barcode.length != 0) {
+    if (this.onSearchProductSelectedById(product.id) != null) {
       product.countOrder++;
     } else {
       product.countOrder = 1;
       this.productsSelect.unshift(product);
     }
-
     this.onGetTotalPrice();
   }
 
@@ -153,7 +155,7 @@ export class ProductSalesComponent {
 
     productSelect.countOrder--;
 
-    if (productSelect.countOrder <= 0){
+    if (productSelect.countOrder <= 0) {
       productSelect.countOrder = 0;
       this.productsSelect.splice(index, 1);
       this.onGetTotalPrice();

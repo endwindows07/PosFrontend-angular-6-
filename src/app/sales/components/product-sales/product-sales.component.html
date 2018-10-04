@@ -8,10 +8,38 @@
             [typeaheadOptionsInScrollableView]="8" class="form-control">
         </div>
         <div class="col-lg-1">
-          <button type="submit" (click)="onInsertCountOrder()" class="btn btn-theme">Drop</button>
+<button type="submit" (click)="searchAdvandStatus = false;" class="btn btn-theme">Drop</button>
         </div>
         <div class="col-lg-1">
-          <button type="submit" class="btn btn-theme">Search</button>
+<button type="submit" (click)="onSearchAdvand(); searchAdvandStatus = true;" class="btn btn-theme">Search</button>
+        </div>
+      </div>
+      <div class="col-lg-12" *ngIf="searchAdvandStatus">
+        <div class="col-lg-10">
+          <table class="table">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>รูป</th>
+                  <th>รหัสแท่ง</th>
+                  <th>ชื่อสินค้า</th>
+                  <th>รายละเอียด</th>
+                  <th>ราคาต่อหน่วย</th>
+                  <th>option</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of searchProductAdvand; let i = index">
+                  <td>รูป #{{i+1}}</td>
+                  <td>{{item.barcode}} ({{item.barcode_Custom}})</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.description}}</td>
+                  <td> {{item.price}}</td>
+                  <td><button (click)="onInsertProductSelected(item)"><span class="glyphicon glyphicon-folder-close"></span></button></td>
+                </tr>
+              </tbody>
+            </table>
+          </table>
         </div>
       </div>
       <div class="col-lg-12">
