@@ -9,6 +9,7 @@ import { IOptionKey } from '../../../interfaces/search-key.interface';
 import { IProduct } from '../../../interfaces/Product/product.interface';
 import { ISearchOption } from '../../../interfaces/search-option.interface';
 import { PageChangedEvent } from 'ngx-bootstrap';
+import { IProductList } from '../../../interfaces/Product/product-list.interface';
 
 @Component({
   selector: "app-nagative-product",
@@ -50,7 +51,7 @@ export class NagativeProductComponent {
 
   start_Page = 1;
   limit_Page = 8;
-  Products: IProduct;
+  Products: IProductList;
   SearchOption: ISearchOption;
 
   private get getSearchtext() {
@@ -95,6 +96,6 @@ export class NagativeProductComponent {
         this.Products = products;
         console.log(products);
       })
-      .catch(err => this.Products.cost_Product = "1");
+      .catch(err => this.alert.error_alert(err.Messsage));
   }
 }

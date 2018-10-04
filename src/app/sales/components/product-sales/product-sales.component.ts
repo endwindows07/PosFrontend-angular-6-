@@ -18,7 +18,7 @@ import { ISearchOption } from "../../../interfaces/search-option.interface";
   templateUrl: "./product-sales.component.html",
   styleUrls: ["./product-sales.component.css"]
 })
-export class ProductSalesComponent  {
+export class ProductSalesComponent {
   constructor(
     private productService: ProductService,
     private salesService: SalesService,
@@ -32,78 +32,31 @@ export class ProductSalesComponent  {
     });
   }
 
-
-  start_Page = 1;
-  limit_Page = 100;
+  start_Page = 0;
+  limit_Page = 0;
 
   searchValueSelected: string;
   payment: number = 0;
   totalPrice: number = 0;
   calculateChange: number = 0;
-  productsSelect: IProduct[] = [];
-
-  productSales: ISales = {
-    Sales_List: null,
-    Sales_Time: null,
-    Payment: null
-  };
-
-  product: IProduct[] = [];
-  // product: IProduct[] = [
-  //   {
-  //     id: "001",
-  //     barcode: "8850019627161",
-  //     barcode_Custom: "687",
-  //     name: "Nescafe 130g",
-  //     description: "More..",
-  //     image_Url: "",
-  //     expired: "2018-09-30T00:00:00",
-  //     cost_Product: "546",
-  //     price: "99",
-  //     amount_Product: "1",
-  //     productCategoryId: "4",
-  //     countOrder: 0
-  //   },
-  //   {
-  //     id: "002",
-  //     barcode: "8859912627161",
-  //     barcode_Custom: "007",
-  //     name: "Miro Xl",
-  //     description: "More..",
-  //     image_Url: "",
-  //     expired: "2018-09-30T00:00:00",
-  //     cost_Product: "546",
-  //     price: "57",
-  //     amount_Product: "1",
-  //     productCategoryId: "4",
-  //     countOrder: 0
-  //   },
-  //   {
-  //     id: "003",
-  //     barcode: "8850012637161",
-  //     barcode_Custom: "0012",
-  //     name: "Auze 130g",
-  //     description: "More..",
-  //     image_Url: "",
-  //     expired: "2018-09-30T00:00:00",
-  //     cost_Product: "132",
-  //     price: "57",
-  //     amount_Product: "1",
-  //     productCategoryId: "2",
-  //     countOrder: 0
-  //   }
-  // ];
 
   productOrders: ISalesOrder[] = [];
 
+  product: IProduct[] = [];
 
+  productsSelect: IProduct[] = [];
+
+  productSales: ISales = {
+    sales_List: null,
+    // sales_Time: Date.now.toString(),
+    payment: null,
+  };
 
   inittailLoadProductLocalStore(options: ISearchOption) {
     this.salesService
       .onGetProduct(options, this.accessTokenService.getAccesstokenStore())
       .then(res => {
         this.product = res.product_List;
-        console.log(this.product);
       });
   }
 
@@ -126,18 +79,7 @@ export class ProductSalesComponent  {
         }
       });
     }
-
     this.onGetTotalPrice();
-  }
-
-  private onGetTotalPrice() {
-    this.totalPrice = 0;
-    if (this.productsSelect.length != 0) {
-      this.productsSelect.forEach(it => {
-        this.totalPrice += Number.parseInt(it.price) * it.countOrder;
-      });
-    }
-    console.log(this.totalPrice);
   }
 
   // สินค้าที่ขายทั้งหมด ต้องเอาไปใส่ใน บิล
@@ -145,8 +87,8 @@ export class ProductSalesComponent  {
     if (this.productsSelect != null) {
       this.productsSelect.forEach(it => {
         let order: ISalesOrder = {
-          ProductId: it.id,
-          Sales_Count: it.countOrder.toString()
+          productId: it.id,
+          sales_Count: it.countOrder.toString()
         };
         this.productOrders.push(order);
       });
@@ -156,13 +98,30 @@ export class ProductSalesComponent  {
 
   private onAdjustSalesProduct() {
     if (this.productsSelect.length == 0) {
-      return console.log("กรุณาเลือกรายการขาย");
+      return this.alert.error_alert("กรุณาเลือกรายการขาย");
     }
 
-    this.productSales.Sales_List = this.productOrders;
-    this.productSales.Payment = this.payment.toString();
-    console.log(this.productSales);
+    if (this.payment < this.totalPrice) {
+      return this.alert.error_alert("ใส่จำนวนเงินให้ถูกต้อง");
+    }
+
+    this.onInsertCountOrder();
+    // console.log(JSON.stringify(this.productOrders));
+    this.productSales.sales_List = this.productOrders;
+    this.productSales.payment = this.payment.toString();
+    // console.log(this.productSales);
     this.onGetTotalPrice();
+    this.salesService.onAdjustProduct(this.productSales, this.accessTokenService.getAccesstokenStore())
+                      .then(res => {
+                        this.alert.success_alert("sales product success");
+                        this.productsSelect = null;
+                        this.productOrders = null;
+                      })
+                      .catch(err => {
+                        this.productsSelect = null;
+                        this.productOrders = null;
+                        this.alert.error_alert(err.Message)
+                      });
   }
 
   private onPlusProductCount(id: string) {
@@ -191,10 +150,19 @@ export class ProductSalesComponent  {
   onRemoveProduct(index: number, id: string) {
     this.productsSelect.forEach(it => {
       if (it.id == id) {
-        this.onGetTotalPrice();
         it.countOrder = 0;
+        this.onGetTotalPrice();
         this.productsSelect.splice(index, 1);
       }
     });
+  }
+
+  private onGetTotalPrice() {
+    this.totalPrice = 0;
+    if (this.productsSelect.length != 0) {
+      this.productsSelect.forEach(it => {
+        this.totalPrice += Number.parseInt(it.price) * it.countOrder;
+      });
+    }
   }
 }

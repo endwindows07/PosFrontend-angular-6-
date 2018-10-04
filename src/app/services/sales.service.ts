@@ -20,13 +20,14 @@ export class SalesService {
     return (this.http.requestGet(`api/product/products?${$.param(options)}`, accessToken)
       .toPromise() as Promise<IProductList>).then(res => {
         this.setProductLocalStore(res)
-        console.log(this.productLocalStore);
+        // console.log(this.productLocalStore);
         return res;
       });
   }
 
   onAdjustProduct(model: ISales, accessToken: string) {
-    this.http.requestPost(`api/AdjustProduct/adjust-product`,model, accessToken)
+    console.log(model);
+   return  this.http.requestPost(`api/AdjustProduct/adjust-product`,model, accessToken)
              .toPromise() as Promise<ISales>;
   }
 

@@ -1,7 +1,7 @@
 
 export interface ISalesOrder {
-    Sales_Count : string,
-    ProductId : string,
+    sales_Count : string,
+    productId : string,
 }
 
 // public int Id { get; set; }

@@ -10,6 +10,7 @@ import { IProduct } from "../../../interfaces/Product/product.interface";
 import { ISearchOption } from "../../../interfaces/search-option.interface";
 import { PageChangedEvent } from "ngx-bootstrap";
 import { DatePipe } from "@angular/common";
+import { IProductList } from "../../../interfaces/Product/product-list.interface";
 
 @Component({
   selector: "app-product-expired",
@@ -51,7 +52,7 @@ export class ProductExpiredComponent {
 
   start_Page = 1;
   limit_Page = 8;
-  Products: IProduct;
+  Products: IProductList;  
   SearchOption: ISearchOption;
 
   private getTimeRemaining(dateTimeProduct: string) {

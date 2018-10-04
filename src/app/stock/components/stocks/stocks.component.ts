@@ -9,6 +9,7 @@ import { IOptionKey } from "../../../interfaces/search-key.interface";
 import { IProduct } from "../../../interfaces/Product/product.interface";
 import { ISearchOption } from "../../../interfaces/search-option.interface";
 import { PageChangedEvent } from "ngx-bootstrap";
+import { IProductList } from "../../../interfaces/Product/product-list.interface";
 
 @Component({
   selector: "app-stocks",
@@ -46,7 +47,7 @@ export class StocksComponent {
 
   start_Page = 1;
   limit_Page = 8;
-  Products: IProduct;
+  Products: IProductList;
   SearchOption: ISearchOption;
 
   private get getSearchtext() {
