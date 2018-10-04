@@ -10,22 +10,31 @@ import { ProductService } from "../../../services/product.service";
 import { AlertService } from "../../../layout/components/services/alert.service";
 import { Router } from "@angular/router";
 import { AccessTokenService } from "../../../services/accesstoken.service";
+import { SalesService } from "../../../services/sales.service";
+import { ISearchOption } from "../../../interfaces/search-option.interface";
 
 @Component({
   selector: "app-product-sales",
   templateUrl: "./product-sales.component.html",
   styleUrls: ["./product-sales.component.css"]
 })
-export class ProductSalesComponent {
+export class ProductSalesComponent  {
   constructor(
     private productService: ProductService,
+    private salesService: SalesService,
     private alert: AlertService,
     private router: Router,
-    private accessTokenService: AccessTokenService,
+    private accessTokenService: AccessTokenService
   ) {
-    this.inittailLoadProductLocalStore();
+    this.inittailLoadProductLocalStore({
+      Start_Page: this.start_Page,
+      Limit_Page: this.limit_Page
+    });
   }
 
+
+  start_Page = 1;
+  limit_Page = 100;
 
   searchValueSelected: string;
   payment: number = 0;
@@ -38,7 +47,7 @@ export class ProductSalesComponent {
     Sales_Time: null,
     Payment: null
   };
-  
+
   product: IProduct[] = [];
   // product: IProduct[] = [
   //   {
@@ -85,15 +94,17 @@ export class ProductSalesComponent {
   //   }
   // ];
 
-  productOrders: ISalesOrder[] = [] ;
+  productOrders: ISalesOrder[] = [];
 
-  onCalculate(){
-      this.calculateChange = this.payment - this.totalPrice 
-  };
 
-  inittailLoadProductLocalStore(){
-    this.product = this.productService.productLocalStore.product_List;
-    console.log(this.product);
+
+  inittailLoadProductLocalStore(options: ISearchOption) {
+    this.salesService
+      .onGetProduct(options, this.accessTokenService.getAccesstokenStore())
+      .then(res => {
+        this.product = res.product_List;
+        console.log(this.product);
+      });
   }
 
   //  onGetCategory() {
@@ -103,25 +114,27 @@ export class ProductSalesComponent {
 
   onSelect(event: TypeaheadMatch): void {
     if (this.productsSelect.length == 0) {
+      event.item.countOrder = 1;
       this.productsSelect.unshift(event.item);
+    } else {
+      this.productsSelect.forEach(it => {
+        if (it.id == event.item.id) {
+          return it.countOrder++;
+        } else {
+          event.item.countOrder = 1;
+          this.productsSelect.unshift(event.item);
+        }
+      });
     }
-    this.productsSelect.forEach(it => {
-      if (it.id == event.item.id) {
-        return it.countOrder++;
-      } else {
-        return this.productsSelect.unshift(event.item);
-      }
-    });
+
     this.onGetTotalPrice();
   }
 
   private onGetTotalPrice() {
-    this.onCalculate();
     this.totalPrice = 0;
     if (this.productsSelect.length != 0) {
       this.productsSelect.forEach(it => {
         this.totalPrice += Number.parseInt(it.price) * it.countOrder;
-        this.onCalculate();
       });
     }
     console.log(this.totalPrice);
@@ -168,6 +181,7 @@ export class ProductSalesComponent {
         if (it.countOrder <= 0) {
           it.countOrder = 0;
           this.productsSelect.splice(index, 1);
+          this.onGetTotalPrice();
         }
       }
     });
@@ -177,10 +191,10 @@ export class ProductSalesComponent {
   onRemoveProduct(index: number, id: string) {
     this.productsSelect.forEach(it => {
       if (it.id == id) {
+        this.onGetTotalPrice();
         it.countOrder = 0;
         this.productsSelect.splice(index, 1);
       }
     });
-    this.onGetTotalPrice();
   }
 }

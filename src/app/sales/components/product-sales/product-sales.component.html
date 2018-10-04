@@ -56,17 +56,16 @@
           </div>
           <div class="well-small green row">
             <div class="pull-left"> ยอดเงินชำระ : </div>
-            <div class="pull-right"> <input ng-change="onCalculate()" [(ngModel)]="calculateChange" type="text" class="pull-right"
-                name="" [(ngModel)]="payment" id=""> </div>
+<div class="pull-right"> <input [(ngModel)]="payment"  type="text" class="pull-right"></div>
             <div class="clearfix"></div>
           </div>
           <div class="well-small row">
             <div class="pull-left"> เงินทอน : </div>
-            <div class="pull-right"> {{calculateChange}} USD </div>
+<div class="pull-right" ng-change="onCalculate()"> {{payment - totalPrice}}USD </div>
             <div class="clearfix"></div>
           </div>
           <div class="well-small green row">
-            <button class="btn btn-large btn-block btn-primary" (click)="onAdjustSalesProduct()">ชำระเงิน : {{payment}}
+            <button class="btn btn-large btn-block btn-primary" (click)="onAdjustSalesProduct()">ชำระเงิน : {{ payment  }}
               บาท</button>
           </div>
         </div>
