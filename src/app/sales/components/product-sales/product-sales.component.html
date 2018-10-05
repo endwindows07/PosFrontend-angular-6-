@@ -8,19 +8,16 @@
             [typeaheadOptionsInScrollableView]="8" class="form-control">
         </div>
         <div class="col-lg-1">
-<button type="submit" (click)="searchAdvandStatus = false;" class="btn btn-theme">Drop</button>
-        </div>
-        <div class="col-lg-1">
-<button type="submit" (click)="onSearchAdvand(); searchAdvandStatus = true;" class="btn btn-theme">Search</button>
+          <button type="submit" (click)="onSearchAdvand(); searchAdvandStatus = !searchAdvandStatus;" class="btn btn-theme">ค้นหาขั้นสูง</button>
         </div>
       </div>
-      <div class="col-lg-12" *ngIf="searchAdvandStatus">
+      <div class="col-lg-12 searchAdvand" *ngIf="searchAdvandStatus" style="margin-bottom: 5%; height: 200px;">
         <div class="col-lg-10">
-          <table class="table">
-            <table class="table">
+          <table class="">
+            <table class="table table-striped">
               <thead>
-                <tr>
-                  <th>รูป</th>
+                <tr class="danger">
+                  <th>ค้นหาขั้นสูง</th>
                   <th>รหัสแท่ง</th>
                   <th>ชื่อสินค้า</th>
                   <th>รายละเอียด</th>
@@ -44,10 +41,10 @@
       </div>
       <div class="col-lg-12">
         <div class="col-lg-10">
-          <table class="table table-responsive">
+          <table class="table  table-responsive">
             <table class="table">
               <thead>
-                <tr>
+                <tr class="info">
                   <th>#</th>
                   <th>รหัสแท่ง</th>
                   <th>ชื่อสินค้า</th>

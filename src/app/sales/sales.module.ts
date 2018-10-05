@@ -6,6 +6,8 @@ import { RouterModule } from "@angular/router";
 import { LayoutModule } from "../layout/layout.module";
 import { SalesRounting } from "./sales.routing";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { SalesBillComponent } from './components/sales-bill/sales-bill.component';
+import { DetailBillComponent } from './components/detail-bill/detail-bill.component';
 
 
 @NgModule({
@@ -17,6 +19,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
     SalesRounting,
     ReactiveFormsModule,
   ],
-  declarations: [ProductSalesComponent, CancelBillsalesComponent]
+  declarations: [ProductSalesComponent, CancelBillsalesComponent, SalesBillComponent, DetailBillComponent]
 })
 export class SalesModule {}

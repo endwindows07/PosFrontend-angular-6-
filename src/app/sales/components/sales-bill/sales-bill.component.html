@@ -1,0 +1,52 @@
+<app-content>
+  <div class="row content-panel">
+    <div class="page-header">
+      <h1>รายการขายสินค้า</h1>
+      <h4><small>รายละเอียดกาารขายสินค้าแต่ละบิล</small></h4>
+    </div>
+    <div class="col-lg-10 content">
+      <label for="exampleInputName2"></label>
+      <div class="row">
+        <div class="form-group col-lg-6">
+          <span [ngSwitch]="search_Type.key">
+            <input *ngSwitchDefault [(ngModel)]="search_Text" type="text" class="form-control" placeholder="   search_Type.value ">
+          </span>
+        </div>
+        <div class="input-group-append col-lg-2 ">
+          <button class="form-control" class="btn btn-info" type="button" (click)="onClickSearch()">
+            <i class="fa fa-search"></i>
+          </button>
+        </div>
+      </div>
+      <br>
+      <table class="table table-striped table-advance table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>ลำดับ</th>
+            <th>รหัสใบเสร็จ</th>
+            <th>ยอดขายในบิล</th>
+            <th>ยอดบชำระ</th>
+            <th>เวลาขาย</th>
+            <th>เจ้าหน้าที่</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="salesBill">
+          <tr *ngFor="let item of salesBill.sales_List; let i = index;">
+            <td>{{i+1}}</td>
+            <td> <a [routerLink]="[ '/', AppUrl.Sales, SalesUrl.DetailSalesBill, item.id ]"> {{item.id}}</a></td>
+            <td>{{item.total_Price}}</td>
+            <td>{{item.payment}}</td>
+            <td>{{item.sales_Time | date:'medium'}}</td>
+            <td>{{item.memberId}}</td>
+          </tr>
+          <!-- table content -->
+        </tbody>
+      </table>
+      <div class="row col-lg-12">
+        <h5>จำนวนสินค้าทั้งหมด Products.product_Total รายการ</h5>
+      </div>
+      <pagination [(ngModel)]="start_Page" [itemsPerPage]="limit_Page" (pageChanged)="onPageChanged($event)" [rotate]="false"
+        [maxSize]="10" previousText="หน้าก่อนหน้า" nextText="หน้าถัดไป" [totalItems]="salesBill.sales_Total"></pagination>
+    </div>
+  </div>
+</app-content>

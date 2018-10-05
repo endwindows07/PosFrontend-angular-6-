@@ -9,7 +9,7 @@ declare let $;
 @Injectable()
 export class SalesService {
   constructor(private http: HttpService) {}
-  
+
   public productLocalStore: IProductList = {} as any;
   public setProductLocalStore(products: IProductList) {
     this.productLocalStore.product_List = products.product_List;
@@ -17,19 +17,26 @@ export class SalesService {
   }
 
   onGetProduct(options: ISearchOption, accessToken: string) {
-    return (this.http.requestGet(`api/product/products?${$.param(options)}`, accessToken)
+    return (this.http
+      .requestGet(`api/product/products?${$.param(options)}`, accessToken)
       .toPromise() as Promise<IProductList>).then(res => {
-        this.setProductLocalStore(res)
-        // console.log(this.productLocalStore);
-        return res;
-      });
+      this.setProductLocalStore(res);
+      // console.log(this.productLocalStore);
+      return res;
+    });
   }
 
   onAdjustProduct(model: ISales, accessToken: string) {
     console.log(model);
-   return  this.http.requestPost(`api/AdjustProduct/adjust-product`,model, accessToken)
-             .toPromise() as Promise<ISales>;
+    return this.http
+      .requestPost(`api/AdjustProduct/adjust-product`, model, accessToken)
+      .toPromise() as Promise<ISales>;
   }
 
   onCancelBillProduct() {}
+
+  onGetSalesBillProduct(options: ISearchOption, accessToken: string) {
+    return this.http.requestGet(`api/Sales/all-sales?${$.param(options)}`, accessToken)
+                    .toPromise() as Promise<ISalesList>;
+  }
 }

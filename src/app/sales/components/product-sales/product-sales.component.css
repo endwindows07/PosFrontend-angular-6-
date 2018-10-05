@@ -15,3 +15,10 @@ tbody {
   width: 100%;
   position: absolute;
 }
+
+.searchAdvand tbody {
+  overflow-y: scroll;
+  height: 200px;
+  width: 100%;
+  position: absolute;
+}
