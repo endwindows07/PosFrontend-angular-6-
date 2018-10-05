@@ -36,7 +36,13 @@ export class SalesService {
   onCancelBillProduct() {}
 
   onGetSalesBillProduct(options: ISearchOption, accessToken: string) {
-    return this.http.requestGet(`api/Sales/all-sales?${$.param(options)}`, accessToken)
-                    .toPromise() as Promise<ISalesList>;
+    return this.http
+      .requestGet(`api/Sales/all-sales?${$.param(options)}`, accessToken)
+      .toPromise() as Promise<ISalesList>;
   }
+
+  onGetSalesBillProductById(id: any, accessToken: string){
+    return this.http.requestGet(`api/Sales/get-sales/${id}`, accessToken)
+                    .toPromise() as Promise<ISales>;
+  };
 }
