@@ -27,13 +27,16 @@ export class SalesService {
   }
 
   onAdjustProduct(model: ISales, accessToken: string) {
-    console.log(model);
     return this.http
       .requestPost(`api/AdjustProduct/adjust-product`, model, accessToken)
       .toPromise() as Promise<ISales>;
   }
 
-  onCancelBillProduct() {}
+  onCancelBillProduct(id: any, accessToken: string) {
+    return this.http.requestGet(`api/AdjustProduct/cancelbill-product/${id}`, accessToken)
+                    .toPromise();
+  }
+  // api/AdjustProduct/cancelbill - product /
 
   onGetSalesBillProduct(options: ISearchOption, accessToken: string) {
     return this.http

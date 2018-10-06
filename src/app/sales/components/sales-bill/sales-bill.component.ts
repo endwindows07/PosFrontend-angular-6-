@@ -35,8 +35,10 @@ export class SalesBillComponent {
 
   salesBillCountItem: number;
   salesBill: ISalesList;
+
   search_Text: string = "";
-  search_Type: string = "";
+  search_Type: string = "Id";
+
   start_Page = 1;
   limit_Page = 8;
 
@@ -47,16 +49,21 @@ export class SalesBillComponent {
     });
   }
 
+  onClickSearch(){
+    this.onIitailLoadSalesBill({
+      Search_Text: this.search_Text,
+      Search_Type: this.search_Type,
+      Start_Page: this.start_Page,
+      Limit_Page: this.limit_Page,
+    });
+  }
+
   onIitailLoadSalesBill(option: ISearchOption) {
-    this.salesService
-      .onGetSalesBillProduct(
-        option,
-        this.accessTokenService.getAccesstokenStore()
-      )
-      .then(salesBill => {
-        this.salesBill = salesBill;
-        console.log(salesBill.sales_Total);
-      })
-      .catch(err => this.alert.error_alert(err.message));
+    this.salesService.onGetSalesBillProduct(option, this.accessTokenService.getAccesstokenStore())
+                      .then(salesBill => {
+                        this.salesBill = salesBill;
+                        console.log(salesBill);
+                      })
+                      .catch(err => this.alert.error_alert(err.message));
   }
 }

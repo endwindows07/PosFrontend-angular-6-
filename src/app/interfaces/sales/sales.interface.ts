@@ -1,4 +1,5 @@
 import { ISalesOrder } from "./sales-order.interface";
+import { IProfile } from "../profile.interface";
 
 export interface ISales {
   sales_List: ISalesOrder[];
@@ -10,4 +11,5 @@ export interface ISales {
   sales_Time?: string,
   cancelSales_Time?: string,
   memberId?: string,
+  member?: IProfile
 }

@@ -38,6 +38,7 @@ export class ProductSalesComponent {
   payment: number = 0;
   totalPrice: number = 0;
   calculateChange: number = 0;
+
   productOrders: ISalesOrder[] = [];
   product: IProduct[] = [];
   productsSelect: IProduct[] = [];
@@ -49,7 +50,6 @@ export class ProductSalesComponent {
   onSearchAdvand(){
     let product = this.product.filter(it => it.name == this.searchValueSelected);
     this.searchProductAdvand = product;
-    console.log(this.searchProductAdvand);
   }
 
   inittailLoadProductLocalStore(options: ISearchOption) {
@@ -76,10 +76,6 @@ export class ProductSalesComponent {
 
   onInsertProductSelected(product: IProduct) {
     let productSelected = this.onSearchProductSelectedById(product.id);
-    // if (this.productsSelect.length == 0) {
-    //   product.countOrder = 1;
-    //   this.productsSelect.unshift(product);
-    // }
 
     if (this.onSearchProductSelectedById(product.id) != null) {
       product.countOrder++;
@@ -87,15 +83,8 @@ export class ProductSalesComponent {
       product.countOrder = 1;
       this.productsSelect.unshift(product);
     }
+    console.log(this.productsSelect);
     this.onGetTotalPrice();
-  }
-
-  onSearchProductById(id: string) {
-    return this.product.find(it => it.id == id);
-  }
-
-  onSearchProductSelectedById(id: string) {
-    return this.productsSelect.find(it => it.id == id);
   }
 
   // สินค้าที่ขายทั้งหมด ต้องเอาไปใส่ใน บิล
@@ -114,35 +103,28 @@ export class ProductSalesComponent {
   }
 
   private onAdjustSalesProduct() {
-    if (this.productsSelect.length == 0) {
-      return this.alert.error_alert("กรุณาเลือกรายการขาย");
-    }
-
-    if (this.payment < this.totalPrice) {
-      return this.alert.error_alert("ใส่จำนวนเงินให้ถูกต้อง");
-    }
+    if (this.productsSelect == null) return this.alert.error_alert("กรุณาเลือกรายการขาย");
+    if (this.payment < this.totalPrice) return this.alert.error_alert("ใส่จำนวนเงินให้ถูกต้อง");
 
     this.onInsertCountOrder();
-    // console.log(JSON.stringify(this.productOrders));
     this.productSales.sales_List = this.productOrders;
     this.productSales.payment = this.payment.toString();
-    // console.log(this.productSales);
+
     this.onGetTotalPrice();
-    this.salesService
-      .onAdjustProduct(
+
+    this.salesService.onAdjustProduct(
         this.productSales,
-        this.accessTokenService.getAccesstokenStore()
-      )
-      .then(res => {
-        this.alert.success_alert("sales product success");
-        this.productsSelect = null;
-        this.productOrders = null;
-      })
-      .catch(err => {
-        this.productsSelect = null;
-        this.productOrders = null;
-        this.alert.error_alert(err.Message);
-      });
+        this.accessTokenService.getAccesstokenStore()).then(res => 
+          {
+            this.alert.success_alert("sales product success");
+          this.productsSelect = null;
+          this.productOrders = null;
+          })
+        .catch(err => {
+          this.productsSelect = null;
+          this.productOrders = null;
+          this.alert.error_alert(err.Message);
+        });
   }
 
   private onPlusProductCount(id: string) {
@@ -163,7 +145,7 @@ export class ProductSalesComponent {
     this.onGetTotalPrice();
   }
 
-  onRemoveProduct(index: number, id: string) {
+  private onRemoveProduct(index: number, id: string) {
     this.onSearchProductSelectedById(id).countOrder = 0;
     this.onGetTotalPrice();
     this.productsSelect.splice(index, 1);
@@ -176,5 +158,13 @@ export class ProductSalesComponent {
         this.totalPrice += Number.parseInt(it.price) * it.countOrder;
       });
     }
+  }
+
+  private onSearchProductById(id: string) {
+    return this.product.find(it => it.id == id);
+}   
+
+  private onSearchProductSelectedById(id: string) {
+    return this.productsSelect.find(it => it.id == id);
   }
 }

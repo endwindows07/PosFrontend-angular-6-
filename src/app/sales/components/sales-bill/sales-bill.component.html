@@ -8,8 +8,8 @@
       <label for="exampleInputName2"></label>
       <div class="row">
         <div class="form-group col-lg-6">
-          <span [ngSwitch]="search_Type.key">
-            <input *ngSwitchDefault [(ngModel)]="search_Text" type="text" class="form-control" placeholder="   search_Type.value ">
+          <span>
+            <input [(ngModel)]="search_Text" type="text" class="form-control" placeholder="{{search_Type.value}} ">
           </span>
         </div>
         <div class="input-group-append col-lg-2 ">
@@ -43,7 +43,7 @@
         </tbody>
       </table>
       <div class="row col-lg-12">
-        <h5>จำนวนสินค้าทั้งหมด Products.product_Total รายการ</h5>
+        <h5>จำนวนบิลทั้งหมด {{salesBill.sales_Total}} รายการ</h5>
       </div>
       <pagination [(ngModel)]="start_Page" [itemsPerPage]="limit_Page" (pageChanged)="onPageChanged($event)" [rotate]="false"
         [maxSize]="10" previousText="หน้าก่อนหน้า" nextText="หน้าถัดไป" [totalItems]="salesBill.sales_Total"></pagination>

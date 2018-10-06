@@ -6,6 +6,7 @@ import { AccessTokenService } from "../../../services/accesstoken.service";
 import { ISales } from "../../../interfaces/sales/sales.interface";
 import { AppUrl } from "../../../app.url";
 import { ProductUrl } from "../../../Product/product.url";
+import { ProductService } from "../../../services/product.service";
 
 @Component({
   selector: "app-detail-bill",
@@ -14,6 +15,7 @@ import { ProductUrl } from "../../../Product/product.url";
 })
 export class DetailBillComponent {
   constructor(
+    private productService: ProductService,
     private salesService: SalesService,
     private alert: AlertService,
     private router: Router,
@@ -22,13 +24,14 @@ export class DetailBillComponent {
   ) {
     this.nativeRoute.params.forEach(query => {
       this.salesBillId = query.id;
-    })
+    });
     this.onInitailLoadSalesBill();
   }
 
   AppUrl = AppUrl;
   ProductUrl = ProductUrl;
-  
+
+  productName: string;
   salesBillId: string;
   salesBill: ISales;
 
@@ -40,8 +43,16 @@ export class DetailBillComponent {
       )
       .then(salesBill => {
         console.log(salesBill);
-         this.salesBill = salesBill;
+        this.salesBill = salesBill;
       })
       .catch(err => this.alert.error_alert(err.Message));
+  }
+
+  onGetStatsuSalesString(status: boolean){
+    if (status){
+      return "ลงระบบ"
+    }else{
+      return "ยกเลิกใบเสร็จ";
+    }
   }
 }
