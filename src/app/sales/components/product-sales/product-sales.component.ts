@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { TypeaheadMatch, TabDirective } from "ngx-bootstrap";
+import { Component } from "@angular/core";
+import { TypeaheadMatch } from "ngx-bootstrap";
 import { IProduct } from "../../../interfaces/Product/product.interface";
 import { ISales } from "../../../interfaces/sales/sales.interface";
 import { ISalesOrder } from "../../../interfaces/sales/sales-order.interface";
@@ -9,9 +9,7 @@ import { Router } from "@angular/router";
 import { AccessTokenService } from "../../../services/accesstoken.service";
 import { SalesService } from "../../../services/sales.service";
 import { ISearchOption } from "../../../interfaces/search-option.interface";
-import { AppUrl } from "../../../app.url";
-import { SalesUrl } from "../../sales.url";
-import { tap } from "rxjs/operators";
+
 
 @Component({
   selector: "app-product-sales",
@@ -56,8 +54,7 @@ export class ProductSalesComponent {
   }
 
   inittailLoadProductLocalStore(options: ISearchOption) {
-    this.salesService
-      .onGetProduct(options, this.accessTokenService.getAccesstokenStore())
+    this.productService.onGetProduct(options, this.accessTokenService.getAccesstokenStore())
       .then(res => {
         this.product = res.product_List;
       });

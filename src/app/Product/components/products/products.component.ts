@@ -116,7 +116,23 @@ export class ProductsComponent {
   }
 
   onPageChanged(page: PageChangedEvent) {
-    this.onClickSearch();
+    if (this.categorySelected) {
+      this.initailLoadProducts({
+        Search_Text: this.getSearchtext,
+        Search_Type: this.search_Type.key,
+        Start_Page: page.page,
+        Limit_Page: page.itemsPerPage,
+        Search_DefaultType: this.searchDefaultType,
+        Search_DefaultText: this.categorySelected.value
+      });
+    } else {
+      this.initailLoadProducts({
+        Search_Text: this.getSearchtext,
+        Search_Type: this.search_Type.key,
+        Start_Page: page.page,
+        Limit_Page: page.itemsPerPage
+      });
+    }
   }
 
   initailLoadProducts(option?: ISearchOption) {

@@ -56,8 +56,8 @@ export class SalesBillComponent {
         Search_DefaultType: this.searchDefaultType,
         Search_Text: this.search_Text,
         Search_Type: this.search_Type,
-        Start_Page: this.start_Page,
-        Limit_Page: this.limit_Page,
+        Start_Page: page.page,
+        Limit_Page: page.itemsPerPage
       });
     } else {
       this.onIitailLoadSalesBill({
@@ -65,8 +65,8 @@ export class SalesBillComponent {
         Search_DefaultType: "SalesTime",
         Search_Text: this.search_Text,
         Search_Type: this.search_Type,
-        Start_Page: this.start_Page,
-        Limit_Page: this.limit_Page,
+        Start_Page: page.page,
+        Limit_Page: page.itemsPerPage
       });
     }
   }
@@ -97,7 +97,6 @@ export class SalesBillComponent {
     this.salesService.onGetSalesBillProduct(option, this.accessTokenService.getAccesstokenStore())
       .then(salesBill => {
         this.salesBill = salesBill;
-        console.log(salesBill);
       })
       .catch(err => this.alert.error_alert(err.message));
   }

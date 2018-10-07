@@ -13,9 +13,9 @@ import { Observable } from 'rxjs';
 })
 export class HttpService {
   constructor(private http: HttpClient) {}
-  // private address = 'http://localhost:8080/';
+  private address = 'http://localhost:8080/';
   
-  private address = "https://localhost:44334/";
+  // private address = "https://localhost:44334/";
 
   requestPost(url: string, body: any, accessToken?: string) {
     return this.http

@@ -3,5 +3,6 @@ export const AppUrl = {
     Account: 'account',
     Product: 'product',
     Stock: 'stock',
-    Sales: 'sales'
+    Sales: 'sales',
+    Report: 'report'
 };

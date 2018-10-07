@@ -10,20 +10,11 @@ declare let $;
 export class SalesService {
   constructor(private http: HttpService) {}
 
-  public productLocalStore: IProductList = {} as any;
-  public setProductLocalStore(products: IProductList) {
-    this.productLocalStore.product_List = products.product_List;
-    this.productLocalStore.product_Total = products.product_Total;
-  }
 
   onGetProduct(options: ISearchOption, accessToken: string) {
-    return (this.http
+    return this.http
       .requestGet(`api/product/products?${$.param(options)}`, accessToken)
-      .toPromise() as Promise<IProductList>).then(res => {
-      this.setProductLocalStore(res);
-      // console.log(this.productLocalStore);
-      return res;
-    });
+      .toPromise() as Promise<IProductList>
   }
 
   onAdjustProduct(model: ISales, accessToken: string) {

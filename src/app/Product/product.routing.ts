@@ -16,7 +16,7 @@ const RouteLists: Routes = [
     },
     {
         path: ProductUrl.AddProduct,
-        component: AddProductComponent,
+        component: AddProductComponent, 
         data: { role: [IRoleAccount.Admin] }
     },
     {

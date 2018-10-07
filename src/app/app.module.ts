@@ -11,6 +11,7 @@ import { LayoutModule } from './layout/layout.module';
 import { AccontService } from './services/account.service';
 import { ProductService } from './services/product.service';
 import { SalesService } from './services/sales.service';
+import { ReportService } from './services/report.service';
 
 
 @NgModule({
@@ -25,7 +26,7 @@ import { SalesService } from './services/sales.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AccontService, ProductService, SalesService],
+  providers: [AccontService, ProductService, SalesService, ReportService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

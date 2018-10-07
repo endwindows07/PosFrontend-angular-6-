@@ -12,36 +12,36 @@ export class ProductService {
     constructor(private http: HttpService) { }
 
     public productLocalStore: IProductList = {} as any;
-    public setProductLocalStore(products: IProductList){
+
+    public setProductLocalStore(products: IProductList) {
         this.productLocalStore.product_List = products.product_List;
         this.productLocalStore.product_Total = products.product_Total;
     }
 
-    onGetProduct(options: ISearchOption, accessToken: string){
+    onGetProduct(options: ISearchOption, accessToken: string) {
         return (this.http.requestGet(`api/product/products?${$.param(options)}`, accessToken)
-                        .toPromise() as Promise<IProductList>).then(res => {
-                            this.setProductLocalStore(res)
-                            console.log(this.productLocalStore);
-                            return res;
-                        });
+            .toPromise() as Promise<IProductList>).then(res => {
+                this.setProductLocalStore(res)
+                return res;
+            });
     }
 
-    onGetProductById(id: any, accessToken: string){
+    onGetProductById(id: any, accessToken: string) {
         return this.http.requestGet(`api/product/product/${id}`, accessToken)
-                        .toPromise() as Promise<IProduct>;
+            .toPromise() as Promise<IProduct>;
     }
 
-    onAddProduct(model: IProduct, accessToken: string){
+    onAddProduct(model: IProduct, accessToken: string) {
         return this.http.requestPost(`api/product/add-product`, model, accessToken)
-                        .toPromise() as Promise<IProduct>;
+            .toPromise() as Promise<IProduct>;
     }
 
-    onUpdateProduct(model: IProduct,id: any, accessToken: string) {
+    onUpdateProduct(model: IProduct, id: any, accessToken: string) {
         return this.http.requestPost(`api/product/update-product/${id}`, model, accessToken)
-                    .toPromise() as Promise<IProduct>;
+            .toPromise() as Promise<IProduct>;
     }
 
-    onUpdateProductInStock(model: IProductAdJust, id: any, accessToken: string){
+    onUpdateProductInStock(model: IProductAdJust, id: any, accessToken: string) {
         return this.http.requestPost(`api/product/update-productstock/${id}`, model, accessToken)
             .toPromise() as Promise<IProductAdJust>;
     }
