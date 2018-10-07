@@ -28,6 +28,8 @@ export class SalesBillComponent {
       Start_Page: this.start_Page,
       Limit_Page: this.limit_Page
     });
+    this.search_Type = 'Id';
+    this.searchDefaultType = 'SalesNow';
   }
 
   AppUrl = AppUrl;
@@ -36,34 +38,79 @@ export class SalesBillComponent {
   salesBillCountItem: number;
   salesBill: ISalesList;
 
-  search_Text: string = "";
-  search_Type: string = "Id";
+  search_Text: string;
+  search_Type: string;
+  searchDefaultText: string;
+  searchDefaultType: string;
+  dateSearch: string;
+
 
   start_Page = 1;
   limit_Page = 8;
 
+
   onPageChanged(page: PageChangedEvent) {
-    this.onIitailLoadSalesBill({
-      Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page,
-    });
+    if (!this.dateSearch) {
+      this.onIitailLoadSalesBill({
+        Search_DefaultText: this.searchDefaultType,
+        Search_DefaultType: this.searchDefaultType,
+        Search_Text: this.search_Text,
+        Search_Type: this.search_Type,
+        Start_Page: this.start_Page,
+        Limit_Page: this.limit_Page,
+      });
+    } else {
+      this.onIitailLoadSalesBill({
+        Search_DefaultText: this.onDateCut(this.dateSearch[0].toString(), this.dateSearch[1].toString()),
+        Search_DefaultType: "SalesTime",
+        Search_Text: this.search_Text,
+        Search_Type: this.search_Type,
+        Start_Page: this.start_Page,
+        Limit_Page: this.limit_Page,
+      });
+    }
   }
 
-  onClickSearch(){
-    this.onIitailLoadSalesBill({
-      Search_Text: this.search_Text,
-      Search_Type: this.search_Type,
-      Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page,
-    });
+  onClickSearch() {
+    if (!this.dateSearch) {
+      this.onIitailLoadSalesBill({
+        Search_DefaultText: this.searchDefaultType,
+        Search_DefaultType: this.searchDefaultType,
+        Search_Text: this.search_Text,
+        Search_Type: this.search_Type,
+        Start_Page: this.start_Page,
+        Limit_Page: this.limit_Page,
+      });
+    } else {
+      this.onIitailLoadSalesBill({
+        Search_DefaultText: this.onDateCut(this.dateSearch[0].toString(), this.dateSearch[1].toString()),
+        Search_DefaultType: "SalesTime",
+        Search_Text: this.search_Text,
+        Search_Type: this.search_Type,
+        Start_Page: this.start_Page,
+        Limit_Page: this.limit_Page,
+      });
+    }
   }
 
   onIitailLoadSalesBill(option: ISearchOption) {
     this.salesService.onGetSalesBillProduct(option, this.accessTokenService.getAccesstokenStore())
-                      .then(salesBill => {
-                        this.salesBill = salesBill;
-                        console.log(salesBill);
-                      })
-                      .catch(err => this.alert.error_alert(err.message));
+      .then(salesBill => {
+        this.salesBill = salesBill;
+        console.log(salesBill);
+      })
+      .catch(err => this.alert.error_alert(err.message));
+  }
+
+  onGetStatsuSalesString(status: boolean) {
+    if (status) {
+      return "ลงระบบ"
+    } else {
+      return "ยกเลิกใบเสร็จ";
+    }
+  }
+
+  onDateCut(dateTo: string, dateFrom: string) {
+    return dateTo.replace(" GMT+0700 (เวลาอินโดจีน)", "") + "&" + dateFrom.replace(" GMT+0700 (เวลาอินโดจีน)", "");
   }
 }

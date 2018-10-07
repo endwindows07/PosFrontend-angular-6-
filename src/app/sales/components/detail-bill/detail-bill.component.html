@@ -26,9 +26,9 @@
             <small> {{salesBill.sales_Time | date:'medium'}} </small>
           </h3>
         </div>
-        <div>
+        <div *ngIf="salesBill.status == false">
           <h3>เวลายกเลิกบิล :
-            <small> {{salesBill.cancelSales_Time | date:'medium'}}</small>
+            <small> {{salesBill.cancelSales_Time | date:'medium'}} ({{salesBill.memberCancelBill}})</small>
           </h3>
         </div>
       </div>

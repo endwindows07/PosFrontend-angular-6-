@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { TypeaheadMatch } from "ngx-bootstrap";
+import { TypeaheadMatch, TabDirective } from "ngx-bootstrap";
 import { IProduct } from "../../../interfaces/Product/product.interface";
 import { ISales } from "../../../interfaces/sales/sales.interface";
 import { ISalesOrder } from "../../../interfaces/sales/sales-order.interface";
@@ -9,6 +9,9 @@ import { Router } from "@angular/router";
 import { AccessTokenService } from "../../../services/accesstoken.service";
 import { SalesService } from "../../../services/sales.service";
 import { ISearchOption } from "../../../interfaces/search-option.interface";
+import { AppUrl } from "../../../app.url";
+import { SalesUrl } from "../../sales.url";
+import { tap } from "rxjs/operators";
 
 @Component({
   selector: "app-product-sales",
@@ -47,7 +50,7 @@ export class ProductSalesComponent {
     payment: null
   };
 
-  onSearchAdvand(){
+  onSearchAdvand() {
     let product = this.product.filter(it => it.name == this.searchValueSelected);
     this.searchProductAdvand = product;
   }
@@ -113,18 +116,18 @@ export class ProductSalesComponent {
     this.onGetTotalPrice();
 
     this.salesService.onAdjustProduct(
-        this.productSales,
-        this.accessTokenService.getAccesstokenStore()).then(res => 
-          {
-            this.alert.success_alert("sales product success");
-          this.productsSelect = null;
-          this.productOrders = null;
-          })
-        .catch(err => {
-          this.productsSelect = null;
-          this.productOrders = null;
-          this.alert.error_alert(err.Message);
-        });
+      this.productSales,
+      this.accessTokenService.getAccesstokenStore()).then(res => {
+        this.productsSelect = [];
+        this.productOrders = [];
+        this.alert.success_alert("sales product success");
+        window.open('http://localhost:4200/sales/detail-bill/' +  res.id) ;
+      })
+      .catch(err => {
+        this.productsSelect = null;
+        this.productOrders = null;
+        this.alert.error_alert(err.Message);
+      });
   }
 
   private onPlusProductCount(id: string) {
@@ -162,7 +165,7 @@ export class ProductSalesComponent {
 
   private onSearchProductById(id: string) {
     return this.product.find(it => it.id == id);
-}   
+  }
 
   private onSearchProductSelectedById(id: string) {
     return this.productsSelect.find(it => it.id == id);

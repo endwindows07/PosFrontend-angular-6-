@@ -2,11 +2,16 @@
 /* [data-notify="progressbar"] {
     color: blue;
 }; */
-.bs-datepicker {
-  background-color: wheat;
-  padding: 10%;
-  width: 100%;
+@import 'ngx-bootstrap/datepicker/bs-datepicker.css';
+
+/* .bs-datepicker-container {
+  
+} */
+
+.theme-green .bs-datepicker-head{
+  background-color: #2f323a;
 }
+
 .content-panel {
   margin-top: 2%;
   padding-left: 5%;

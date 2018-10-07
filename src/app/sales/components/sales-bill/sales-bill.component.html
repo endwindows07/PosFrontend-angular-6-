@@ -1,5 +1,5 @@
 <app-content>
-  <div class="row content-panel">
+  <div class="row content-panel" *ngIf="salesBill">
     <div class="page-header">
       <h1>รายการขายสินค้า</h1>
       <h4><small>รายละเอียดกาารขายสินค้าแต่ละบิล</small></h4>
@@ -12,7 +12,11 @@
             <input [(ngModel)]="search_Text" type="text" class="form-control" placeholder="{{search_Type.value}} ">
           </span>
         </div>
-        <div class="input-group-append col-lg-2 ">
+        <div class="col-md-3 form-group">
+          <input placeholder="ค้นหาใบเสร็จเดือนนี้" type="text" class="form-control" [(ngModel)]="dateSearch"
+            bsDaterangepicker #dpr="bsDaterangepicker">
+        </div>
+        <div class=" input-group-append col-lg-2 ">
           <button class="form-control" class="btn btn-info" type="button" (click)="onClickSearch()">
             <i class="fa fa-search"></i>
           </button>
@@ -25,18 +29,20 @@
             <th>ลำดับ</th>
             <th>รหัสใบเสร็จ</th>
             <th>ยอดขายในบิล</th>
-            <th>ยอดบชำระ</th>
+            <th>ยอดบำระ</th>
             <th>เวลาขาย</th>
+            <th>สถานะบิล</th>
             <th>เจ้าหน้าที่</th>
           </tr>
         </thead>
-        <tbody *ngIf="salesBill">
+        <tbody>
           <tr *ngFor="let item of salesBill.sales_List; let i = index;">
             <td>{{i+1}}</td>
             <td> <a [routerLink]="[ '/', AppUrl.Sales, SalesUrl.DetailSalesBill, item.id ]"> {{item.id}}</a></td>
             <td>{{item.total_Price}}</td>
             <td>{{item.payment}}</td>
             <td>{{item.sales_Time | date:'medium'}}</td>
+            <td>{{onGetStatsuSalesString(item.status)}}</td>
             <td>{{item.memberId}}</td>
           </tr>
           <!-- table content -->
