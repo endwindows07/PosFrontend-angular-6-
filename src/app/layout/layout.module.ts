@@ -16,7 +16,7 @@ import { AlertService } from './components/services/alert.service';
     PaginationModule.forRoot(),
     BsDropdownModule.forRoot(),
     BsDatepickerModule.forRoot(),
-    TypeaheadModule.forRoot()
+    TypeaheadModule.forRoot(),
   ],
   exports: [
     TopbarComponent,
@@ -28,7 +28,7 @@ import { AlertService } from './components/services/alert.service';
     PaginationModule,
     BsDropdownModule,
     BsDatepickerModule,
-    TypeaheadModule
+    TypeaheadModule,
   ],
   declarations: [
     TopbarComponent,

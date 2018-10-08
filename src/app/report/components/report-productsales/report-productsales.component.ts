@@ -10,8 +10,6 @@ export class ReportProductsalesComponent {
 
   }
 
-  onIitailLoadReportSales(){
-
-  }
   
+
 }
