@@ -1,8 +1,45 @@
 <app-content>
-  <table>
-    <tr>
-      <td style="width: 130%; height: 100%"><canvas id="lineChart"></canvas></td>
-      <td style="width: 130%; height: 100%"><canvas id="lineChart"></canvas></td>
-    </tr>
-  </table>
+  <div class="row content-panel">
+    <div class="">
+      <div class="col-lg-6"></div>
+      <div class="col-lg-3">
+        <input placeholder="" type="text" class="form-control" [(ngModel)]="Search_Text" bsDaterangepicker
+          #dpr="bsDaterangepicker" placement="bottom">
+      </div>
+      <div class="">
+        <button class="form-control" class="btn btn-info" type="button" (click)="onClickSearch()">
+          <i class="fa  fa-search"></i> 
+          ค้นหา
+        </button>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-lg-10">
+        <canvas id="lineChart"></canvas>
+      </div>
+      <div class="col-lg-2">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ยอดขาย</th>
+              <th>วันที่</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of totalSalesReportList.reportSales_List">
+              <td>{{item.total_Price}} บาท</td>
+              <td>{{item.sales_Time| date:'dd/MM/yyyy'}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+
+    </div>
+  </div>
 </app-content>
