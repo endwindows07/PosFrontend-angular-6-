@@ -10,12 +10,12 @@ import { AccessTokenService } from "../../../services/accesstoken.service";
 import { SalesService } from "../../../services/sales.service";
 import { ISearchOption } from "../../../interfaces/search-option.interface";
 
-
 @Component({
   selector: "app-product-sales",
   templateUrl: "./product-sales.component.html",
   styleUrls: ["./product-sales.component.css"]
 })
+
 export class ProductSalesComponent {
   constructor(
     private productService: ProductService,
@@ -28,7 +28,11 @@ export class ProductSalesComponent {
       Start_Page: this.start_Page,
       Limit_Page: this.limit_Page
     });
+    console.log(this.dateNow.toJSON())
   }
+
+  dateNow: Date = new Date();
+
 
   start_Page = 0;
   limit_Page = 0;
@@ -93,7 +97,7 @@ export class ProductSalesComponent {
       this.productsSelect.forEach(it => {
         let order: ISalesOrder = {
           productId: it.id,
-          // sales_Time: Date.now().toString(),
+          sales_Time: this.dateNow.toJSON(),
           sales_Count: it.countOrder.toString()
         };
         this.productOrders.push(order);

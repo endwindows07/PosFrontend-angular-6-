@@ -23,7 +23,6 @@ export class ReportSalesComponent {
     private router: Router,
     private alert: AlertService,
     private accessTokenService: AccessTokenService,
-    private builder: FormBuilder
   ) {
     this.onIitailLoadReportSales({
       Search_DefaultText: "SalesNow",
@@ -43,8 +42,6 @@ export class ReportSalesComponent {
   LineChart = [];
 
   onClickSearch() {
-
-    this.LineChart = null;
 
     if(!this.Search_Text){
       this.onIitailLoadReportSales({

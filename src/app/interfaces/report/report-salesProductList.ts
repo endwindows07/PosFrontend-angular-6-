@@ -1,4 +1,6 @@
+import { IReportSalesProduct } from "./report-salesProduct";
+
 export interface IReportSalesProductList {
-        reportSalesProductModel: string;
+        salesProduct_List: IReportSalesProduct[];
         salesProduct_Total: string;
 }
