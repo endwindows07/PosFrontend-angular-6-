@@ -1,16 +1,19 @@
 <app-content>
   <div class="row content-panel">
-    <div class="">
-      <div class="col-lg-6"></div>
-      <div class="col-lg-3">
-        <input placeholder="" type="text" class="form-control" [(ngModel)]="Search_Text" bsDaterangepicker
-          #dpr="bsDaterangepicker" placement="bottom">
-      </div>
+    <div class="row">
       <div class="">
-        <button class="form-control" class="btn btn-info" type="button" (click)="onClickSearch()">
-          <i class="fa  fa-search"></i> 
-          ค้นหา
-        </button>
+        <div class="col-lg-1"></div>
+        <div class="col-lg-8">
+          <input placeholder="" type="text" class="form-control" [(ngModel)]="Search_Text" bsDaterangepicker #dpr="bsDaterangepicker"
+            placement="bottom">
+        </div>
+        <div class="">
+          <button class="form-control" class="btn btn-info" type="button" (click)="onClickSearch()">
+            <i class="fa  fa-search"></i>
+            ค้นหา
+          </button>
+        </div>
+        <br>
       </div>
     </div>
     <br>
@@ -35,11 +38,6 @@
         </table>
       </div>
     </div>
-    <br>
-    <br>
-    <br>
-    <div class="row">
 
-    </div>
   </div>
 </app-content>

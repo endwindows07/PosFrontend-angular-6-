@@ -1,5 +1,67 @@
 <app-content>
-  <p>
-    report-productsales works!
-  </p>
+  <div class="row content-panel" style="height: 900px">
+    <div class="row">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-8">
+        <input placeholder="ค้นหาด้วยเวลา mm/dd/yyy" type="text" class="form-control" [(ngModel)]="Search_Text"
+          bsDaterangepicker #dpr="bsDaterangepicker" placement="bottom">
+      </div>
+      <div class="">
+        <button class="form-control" class="btn btn-info" type="button" (click)="onClickSearch()">
+          <i class="fa  fa-search"></i> ค้นหา </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-10">
+        <canvas id="lineChart"></canvas>
+      </div>
+      <div class="col-lg-2">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ยอดขาย</th>
+              <th>วันที่</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr *ngFor="let item of totalSalesReportList.reportSales_List">
+              <td>{{item.total_Price}} บาท</td>
+              <td>{{item.sales_Time| date:'dd/MM/yyyy'}}</td>
+            </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-8">
+        <input placeholder="ค้นหาด้วยรหัสแท่ง" type="text" class="form-control" [(ngModel)]="Search_Text"
+        placement="bottom">
+      </div>
+      <div class="">
+        <button class="form-control" class="btn btn-info" type="button" (click)="onClickSearch()">
+          <i class="fa  fa-search"></i> ค้นหา </button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-1"></div>
+      <div class="col-lg-9">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>รูปภาพ</th>
+              <th>รหัสแท่ง</th>
+              <th>ชื่อสิน้คา</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- <tr *ngFor="let item of totalSalesReportList.reportSales_List">
+                                      <td>{{item.total_Price}} บาท</td>
+                                      <td>{{item.sales_Time| date:'dd/MM/yyyy'}}</td>
+                                    </tr> -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </app-content>

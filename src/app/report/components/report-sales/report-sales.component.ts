@@ -36,13 +36,12 @@ export class ReportSalesComponent {
 
   totalSalesReportList: IReportSaleList = {
     report_Count: null,
-    reportSales_List: null
+    reportSales_List: null 
   };
 
   LineChart = [];
 
   onClickSearch() {
-
     if(!this.Search_Text){
       this.onIitailLoadReportSales({
         Search_DefaultText: "SalesNow",

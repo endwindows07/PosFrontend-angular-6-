@@ -15,7 +15,7 @@ const RouteLists: Routes = [
     {
         path: ReportUrl.ReportProductSales,
         children: [
-            { path: '', component: ReportSalesComponent },
+            { path: '', component: ReportProductsalesComponent },
             { path: ':id', component: ReportProductsalesComponent },
         ],
         data: { role: [IRoleAccount.Admin] }
