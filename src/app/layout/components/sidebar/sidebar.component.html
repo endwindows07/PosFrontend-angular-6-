@@ -57,7 +57,16 @@
             <li><a [routerLink]="[ '/', AppUrl.Sales, SalesUrl.SalesBill]">รายงานขายสินค้า</a></li>
             <li><a [routerLink]="[ '/', AppUrl.Report, ReportUrl.ReportSales]">รายงานยอดขาย</a></li>
             <li><a [routerLink]="[ '/', AppUrl.Report, ReportUrl.ReportProductSales]">รายงานยอดขายสินค้า</a></li>
-            <li><a href="gallery.html">รายงานเปรียบเทียบยอดขายสินค้า</a></li>
+          </ul>
+        </li>
+        <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">
+          <a href="javascript:;">
+            <i class="fa fa-tasks"></i>
+            <span>การจัดซื้อสินค้า</span>
+          </a>
+          <ul class="sub">
+            <li><a [routerLink]="[ '/', AppUrl.Order, OrderUrl.OrderInsert]">เพิ่มการจัดซื้อ</a></li>
+            <li><a [routerLink]="[ '/', AppUrl.Order, OrderUrl.Orders]">การจัดซื้อทั้งหมด</a></li>
           </ul>
         </li>
         <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">

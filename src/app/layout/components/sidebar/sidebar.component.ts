@@ -9,6 +9,7 @@ import { ProductUrl } from '../../../Product/product.url';
 import { StockUrl } from '../../../stock/stock.url';
 import { SalesUrl } from '../../../sales/sales.url';
 import { ReportUrl } from '../../../report/report.url';
+import { OrderUrl } from 'src/app/order/order.url';
 declare const App: any;
 @Component({
   selector: 'app-sidebar',
@@ -33,6 +34,7 @@ export class SidebarComponent implements OnInit {
   SalesUrl = SalesUrl;
   ReportUrl = ReportUrl;
   roleAccount = IRoleAccount;
+  OrderUrl = OrderUrl;
   
   ngOnInit() {
   }

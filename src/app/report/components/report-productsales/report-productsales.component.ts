@@ -44,7 +44,7 @@ export class ReportProductsalesComponent implements OnInit {
   }
 
   salesPorductReportId: number;
-  salesProductReportList: IReportSalesProductList[] = [];
+  salesProductReportList: IReportSalesProductList[] = [] ;
 
   products: IProduct[] = [];
   productsSelect: IProduct[] = [];
@@ -128,9 +128,9 @@ export class ReportProductsalesComponent implements OnInit {
     });
   }
 
-  onSetChart(sales_Time: string[], sales_Count: string[] ) {
+  onSetChart(sales_Time?: string[], sales_Count?: string[] ) {
     this.LineChart = new Chart('lineChart', {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: sales_Time,
         datasets: [{
