@@ -28,11 +28,9 @@ export class ProductSalesComponent {
       Start_Page: this.start_Page,
       Limit_Page: this.limit_Page
     });
-    console.log(this.dateNow.toJSON())
   }
 
   dateNow: Date = new Date();
-
 
   start_Page = 0;
   limit_Page = 0;
@@ -46,7 +44,9 @@ export class ProductSalesComponent {
 
   productOrders: ISalesOrder[] = [];
   product: IProduct[] = [];
+
   productsSelect: IProduct[] = [];
+
   productSales: ISales = {
     sales_List: null,
     payment: null
@@ -69,7 +69,7 @@ export class ProductSalesComponent {
     product = this.product.find(
       it => it.barcode == this.searchValueSelected.trim()
     );
-    if (product.barcode != "") {
+    if (product) {
       this.onInsertProductSelected(product);
     }
   }
@@ -87,7 +87,6 @@ export class ProductSalesComponent {
       product.countOrder = 1;
       this.productsSelect.unshift(product);
     }
-    console.log(this.productsSelect);
     this.onGetTotalPrice();
   }
 

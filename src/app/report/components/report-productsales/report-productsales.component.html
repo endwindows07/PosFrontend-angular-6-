@@ -7,7 +7,7 @@
           bsDaterangepicker #dpr="bsDaterangepicker" placement="bottom">
       </div>
       <div class="">
-        <button class="form-control" class="btn btn-info" type="button" (click)="onClickSearch()">
+        <button class="form-control" class="btn btn-info" type="button" (click)="onSearchSalesProductTime()">
           <i class="fa  fa-search"></i> ค้นหา </button>
       </div>
     </div>
@@ -35,11 +35,11 @@
     <div class="row">
       <div class="col-lg-1"></div>
       <div class="col-lg-8">
-        <input placeholder="ค้นหาด้วยรหัสแท่ง" type="text" class="form-control" [(ngModel)]="Search_Text"
-        placement="bottom">
+        <input placeholder="ค้นหาด้วยรหัสแท่ง" [(ngModel)]="productBarcodeSearch" (input)="onSearchProduct($event.target.value)"
+          type="text" class="form-control" placement="bottom">
       </div>
       <div class="">
-        <button class="form-control" class="btn btn-info" type="button" (click)="onClickSearch()">
+        <button class="form-control" class="btn btn-info" type="button" (click)="onLoadProductSelectToChart()">
           <i class="fa  fa-search"></i> ค้นหา </button>
       </div>
     </div>
@@ -51,14 +51,19 @@
             <tr>
               <th>รูปภาพ</th>
               <th>รหัสแท่ง</th>
-              <th>ชื่อสิน้คา</th>
+              <th>ชื่อสินค้า</th>
+              <th>จำนวนสินค้าในระบบ</th>
+              <th></th>
             </tr>
           </thead>
-          <tbody>
-            <!-- <tr *ngFor="let item of totalSalesReportList.reportSales_List">
-                                      <td>{{item.total_Price}} บาท</td>
-                                      <td>{{item.sales_Time| date:'dd/MM/yyyy'}}</td>
-                                    </tr> -->
+          <tbody *ngIf="productsSelect">
+            <tr *ngFor="let item of productsSelect; let i = index">
+              <td>pic</td>
+              <td>{{item.barcode}}</td>
+              <td>{{item.name}}</td>
+              <td>{{item.amount_Product}}</td>
+              <td><button (click)="onRemoveProductSelected(i)"><span class="glyphicon glyphicon-folder-close"></span></button></td>
+            </tr>
           </tbody>
         </table>
       </div>
