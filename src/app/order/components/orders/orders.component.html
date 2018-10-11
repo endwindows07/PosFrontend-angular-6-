@@ -39,11 +39,11 @@
         <tbody *ngIf="orderList">
           <tr *ngFor="let item of orderList; let i = index;">
             <td>{{ i+1 }}</td>
-            <td> <a [routerLink]="[ '/', AppUrl.Order, OrderUrl.OrderDetail, item.id ]">{{ item.id }}</a></td>
-            <td> {{ item.order_Name }} </td>
+            <td> {{ item.id }} </td>
+            <td> <a [routerLink]="[ '/', AppUrl.Order, OrderUrl.OrderDetail, item.id ]"> {{ item.order_Name }} </a></td>
             <td> {{ item.order_Time | date: 'medium' }} </td>
             <td> {{ item.orderInStore_Time | date: 'medium' }} </td>
-            <td> {{ item.status }} </td>
+            <td> {{ onGetStatsuSalesString(item.status )}} </td>
             <td> {{ item.memberId }}</td>
             <td>|||</td>
           </tr>

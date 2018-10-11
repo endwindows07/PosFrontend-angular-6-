@@ -4,6 +4,8 @@ import { AlertService } from 'src/app/layout/components/services/alert.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AccessTokenService } from 'src/app/services/accesstoken.service';
 import { IOrderList } from 'src/app/interfaces/order/order-list.interface';
+import { AppUrl } from 'src/app/app.url';
+import { OrderUrl } from '../../order.url';
 
 @Component({
   selector: 'app-order-detail',
@@ -26,6 +28,9 @@ export class OrderDetailComponent {
 
   }
 
+  AppUrl = AppUrl;
+  OrderUrl = OrderUrl;
+  
   orderId: number;
   order: IOrderList;
 
@@ -38,7 +43,18 @@ export class OrderDetailComponent {
         this.alert.error_alert(err.Message);
       })
   }
-  
+
+  onAdjustOrder() {
+    this.orderService.onAdjustOrderById(this.orderId, this.accessTokenService.getAccesstokenStore())
+      .then(res => {
+        this.alert.success_alert("รายจากจัดซื้อสินค้าลงระบบสำเร็จ");
+        this.router.navigate(['/', AppUrl.Order, OrderUrl.Orders]);
+      })
+      .catch(err => {
+        this.alert.error_alert(err.Message);
+      })
+  }
+
   onGetStatsuSalesString(status: boolean) {
     if (status) {
       return "ลงระบบ"

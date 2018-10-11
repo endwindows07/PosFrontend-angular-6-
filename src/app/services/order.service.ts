@@ -30,7 +30,7 @@ export class OrderService {
     }
 
     onAdjustOrderById(id: any, accessToken: string) {
-        return this.http.requestPost(`api/Order/adjust-order/${id}`, accessToken)
+        return this.http.requestGet(`api/Order/adjust-order/${id}`, accessToken)
             .toPromise() as Promise<IOrderList>;
     }
 

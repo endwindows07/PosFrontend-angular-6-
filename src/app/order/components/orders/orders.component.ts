@@ -44,4 +44,13 @@ export class OrdersComponent {
         this.alert.error_alert(err.Message);
       });
   }
+
+  onGetStatsuSalesString(status: boolean) {
+    if (status) {
+      return "ลงระบบ"
+    } else {
+      return "ยังไม่ลงระบบ";
+    }
+  }
+  
 }
