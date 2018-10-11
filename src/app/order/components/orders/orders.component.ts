@@ -10,7 +10,7 @@ import { AppUrl } from 'src/app/app.url';
 import { OrderUrl } from '../../order.url';
 
 @Component({
-  selector: 'app-orders',
+  selector: 'app-orders', 
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.css']
 })

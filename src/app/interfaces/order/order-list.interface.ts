@@ -1,14 +1,14 @@
 import { IOrder } from "./order.interface";
 
 export interface IOrderList {
-    Order_Name: string;
-    Product_List: IOrder[];
+    order_Name: string;
+    product_List: IOrder[];
 
-    Id?: string;
-    Product_Amount?: string;
-    Status?: string;
-    Order_Time?: string;
-    OrderInStore_Time?: string;
-    MemberChngeOrderId?: string;
-    MemberId?: string;
+    id?: string;
+    product_Amount?: string;
+    status?: string;
+    order_Time?: string;
+    orderInStore_Time?: string;
+    memberChngeOrderId?: string;
+    memberId?: string;
 }

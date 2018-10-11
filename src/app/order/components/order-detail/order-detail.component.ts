@@ -6,6 +6,7 @@ import { AccessTokenService } from 'src/app/services/accesstoken.service';
 import { IOrderList } from 'src/app/interfaces/order/order-list.interface';
 import { AppUrl } from 'src/app/app.url';
 import { OrderUrl } from '../../order.url';
+import { ProductUrl } from 'src/app/Product/product.url';
 
 @Component({
   selector: 'app-order-detail',
@@ -30,6 +31,7 @@ export class OrderDetailComponent {
 
   AppUrl = AppUrl;
   OrderUrl = OrderUrl;
+  ProductUrl = ProductUrl;
   
   orderId: number;
   order: IOrderList;

@@ -36,8 +36,8 @@ export class OrderInsertComponent {
   orderProducts: IOrder[] = [];
   orderName: string;
   orderList: IOrderList = {
-    Order_Name: null,
-    Product_List: null
+    order_Name: null,
+    product_List: null
   };
 
   product: IProduct[] = [];
@@ -47,47 +47,48 @@ export class OrderInsertComponent {
 
 
   searchProductAdvand: IProduct[] = [];
+
   productsSelect: IProduct[] = [];
 
   private onInsertCountOrder() {
     if (this.productsSelect != null) {
       this.productsSelect.forEach(it => {
         let order: IOrder = {
-          Product_Id: it.id,
-          Order_Count: it.countOrder.toString()
+          product_Id: it.id,
+          order_Count: it.countOrder.toString()
         };
         this.orderProducts.push(order);
       });
     }
   }
 
-   onAdjustSalesProduct() {
+  onAdjustSalesProduct() {
     if (this.productsSelect.length == 0) return this.alert.error_alert("กรุณาเลือกรายการสินค้าที่ต้องการจัดซื้อ");
     this.orderName = this.orderName.trim();
     if (this.orderName == "") return this.alert.error_alert("กรุณาตั้งชื่อรายการจัดซื้อ");
 
     this.onInsertCountOrder();
-    this.orderList.Product_List = this.orderProducts;
-    this.orderList.Order_Name = this.orderName;
+    this.orderList.product_List = this.orderProducts;
+    this.orderList.order_Name = this.orderName;
 
     this.orderService.onInsertOrder(this.orderList, this.accessTokenService.getAccesstokenStore())
-                     .then(res => {
-                       console.log(res);
-                       this.onClearAllData();
-                       this.alert.success_alert("สร้างรายการจัดซื้อเสร็จสิ้น");
-                     })
-                     .catch(err => {
-                       this.alert.error_alert(err.Message);
-                       this.onClearAllData();
-                     });
+      .then(res => {
+        console.log(res);
+        this.onClearAllData();
+        this.alert.success_alert("สร้างรายการจัดซื้อเสร็จสิ้น");
+      })
+      .catch(err => {
+        this.alert.error_alert(err.Message);
+        this.onClearAllData();
+      });
   }
 
-  private onClearAllData(){
+  private onClearAllData() {
     this.orderProducts = [];
     this.orderName = "";
     this.orderList = {
-      Order_Name: null,
-      Product_List: null
+      order_Name: null,
+      product_List: null
     };
     this.searchAdvandStatus = false;
     this.searchValueSelected = "";
@@ -133,6 +134,7 @@ export class OrderInsertComponent {
     }
     console.log(this.productsSelect);
   }
+  
   private onPlusProductCount(id: string) {
     this.onSearchProductSelectedById(id).countOrder++;
   }
@@ -147,6 +149,7 @@ export class OrderInsertComponent {
       this.productsSelect.splice(index, 1);
     }
   }
+
   private onRemoveProduct(index: number, id: string) {
     this.onSearchProductSelectedById(id).countOrder = 0;
     this.productsSelect.splice(index, 1);

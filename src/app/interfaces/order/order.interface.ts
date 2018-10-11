@@ -1,4 +1,4 @@
 export interface IOrder{
-    Order_Count: string;
-    Product_Id: string;
+    order_Count: string;
+    product_Id: string;
 }
