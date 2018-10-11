@@ -1,14 +1,16 @@
 import { Injectable } from "@angular/core";
 import { HttpService } from "./http.service";
 import { IOrderList } from "../interfaces/order/order-list.interface";
+import { ISearchOption } from "../interfaces/search-option.interface";
 declare let $;
+
 @Injectable()
 
 export class OrderService {
     constructor(private http: HttpService) { }
     
-    onGetOrders(accessToken: string){
-        return this.http.requestPost(`api/Order/orders`, accessToken)
+    onGetOrders(options: ISearchOption, accessToken: string){
+        return this.http.requestGet(`api/Order/orders?${$.param(options)}`, accessToken)
             .toPromise() as Promise<IOrderList[]>;
     }
 
