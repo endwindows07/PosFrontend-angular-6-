@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { AccessTokenService } from 'src/app/services/accesstoken.service';
 import { ISearchOption } from 'src/app/interfaces/search-option.interface';
 import { IOrderList } from 'src/app/interfaces/order/order-list.interface';
+import { AppUrl } from 'src/app/app.url';
+import { OrderUrl } from '../../order.url';
 
 @Component({
   selector: 'app-orders',
@@ -24,6 +26,10 @@ export class OrdersComponent {
       Limit_Page: this.Limit_Page
     })
   }
+
+  AppUrl = AppUrl;
+  OrderUrl = OrderUrl;
+
   Start_Page: number = 1;
   Limit_Page: number = 8;
   orderList: IOrderList[] = [];

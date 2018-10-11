@@ -15,7 +15,7 @@ export class OrderService {
     }
 
     onGetOrderById(id: any, accessToken: string){
-        return this.http.requestPost(`api/Order/orders/${id}`,accessToken)
+        return this.http.requestGet(`api/Order/orders/${id}`,accessToken)
             .toPromise() as Promise<IOrderList>;
     }
 

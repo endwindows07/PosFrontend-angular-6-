@@ -1,6 +1,6 @@
 export const OrderUrl = {
     Orders: 'oders',
-    Order: 'order',
+    OrderDetail: 'order-detail',
     OrderInsert: 'order-insert',
     OrderUpdate: 'order-update',
 }

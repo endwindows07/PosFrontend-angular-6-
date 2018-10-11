@@ -14,7 +14,7 @@ import { IRoleAccount } from "../interfaces/role";
         data: { role: [IRoleAccount.Admin] }
     },
     {
-        path: OrderUrl.Order,
+        path: OrderUrl.OrderDetail,
         children: [
             {path: '', component: OrdersComponent},
             {path: ':id', component: OrderDetailComponent}
