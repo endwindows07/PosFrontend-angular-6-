@@ -1,6 +1,8 @@
+import { IOrder } from "./order.interface";
+
 export interface IOrderList {
     Order_Name: string;
-    Product_List: string;
+    Product_List: IOrder[];
 
     Id?: string;
     Product_Amount?: string;

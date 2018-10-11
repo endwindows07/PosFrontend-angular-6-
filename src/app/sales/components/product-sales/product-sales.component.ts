@@ -34,6 +34,7 @@ export class ProductSalesComponent {
 
   start_Page = 0;
   limit_Page = 0;
+  
   searchAdvandStatus: boolean = false;
   searchValueSelected: string;
   searchProductAdvand: IProduct[] = [];
@@ -126,7 +127,7 @@ export class ProductSalesComponent {
       .catch(err => {
         this.productsSelect = null;
         this.productOrders = null;
-        this.alert.error_alert(err.Message);
+        this.alert.error_alert(err.Message); 
       });
   }
 

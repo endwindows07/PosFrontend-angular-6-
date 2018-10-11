@@ -1,5 +1,54 @@
 <app-content>
-  <p>
-    order-insert works!
-  </p>
+  <div class="form-panel row">
+    <div class="col-lg-12">
+      <div class="form-group col-lg-10">
+        <input [(ngModel)]="searchValueSelected" (input)="onSearchBarcodeProduct($event.target.value)" [typeahead]="product"
+          typeaheadOptionField="name" (typeaheadOnSelect)="onSelect($event)" [typeaheadScrollable]="true"
+          [typeaheadOptionsInScrollableView]="8" class="form-control">
+      </div>
+      <div class="col-lg-1">
+        <button type="submit" (click)="onSearchAdvand(); searchAdvandStatus = !searchAdvandStatus;" class="btn btn-theme">ค้นหาขั้นสูง</button>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-10">
+        <table class="table  table-responsive">
+          <table class="table">
+            <thead>
+              <tr class="info">
+                <th>#</th>
+                <th>รหัสแท่ง</th>
+                <th>ชื่อสินค้า</th>
+                <th>ราคาต่อหน่วย</th>
+                <th>จำนวน</th>
+                <th>option</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of productsSelect; let i = index">
+                <td>{{i+1}}</td>
+                <td>{{item.barcode}} ({{item.barcode_Custom}})</td>
+                <td>{{item.name}}</td>
+                <td>{{item.price}}</td>
+                <td>
+                  <button (click)="onMinusProductCount(item.id, i)"><span class="glyphicon glyphicon-minus"></span></button>
+                  {{item.countOrder}}
+                  <button (click)="onPlusProductCount(item.id)"><span class="glyphicon glyphicon-plus"></span></button>
+                </td>
+                <td><button (click)="onRemoveProduct(i, item.id)"><span class="glyphicon glyphicon-folder-close"></span></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </table>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-8">
+        <input class="form-control" [(ngModel)]="orderName" placeholder="ชื่อใบจัดซื้อ" style="height:50px" type="text" name="" id="">
+      </div>
+      <div class="col-lg-3">
+        <button type="submit" (click)="onAdjustSalesProduct()" class="btn btn-lg btn-success">สร้างใบจัดซื้อสินค้า </button>
+      </div>
+    </div>
+  </div>
 </app-content>
