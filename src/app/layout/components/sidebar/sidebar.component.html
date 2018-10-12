@@ -57,6 +57,7 @@
             <li><a [routerLink]="[ '/', AppUrl.Sales, SalesUrl.SalesBill]">รายงานขายสินค้า</a></li>
             <li><a [routerLink]="[ '/', AppUrl.Report, ReportUrl.ReportSales]">รายงานยอดขาย</a></li>
             <li><a [routerLink]="[ '/', AppUrl.Report, ReportUrl.ReportProductSales]">รายงานยอดขายสินค้า</a></li>
+            <li><a [routerLink]="[ '/', AppUrl.Report, ReportUrl.ReportCompareProductSale]">รายงานเปรียบเทียบยอดขายสินค้า</a></li>
           </ul>
         </li>
         <li class="sub-menu" *ngIf="MemberProfile.role == roleAccount.Admin">

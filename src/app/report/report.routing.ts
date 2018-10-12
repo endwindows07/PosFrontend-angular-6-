@@ -4,6 +4,7 @@ import { IRoleAccount } from "../interfaces/role";
 import { ReportUrl } from "./report.url";
 import { ReportProductsalesComponent } from "./components/report-productsales/report-productsales.component";
 import { ProductsComponent } from "../Product/components/products/products.component";
+import { CompareProductComponent } from "./components/compare-product/compare-product.component";
 
 const RouteLists: Routes = [
     { path: '', redirectTo: ReportUrl.ReportSales, pathMatch: 'full' },
@@ -18,6 +19,11 @@ const RouteLists: Routes = [
             { path: '', component: ReportProductsalesComponent },
             { path: ':id', component: ReportProductsalesComponent },
         ],
+        data: { role: [IRoleAccount.Admin] }
+    },
+    {
+        path: ReportUrl.ReportCompareProductSale,
+        component: CompareProductComponent,
         data: { role: [IRoleAccount.Admin] }
     },
 ];

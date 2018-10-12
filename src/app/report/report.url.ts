@@ -1,4 +1,5 @@
 export const ReportUrl = {
     ReportSales: 'report-sales',
-    ReportProductSales: 'report-productsales'
+    ReportProductSales: 'report-productsales',
+    ReportCompareProductSale: 'report-compare'
 };

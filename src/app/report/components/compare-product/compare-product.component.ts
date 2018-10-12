@@ -1,23 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { ReportService } from '../../../services/report.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService } from '../../../layout/components/services/alert.service';
-import { AccessTokenService } from '../../../services/accesstoken.service';
-import { ISearchOption } from '../../../interfaces/search-option.interface';
-import { Chart } from 'chart.js';
-import { IReportSaleList } from '../../../interfaces/report/report-salesList';
-import { IReportSalesProductList } from '../../../interfaces/report/report-salesProductList';
-import { IProduct } from 'src/app/interfaces/Product/product.interface';
+import { ReportService } from 'src/app/services/report.service';
 import { ProductService } from 'src/app/services/product.service';
-import { IReportSalesProduct } from 'src/app/interfaces/report/report-salesProduct';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService } from 'src/app/layout/components/services/alert.service';
+import { AccessTokenService } from 'src/app/services/accesstoken.service';
+import { IReportSalesProductList } from 'src/app/interfaces/report/report-salesProductList';
+import { IProduct } from 'src/app/interfaces/Product/product.interface';
+import { ISearchOption } from 'src/app/interfaces/search-option.interface';
+import { Chart } from 'chart.js';
 
 @Component({
-  selector: 'app-report-productsales',
-  templateUrl: './report-productsales.component.html',
-  styleUrls: ['./report-productsales.component.css']
+  selector: 'app-compare-product',
+  templateUrl: './compare-product.component.html',
+  styleUrls: ['./compare-product.component.css']
 })
-export class ReportProductsalesComponent implements OnInit {
-
+export class CompareProductComponent implements OnInit {
 
   constructor(
     private reportService: ReportService,
@@ -96,9 +93,9 @@ export class ReportProductsalesComponent implements OnInit {
         let sales_TimeP2: string[] = salesProductReport.salesProduct_Second.map(it => it.sales_Time);
         let sales_CountP2: string[] = salesProductReport.salesProduct_Second.map(it => it.sales_Count);
 
-        if (sales_TimeP1.length > sales_TimeP2.length){
+        if (sales_TimeP1.length > sales_TimeP2.length) {
           this.onSetChart(sales_TimeP1, sales_CountP1, sales_CountP2);
-        }else{
+        } else {
           this.onSetChart(sales_TimeP2, sales_CountP1, sales_CountP2);
         }
       })
@@ -146,7 +143,7 @@ export class ReportProductsalesComponent implements OnInit {
         datasets: [{
           label: '# สินค้าที่หนึ่ง',
           data: sales_CountP1,
-           backgroundColor: "#3e95cd",
+          backgroundColor: "#3e95cd",
         },
         {
           label: '# สินค้าที่สอง',
@@ -170,4 +167,5 @@ export class ReportProductsalesComponent implements OnInit {
   onDateCut(dateTo: string, dateFrom: string) {
     return dateTo.replace(" GMT+0700 (เวลาอินโดจีน)", "") + "&" + dateFrom.replace(" GMT+0700 (เวลาอินโดจีน)", "");
   }
+
 }

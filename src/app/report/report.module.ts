@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { ReportRouting } from './report.routing';
 import { LayoutModule } from '../layout/layout.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CompareProductComponent } from './components/compare-product/compare-product.component';
 
 @NgModule({
   imports: [
@@ -16,6 +17,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     ReactiveFormsModule 
   ],
-  declarations: [ReportSalesComponent, ReportProductsalesComponent]
+  declarations: [ReportSalesComponent, ReportProductsalesComponent, CompareProductComponent]
 })
 export class ReportModule { }
