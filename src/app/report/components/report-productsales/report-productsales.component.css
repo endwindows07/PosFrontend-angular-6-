@@ -1,3 +1,17 @@
-.row{
-    margin-top: 4%;
+tr {
+  width: 100%;
+  display: inline-table;
+  table-layout: fixed;
+}
+
+table {
+  height: 100%; 
+  display: -moz-groupbox; 
+}
+
+tbody {
+  overflow-y: scroll;
+  height: 270px; 
+  width: 100%;
+  position: absolute;
 }

@@ -1,5 +1,9 @@
 <app-content>
-  <div class="row content-panel" style="height: 900px">
+  <div class="row content-panel" *ngIf="salesProductReportList" style="height: 900px">
+    <div class="page-header">
+      <h1>รายงานยอดขายสินค้า</h1>
+      <h4><small>รายงานยอดขายสินค้าจะแสดงยอดขายสินค้า ที่กำหนดออกมาในรูปแบบกราฟ (ค่าเริ่มต้นการค้นหาคือ เดือนปัจจุบัน)</small></h4>
+    </div>
     <div class="row">
       <div class="col-lg-1"></div>
       <div class="col-lg-8">
@@ -24,10 +28,10 @@
             </tr>
           </thead>
           <tbody>
-            <!-- <tr *ngFor="let item of totalSalesReportList.reportSales_List">
-              <td>{{item.total_Price}} บาท</td>
-              <td>{{item.sales_Time| date:'dd/MM/yyyy'}}</td>
-            </tr> -->
+            <tr *ngFor="let item of salesProductReportList.salesProduct_List">
+              <td>{{item.sales_Count}}</td>
+              <td>{{item.sales_Time | date:'dd/MM/yyyy'}}</td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -49,6 +53,7 @@
         <table class="table">
           <thead>
             <tr>
+              <th>#</th>
               <th>รูปภาพ</th>
               <th>รหัสแท่ง</th>
               <th>ชื่อสินค้า</th>
@@ -58,6 +63,7 @@
           </thead>
           <tbody *ngIf="productsSelect">
             <tr *ngFor="let item of productsSelect; let i = index">
+              <td>{{i+1}}</td>
               <td>pic</td>
               <td>{{item.barcode}}</td>
               <td>{{item.name}}</td>

@@ -34,12 +34,19 @@ export class ReportProductsalesComponent implements OnInit {
       Start_Page: 0,
       Limit_Page: 0
     });
+    this.onInitailLoadSalesProductReport({
+      Start_Page: 0,
+      Limit_Page: 0
+    })
 
     this.Search_Type = "SalesTime";
   }
 
-  salesPorductReportId: number;
-  salesProductReportList: IReportSalesProductList[] = [];
+  salesPorductReportId: number = 0;
+  salesProductReportList: IReportSalesProductList = {
+    salesProduct_List: null,
+    salesProduct_Total: null
+  };
 
   products: IProduct[] = [];
   productsSelect: IProduct[] = [];
@@ -61,22 +68,48 @@ export class ReportProductsalesComponent implements OnInit {
       });
   }
 
+  onInitailLoadSalesProductReport(options: ISearchOption) {
+    this.reportService.onGetReportProductSales(options, this.salesPorductReportId, this.accessTokenService.getAccesstokenStore())
+      .then(salesProductReport => {
+        this.salesProductReportList.salesProduct_List = salesProductReport.salesProduct_List;
+        console.log(this.salesProductReportList);
+        this.onLoadProductSelectToChart();
+      })
+      .catch(err => this.alert.error_alert(err.Message));
+  }
+
+  onSearchSalesProductTime() {
+    if (!this.Search_Text) {
+      this.onInitailLoadSalesProductReport({
+        Search_DefaultText: "SalesNow",
+        Search_DefaultType: "SalesNow",
+      });
+    } else {
+      this.onInitailLoadSalesProductReport({
+        Search_Text: this.onDateCut(this.Search_Text[0].toString(), this.Search_Text[1].toString()),
+        Search_Type: this.Search_Type,
+      });
+    }
+    this.onLoadProductSelectToChart();
+  }
+
+
   onSearchProduct() {
     let product: IProduct;
     product = this.products.find(
       it => it.barcode == this.productBarcodeSearch.trim()
     );
+    console.log(product);
     if (product) return this.onInsertProductSelect(product);
     return;
   }
 
   onInsertProductSelect(product: IProduct) {
-    this.productBarcodeSearch = "";
-    let ProdoctBarcodeItem: string[] = [];
     let productItem = this.productsSelect.find(it => it.id == product.id);
 
     if (!productItem) {
       this.productsSelect.unshift(product);
+      this.salesPorductReportId = Number.parseInt(product.id);
       return;
     }
     this.alert.error_alert('มีข้อมูลสินค้าอยู่แล้ว');
@@ -86,74 +119,23 @@ export class ReportProductsalesComponent implements OnInit {
     this.productsSelect.splice(index, 1);
   }
 
-  onInitailLoadSalesProductReport(options: ISearchOption) {
-    this.reportService.onCompareProductSales(options, this.accessTokenService.getAccesstokenStore())
-      .then(salesProductReport => {
-
-        let sales_TimeP1: string[] = salesProductReport.salesProduct_First.map(it => it.sales_Time);
-        let sales_CountP1: string[] = salesProductReport.salesProduct_First.map(it => it.sales_Count);
-
-        let sales_TimeP2: string[] = salesProductReport.salesProduct_Second.map(it => it.sales_Time);
-        let sales_CountP2: string[] = salesProductReport.salesProduct_Second.map(it => it.sales_Count);
-
-        if (sales_TimeP1.length > sales_TimeP2.length){
-          this.onSetChart(sales_TimeP1, sales_CountP1, sales_CountP2);
-        }else{
-          this.onSetChart(sales_TimeP2, sales_CountP1, sales_CountP2);
-        }
-      })
-      .catch(err => this.alert.error_alert(err.Message));
-
-  }
-
-  onSearchSalesProductTime() {
-    let ProdoctBarcodeItem: string[] = [];
-    this.productsSelect.forEach(it => {
-      ProdoctBarcodeItem.push(it.barcode);
-    })
-
-    if (!this.Search_Text) {
-      this.onInitailLoadSalesProductReport({
-        Search_DefaultText: "SalesNow",
-        Search_DefaultType: "SalesNow",
-        Search_FirstProdoctBarcode: ProdoctBarcodeItem[0],
-        Search_SecondProdoctBarcode: ProdoctBarcodeItem[1]
-      });
-    } else {
-      this.onInitailLoadSalesProductReport({
-        Search_Text: this.onDateCut(this.Search_Text[0].toString(), this.Search_Text[1].toString()),
-        Search_Type: this.Search_Type,
-        Search_FirstProdoctBarcode: ProdoctBarcodeItem[0],
-        Search_SecondProdoctBarcode: ProdoctBarcodeItem[1]
-      });
-    }
-    this.onLoadProductSelectToChart();
-  }
 
   onLoadProductSelectToChart() {
-    this.salesProductReportList.forEach(it => {
-      let sales_Time: string[] = it.salesProduct_List.map(it => it.sales_Time);
-      let sales_Count: string[] = it.salesProduct_List.map(it => it.sales_Count);
-      // this.onSetChart(sales_Time, sales_Count);
-    });
+    let sales_Time: string[] = this.salesProductReportList.salesProduct_List.map(it => it.sales_Time);
+    let sales_Count: string[] = this.salesProductReportList.salesProduct_List.map(it => it.sales_Count);
+    this.onSetChart(sales_Time, sales_Count);
   }
 
-  onSetChart(sales_Time?: string[], sales_CountP1?: string[], sales_CountP2?: string[]) {
+  onSetChart(sales_Time?: string[], sales_CountP1?: string[]) {
     this.LineChart = new Chart('lineChart', {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: sales_Time,
         datasets: [{
           label: '# สินค้าที่หนึ่ง',
           data: sales_CountP1,
-           backgroundColor: "#3e95cd",
-        },
-        {
-          label: '# สินค้าที่สอง',
-          data: sales_CountP2,
-          backgroundColor: "#fcb322",
-        }
-        ],
+          backgroundColor: "#5bc0de",
+        }],
       },
       options: {
         scales: {

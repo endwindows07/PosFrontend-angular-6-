@@ -76,15 +76,15 @@ export class ReportSalesComponent {
 
   onSetTotalSalesReportChart(sales_Time: string[], total_Price: string[]) {
     this.LineChart = new Chart('lineChart', {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: sales_Time,
         datasets: [{
           label: 'รายงานยอดขาย',
           data: total_Price,
-          backgroundColor: '#4ecdc4',
-          borderColor: '#f2f2f2',
-          borderWidth: 1
+          // backgroundColor: '#4ecdc4',
+          borderColor: '#00c2e0',
+          borderWidth: 3
         }]
       },
       options: {
