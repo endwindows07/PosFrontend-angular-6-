@@ -1,7 +1,7 @@
 
-.form-panel {
+/* .form-panel {
     height: 800px;
-}
+} */
 
 tr {
   width: 100%;
@@ -10,7 +10,7 @@ tr {
 }
 
 table {
-  height: 400px; 
+  /* height: 400px;  */
   margin-bottom: 50px;
   display: -moz-groupbox; 
 }
@@ -18,19 +18,32 @@ table {
 tbody {
   margin-top: 15px;
   overflow-y: scroll;
-  height: 400px; 
-  width: 96.5%;
+  height: 250px; 
+  width: 97.5%;
   position: absolute;
 }
 
 .searchAdvand table {
-  height: 400px; 
+  /* height: 400px;  */
   margin-bottom: 100px;
   display: -moz-groupbox; 
+  padding-bottom: 10%;
 }
+
 .searchAdvand tbody {
   overflow-y: scroll;
   height: 200px;
   width: 96.5%;
   position: absolute;
+}
+
+input {
+    height: 50px;
+    padding: 0 10px;
+}
+
+input::-webkit-input-placeholder {
+
+    font-size: 20px;
+    line-height: 6;
 }
