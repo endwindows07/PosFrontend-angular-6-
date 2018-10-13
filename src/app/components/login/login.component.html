@@ -1,24 +1,40 @@
-<div id="login-page">
-  <div class="container">
-    <form class="form-login" [formGroup]="form" (submit)="onSubmit()">
-      <h2 class="form-login-heading">ลงชื่อเข้าใช้</h2>
-      <div class="login-wrap">
-        <input type="text" class="form-control" formControlName="Username" placeholder="ชื่อผู้ใช้" autofocus>
-        <br>
-        <input type="password" class="form-control" formControlName="Password" placeholder="รหัสผ่าน">
-        <br>
-        <button class="btn btn-theme btn-block" type="submit"><i class="fa fa-lock"></i> เข้าสู่ระบบ</button>
-        <hr>
-        <div class="registration">
-          จำรหัสผ่านได้รึป่าว ?<br />
-          <a class="">
-            ลืมรหัสผ่าน คลิก
-          </a>
+<div class="main-wrapper">
+    <div class="auth-wrapper d-flex no-block justify-content-center align-items-center bg-dark">
+        <div class="auth-box bg-dark border-top border-secondary">
+            <div id="loginform">
+                <div class="text-center p-t-20 p-b-20">
+                    <span class="db"><img src="../../assets/images/logo.png" alt="logo" /></span>
+                </div>
+                <form class="form-horizontal m-t-20" id="loginform" [formGroup]="form" (submit)="onSubmit()">
+                    <div class="row p-b-30">
+                        <div class="col-12">
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-success text-white" id="basic-addon1"><i class="ti-user"></i></span>
+                                </div>
+                                <input type="text" class="form-control form-control-lg" formControlName="Username" placeholder="ชื่อผู้ใช้" autofocus
+                                    aria-label="Username" aria-describedby="basic-addon1" required="">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text bg-warning text-white" id="basic-addon2"><i class="ti-pencil"></i></span>
+                                </div>
+                                <input type="password" class="form-control form-control-lg"formControlName="Password" placeholder="รหัสผ่าน"
+                                    aria-label="Password" aria-describedby="basic-addon1" required="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row border-top border-secondary">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <div class="">
+                                    <button class="btn btn-lg btn-success float-right" type="submit">เข้าสู่ระบบ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
-      </div>
-      <!-- Modal -->
-
-      <!-- modal -->
-    </form>
-  </div>
+    </div>
 </div>

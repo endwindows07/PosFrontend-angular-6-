@@ -1,5 +1,10 @@
-        $(function () {
-            "use strict";
+"use strict";
+
+var App = {
+    loadCommonScript() {
+
+        $(function () { 
+
             $(".preloader").fadeOut();
             // ============================================================== 
             // Theme options
@@ -114,3 +119,5 @@
                 }
             });
         });
+    }
+}

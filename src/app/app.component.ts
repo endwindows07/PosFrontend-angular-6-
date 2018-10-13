@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-declare const App: any;
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,6 +8,6 @@ declare const App: any;
 export class AppComponent implements OnInit {
   title = 'PPosAngular';
   ngOnInit() {
-    App.loadCommonScript();
+
   }
 }

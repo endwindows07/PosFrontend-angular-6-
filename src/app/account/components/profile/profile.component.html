@@ -1,174 +1,106 @@
 <app-content>
-  <div class="">
-    <div class="row content-panel">
-      <div class="col-md-3 profile-text mt mb centered">
-        <div class="right-divider hidden-sm hidden-xs">
-          <h4>เข้าใช้ล่าสุด</h4>
-          <h6>12/02/2012</h6>
-          <h4>แก้ไขเมื่อ</h4>
-          <!-- <h6>{{ MemberProfile.updated }}</h6> -->
+  <div class="container-fluid">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-body row">
+          <div class="col-lg-4">
+            <img src="../../../../assets/assets/images/background/img4.jpg" class="img-thumbnail">
+          </div>
+          <div class="page-header">
+            <h2>ชื่อผู้ใช้งาน : <small> {{ MemberProfile.username }} </small></h2>
+            <h3>ชื่อผู้ใช้ : <small> {{ MemberProfile.fristname }} </small></h3>
+            <h3>นามสกุลผู้ใช้ : <small> {{ MemberProfile.lastname }} </small></h3>
+            <h3>สถานะผู้ใช้ : <small> {{ MemberProfile.status }} </small></h3>
+          </div>
+          <p></p>
         </div>
       </div>
-      <div class="col-md-4 profile-text" *ngIf="MemberProfile">
-        <h2> {{ MemberProfile.username }} </h2>
-        <h3> {{ MemberProfile.fristname }} </h3>
-        <h6> {{ MemberProfile.lastname }} </h6>
-      </div>
-      <div class="col-md-4 centered">
-        <div class="profile-pic">
-          <p><img src="assets/img/ui-sam.jpg" class="img-circle"></p>
-          <p>
-            <button class="btn btn-theme02">แก้ไขโปรไฟร์</button>
-            <button class="btn btn-theme02">เปลี่ยนรหัสผ่าน</button>
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="content-panel">
-      <div class="panel-heading">
-        <ul class="nav nav-tabs nav-justified">
-          <li class="active">
-            <a data-toggle="tab" href="#contact" class="contact-map">Contact</a>
-          </li>
-          <li>
-            <a data-toggle="tab" href="#edit">Edit Profile</a>
-          </li>
-          <li>
-            <a data-toggle="tab" href="#password">Change Password</a>
-          </li>
+      <div class="card">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#profile" role="tab"><span class="hidden-sm-up"></span>
+              <span class="hidden-xs-down">ข้อมูลทั้วไป</span></a> </li>
+          <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#updateProfile" role="tab"><span class="hidden-sm-up"></span><span
+                class="hidden-xs-down">แก้ไขโปรไฟล์</span></a> </li>
+          <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#chagePassword" role="tab"><span class="hidden-sm-up"></span>
+              <span class="hidden-xs-down">เปลี่ยนรหัสผ่าน</span></a> </li>
         </ul>
-      </div>
-      <!-- /panel-heading -->
-      <div class="panel-body">
-        <div class="tab-content">
-          <!-- /tab-pane -->
-          <div id="contact" class="tab-pane active">
-            <div class="row">
-              <div class="col-md-6">
-                <div id="map"></div>
-              </div>
-              <!-- /col-md-6 -->
-              <div class="col-md-6 detailed">
-                <h4>Location</h4>
-                <div class="col-md-8 col-md-offset-2 mt">
-                  <p>
-                    Postal Address<br /> PO BOX 12988, Sutter Ave<br /> Brownsville, New York.
-                  </p>
-                  <br>
-                  <p>
-                    Headquarters<br /> 844 Sutter Ave,<br /> 9003, New York.
-                  </p>
+        <!-- Tab panes -->
+        <div class="tab-content tabcontent-border">
+          <div class="tab-pane active  p-20" id="profile" role="tabpanel" style="height: 300px">
+            <div class="p-20">
+            </div>
+          </div>
+          <div class="tab-pane" id="updateProfile" role="tabpanel">
+            <div class="card">
+              <form class="form-horizontal" [formGroup]="form" (submit)="onSubmitUpdate()">
+                <div class="card-body">
+                  <h4 class="card-title">แก้ไขข้อมูลส่วนตัว</h4>
+                  <div class="form-group row">
+                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">ชื่อผู้ใช้งาน</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="fname" formControlName="username">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="lname" class="col-sm-3 text-right control-label col-form-label">ชื่อผู้ใช้</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="lname" formControlName="fristname" placeholder="Last Name Here">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="email1" class="col-sm-3 text-right control-label col-form-label">นามสกุลผู้ใช้</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="email1" formControlName="lastname" placeholder="Company Name Here">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-3">
+                    </div>
+                    <div class="col-lg-1">
+                      <button type="submit" class="btn btn-primary">แก้ไขข้อมูลส่วนตัว</button>
+                    </div>
+                  </div>
                 </div>
-                <h4>Contacts</h4>
-                <div class="col-md-8 col-md-offset-2 mt">
-                  <p>
-                    Phone: +33 4898-4303<br /> Cell: 48 4389-4393<br />
-                  </p>
-                  <br>
-                  <p>
-                    Email: hello@dashiotheme.com<br /> Skype: UseDashio<br /> Website: http://Alvarez.is
-                  </p>
+              </form>
+            </div>
+          </div>
+          <div class="tab-pane  p-20" id="chagePassword" role="tabpanel">
+            <div class="card">
+              <form class="form-horizontal" [formGroup]="formPassword" (submit)="onChangePassword()">
+                <div class="card-body">
+                  <h4 class="card-title">เปลียนรหัสผ่าน</h4>
+                  <div class="form-group row">
+                    <label for="fname" class="col-sm-3 text-right control-label col-form-label">รหัสผ่านเดิม</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="fname" formControlName="old_Password" placeholder="รหัสผ่านเดิม">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="lname" class="col-sm-3 text-right control-label col-form-label">รหัสผ่านใหม่</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="lname" formControlName="new_Password"  placeholder="รหัสผ่านใหม่">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <label for="email1" class="col-sm-3 text-right control-label col-form-label">ยืนยันรหัสผ่าน</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="email1" formControlName="cnew_password"  placeholder="ยืนยันรหัสผ่าน">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="col-sm-3">
+                    </div>
+                    <div class="col-lg-1">
+                      <button type="submit" class="btn btn-primary">เปลี่ยนรหัสผ่าน</button>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <!-- /col-md-6 -->
+              </form>
             </div>
-            <!-- /row -->
           </div>
-          <!-- /tab-pane -->
-          <div id="edit" class="tab-pane">
-            <div class="row">
-              <div class="col-lg-8 col-lg-offset-2 detailed">
-                <h4 class="mb">แก้ไขข้อมูลส่วนตัว</h4>
-                <form role="form" class="form-horizontal" [formGroup]="form" (submit)="onSubmitUpdate()">
-                  <div class="form-group">
-                    <label class="col-lg-2 control-label"> รูปประจำตัว</label>
-                    <div class="col-lg-6">
-                      <input type="file" id="exampleInputFile" class="file-pos">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-2 control-label">ชื่อผู้ใช้</label>
-                    <div class="col-lg-6">
-                      <input type="text" placeholder=" " id="c-name" class="form-control" formControlName="username"
-                        placeholder="ชื่อผู้ใช้">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-2 control-label">ชื่อ</label>
-                    <div class="col-lg-6">
-                      <input type="text" placeholder=" " id="c-name" class="form-control" formControlName="fristname"
-                        placeholder="ชื่อ">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-2 control-label">นามสกุล</label>
-                    <div class="col-lg-6">
-                      <input type="text" placeholder=" " id="lives-in" class="form-control" formControlName="lastname"
-                        placeholder="นามสกุล">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-md-2"></div>
-                    <div class=" col-lg-1">
-                      <button class="btn btn-info" type="submit">บันทึก</button>
-                    </div>
-                    <div class="col-md-1">
-                      <button class="btn">ยกเลิก</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- /col-lg-8 -->
-            </div>
-            <!-- /row -->
-          </div>
-          <div id="password" class="tab-pane">
-            <div class="row">
-              <div class="col-lg-8 col-lg-offset-2 detailed">
-                <h4 class="mb">แก้ไขรหัสผ่าน</h4>
-                <form role="form" class="form-horizontal" [formGroup]="formPassword" (submit)="onChangePassword()">
-                  <div class="form-group">
-                    <label class="col-lg-2 control-label">รหัสผ่านเดิม</label>
-                    <div class="col-lg-6">
-                      <input type="text" id="c-name" placeholder="รหัสผ่านเดิม" class="form-control" formControlName="old_Password">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-2 control-label">รหัสผ่านใหม่</label>
-                    <div class="col-lg-6">
-                      <input type="text" id="c-name" placeholder="รหัสผ่านใหม่" class="form-control" formControlName="new_Password">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <label class="col-lg-2 control-label">ยืนยันรหัสผ่าน</label>
-                    <div class="col-lg-6">
-                      <input type="text" id="lives-in" placeholder="ยืนยันรหัสผ่าน" class="form-control"
-                        formControlName="cnew_password">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <div class="col-md-2"></div>
-                    <div class=" col-lg-1">
-                      <button class="btn btn-info" type="submit">บันทึก</button>
-                    </div>
-                    <div class="col-md-1">
-                      <button class="btn">ยกเลิก</button>
-                    </div>
-                  </div>
-                </form>
-              </div>
-              <!-- /col-lg-8 -->
-            </div>
-            <!-- /row -->
-          </div>
-          <!-- /tab-pane -->
         </div>
-        <!-- /tab-content -->
       </div>
-      <!-- /panel-body -->
     </div>
-    <!-- /col-lg-12 -->
   </div>
 </app-content>

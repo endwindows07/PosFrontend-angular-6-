@@ -5166,7 +5166,7 @@
 		);
 	
 		settings.nScrollHead = scrollHead;
-		settings.nScrollBody = scrollBody;
+		settings.nScrollBody = scrollBody; 
 		settings.nScrollFoot = scrollFoot;
 	
 		// On redraw - align columns

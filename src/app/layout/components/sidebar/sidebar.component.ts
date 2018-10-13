@@ -11,6 +11,10 @@ import { SalesUrl } from '../../../sales/sales.url';
 import { ReportUrl } from '../../../report/report.url';
 import { OrderUrl } from 'src/app/order/order.url';
 declare const App: any;
+declare const sidebar: any;
+declare const waves: any;
+ 
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -22,7 +26,9 @@ export class SidebarComponent implements OnInit {
     private accessTokenService: AccessTokenService
   ) {
     this.inittalLoadForm();
-    setTimeout(() => App.loadCommonScript(), 200);
+    setTimeout(() => App.loadCommonScript(), 100);
+    setTimeout(() => sidebar.loadSideScript(), 10);
+    setTimeout(() => waves.loadCommonScript(), 0);
   }
 
   MemberProfile: IProfile;
