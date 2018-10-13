@@ -34,7 +34,7 @@ export class ProductSalesComponent {
 
   start_Page = 0;
   limit_Page = 0;
-  
+
   searchAdvandStatus: boolean = false;
   searchValueSelected: string;
   searchProductAdvand: IProduct[] = [];
@@ -66,17 +66,31 @@ export class ProductSalesComponent {
   }
 
   onSearchBarcodeProduct() {
-    let product: IProduct;
-    product = this.product.find(
-      it => it.barcode == this.searchValueSelected.trim()
-    );
-    if (product) {
-      this.onInsertProductSelected(product);
+    
+    if (this.searchAdvandStatus) {
+      let product: IProduct[];
+      product = this.product.filter(
+        it => it.name.includes(this.searchValueSelected)
+      );
+      
+      if (product) {
+        this.searchProductAdvand = product ;
+      }
+    } else {
+      let product: IProduct;
+      product = this.product.find(
+        it => it.barcode == this.searchValueSelected.trim()
+      );
+      if (product) {
+        this.onInsertProductSelected(product);
+      }
     }
   }
 
   onSelect(event: TypeaheadMatch): void {
-    this.onInsertProductSelected(event.item);
+    if (!this.searchAdvandStatus) {
+      this.onInsertProductSelected(event.item);
+    }
   }
 
   onInsertProductSelected(product: IProduct) {
@@ -122,12 +136,12 @@ export class ProductSalesComponent {
         this.productsSelect = [];
         this.productOrders = [];
         this.alert.success_alert("sales product success");
-        window.open('http://localhost:4200/sales/detail-bill/' +  res.id) ;
+        window.open('http://localhost:4200/sales/detail-bill/' + res.id);
       })
       .catch(err => {
         this.productsSelect = null;
         this.productOrders = null;
-        this.alert.error_alert(err.Message); 
+        this.alert.error_alert(err.Message);
       });
   }
 
