@@ -1,4 +1,48 @@
 <app-content>
+  <div class="page-breadcrumb">
+    <div class="row">
+      <div class="col-12 d-flex no-block align-items-center">
+        <div class="ml-auto text-left">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="#">หน้าร้าน</a></li>
+              <li class="breadcrumb-item active" aria-current="page">หน้าขายสินค้า</li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content -->
+    <!-- ============================================================== -->
+    <div class="row">
+      <div class="col-md-12">
+
+        <div class="card card-body printableArea">
+          <h3><b>รายละเอียดสินค้า</b> <span class="pull-right"></span></h3>
+          <hr>
+          <div class="card-body row">
+            <div class="col-lg-3">
+              <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNjYyMDFjN2E4NSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE2NjIwMWM3YTg1Ij48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4="
+                alt="">
+            </div>
+            <div class="col-lg-9">
+              <h1> {{ Product.name }} <small> #{{ Product.barcode }} ({{ Product.barcode_Custom }})</small></h1>
+              <h4> Desciption : <small> {{ Product.description }} </small> </h4>
+              <h4> Amount : <small> {{ Product.amount_Product }} {{ getType(Product.type) }}</small></h4>
+              <h4> Category : <small> {{ getCategory(Product.productCategoryId) }} </small> </h4>
+              <h4>Cost Price : <small> {{ Product.cost_Product }} บาท</small> </h4>
+              <h4>Price : <small> {{ Product.price }} บาท</small> </h4>
+              <h4>Expiredtime : <small> {{ Product.expired }} </small> </h4>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row">
     <div class="content-panel" style="height: 500px">
       <div class=" col-lg-3 row">
@@ -66,7 +110,7 @@
         </div>
         <div class="row">
           <h4>Expiredtime :
-            <small> {{ Product.expired }} </small>
+            <small> {{ Product.expired | date:'dd/MM/yy'}} </small>
           </h4>
         </div>
       </div>

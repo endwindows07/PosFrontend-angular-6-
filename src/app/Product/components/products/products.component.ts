@@ -24,6 +24,7 @@ export class ProductsComponent {
     private router: RouterModule,
     private accessTokenService: AccessTokenService
   ) {
+    this.categorySelected = null;
     this.search_Type = this.search_TypeItem[0];
     this.initailLoadProducts({
       Start_Page: this.start_Page,
