@@ -8,6 +8,7 @@ import { AppUrl } from "../../../app.url";
 import { StockUrl } from "../../stock.url";
 import { ProductUrl } from "../../../Product/product.url";
 import { IProduct } from "../../../interfaces/Product/product.interface";
+import { TypeProduct } from "src/app/interfaces/Product/product-type.interface";
 
 @Component({
   selector: "app-adjust-stock",
@@ -63,5 +64,10 @@ export class AdjustStockComponent {
 
   intailLoadFormAdjust() {
     this.form = this.builder.group({ amount_Product: [""] });
+  }
+
+  
+  getType(typeNumber: TypeProduct) {
+    return TypeProduct[typeNumber];
   }
 }

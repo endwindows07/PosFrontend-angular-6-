@@ -10,6 +10,7 @@ import { IProduct } from '../../../interfaces/Product/product.interface';
 import { ISearchOption } from '../../../interfaces/search-option.interface';
 import { PageChangedEvent } from 'ngx-bootstrap';
 import { IProductList } from '../../../interfaces/Product/product-list.interface';
+import { ICategory } from 'src/app/interfaces/Product/product-category.interface';
 
 @Component({
   selector: "app-nagative-product",
@@ -66,13 +67,13 @@ export class NagativeProductComponent {
     }
     return responseSearch;
   }
-
+  
   onClickSearch() {
     this.initailLoadProducts({
-      Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page,
       Search_Text: this.getSearchtext,
       Search_Type: this.search_Type.key,
+      Start_Page: this.start_Page,
+      Limit_Page: this.limit_Page,
       Search_DefaultType: this.searchDefaultType,
       Search_DefaultText: this.searchDefaultText
     });
@@ -97,5 +98,13 @@ export class NagativeProductComponent {
         console.log(products);
       })
       .catch(err => this.alert.error_alert(err.Messsage));
+  }
+  getStatus(status: boolean) {
+    switch (status) {
+      case true:
+        return "พร้อมขาย";
+      case false:
+        return "ไม่พร้อมขาย";
+    }
   }
 }

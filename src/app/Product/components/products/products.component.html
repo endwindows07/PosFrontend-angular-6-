@@ -10,15 +10,15 @@
             <div class="col-md-12">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-4">
+                  <div class="col-6">
                     <div class="search input-field m-t-0 m-b-0">
                       <input [(ngModel)]="search_Text" type="text" class="form-control" placeholder=" {{ search_Type.value}}"
                         class="form-control border-0" placeholder="ค้นหาข้อมูลสินค้า" autofocus>
                     </div>
                   </div>
-                  <div class="col-lg-3">
+                  <div class="col-lg-2">
                     <div class="btn-group" dropdown>
-                      <button dropdownToggle type="button" class="btn btn-lg btn-secondary dropdown-toggle" data-toggle="dropdown"
+                      <button dropdownToggle type="dropdown" class="btn btn-lg btn-outline-secondary dropdown-toggle" data-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         {{ search_Type.value}}
                         <span class="caret"></span>
@@ -32,72 +32,72 @@
                       </ul>
                     </div>
                   </div>
-                  <!-- <div class="col-lg-2">
-                    <div class="btn-group" dropdown>
-                      <button dropdownToggle type="button" class="btn btn-lg btn-secondary dropdown-toggle" data-toggle="dropdown"
-                        aria-haspopup="true" aria-expanded="false">
-                        {{ categorySelected.value}}
-                        <span class="caret"></span>
-                      </button>
-                      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                        <li role="menuitem" *ngFor="let item of categoryItem">
-                          <a class="dropdown-item" (click)="categorySelected = item; onClickSearch();">
-                            {{ item.value }}
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                  </div> -->
                   <div class="col-2">
-                    <a (click)="onClickSearch()" class="btn-warning  btn-lg float-right text-white"
-                      href="javascript:void(0)"><i class="fas fa-search">
+                    <a (click)="onClickSearch()" class="btn-cyan  btn-lg float-right text-white" href="javascript:void(0)"><i
+                        class="fas fa-search">
                         ค้นหา</i></a>
+                  </div>
+                  <div class="col-lg-2">
+                    <a  class="btn-lg float-right "  href="javascript:void(0)" (click)="classHtmlStatus = !classHtmlStatus; changeClass(); " [ngClass]="{'btn-cyan': classHtmlStatus === true, 'btn-secondary': classHtmlStatus === false}"> หมวดหมู่สินค้า </a>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-md-12">
-            <div class="table-responsive m-t-40" style="clear: both;">
-              <table class="table table-striped" style=" height: 350px; ">
-                <thead>
-                  <tr>
-                    <th>
-                      <h5> ลำดับ </h5>
-                    </th>
-                    <th>
-                      <h5>รหัสแท่ง </h5>
-                    </th>
-                    <th>
-                      <h5>รูปสินค้า </h5>
-                    </th>
-                    <th>
-                      <h5>ชื่อสินค้า </h5>
-                    </th>
-                    <th>
-                      <h5>สถานะ </h5>
-                    </th>
-                    <th>
-                      <h5>เครื่องมือ </h5>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of Products.product_List; let i = index">
-                    <td>
-                      <p>{{ i + 1 }}</p>
-                    </td>
-                    <td class="hidden-phone"> {{item.barcode}} ({{ item.barcode_Custom }}) </td>
-                    <td>image</td>
-                    <td>{{item.name}}</td>
-                    <td>{{getStatus(item.status)}}</td>
-                    <td>
-                      <a class="btn btn-success btn-xs" [routerLink]="[ '/', AppUrl.Product, ProductUrl.DetailProduct, item.id ]"><i
-                          class="fa fa-pencil">details</i></a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+          <div class="row">
+            <div [ngClass]="{'col-lg-12': classHtmlStatus === true, 'col-lg-10': classHtmlStatus === false}">
+              <div class="table-responsive m-t-40" style="clear: both;">
+                <table class="table table-striped" style=" height: 350px; ">
+                  <thead>
+                    <tr>
+                      <th>
+                        <h5> ลำดับ </h5>
+                      </th>
+                      <th>
+                        <h5>รหัสแท่ง </h5>
+                      </th>
+                      <th>
+                        <h5>รูปสินค้า </h5>
+                      </th>
+                      <th>
+                        <h5>ชื่อสินค้า </h5>
+                      </th>
+                      <th>
+                        <h5>สถานะ </h5>
+                      </th>
+                      <th>
+                        <h5>เครื่องมือ </h5>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of Products.product_List; let i = index">
+                      <td>
+                        <p>{{ i + 1 }}</p>
+                      </td>
+                      <td class="hidden-phone"> {{item.barcode}} ({{ item.barcode_Custom }}) </td>
+                      <td>image</td>
+                      <td>{{item.name}}</td>
+                      <td>{{getStatus(item.status)}}</td>
+                      <td>
+                        <a class="btn btn-success btn-xs" [routerLink]="[ '/', AppUrl.Product, ProductUrl.DetailProduct, item.id ]"><i
+                            class="fa fa-pencil">details</i></a>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-md-2" *ngIf="!classHtmlStatus">
+              <div class="radio" *ngFor="let item of categoryItem">
+                <table class="table">
+                  <thead>
+                    <label><input type="radio" name="optradio" (click)="categorySelected = item; onClickSearch(); "
+                        checked>
+                      {{item.value}}</label>
+                  </thead>
+                </table>
+              </div>
             </div>
           </div>
           <div class="row col-lg-12">

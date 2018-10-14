@@ -34,6 +34,7 @@ export class ProductsComponent {
 
   AppUrl = AppUrl;
   ProductUrl = ProductUrl;
+  classHtmlStatus: boolean = true;
 
   search_Text = "";
   search_Type: IOptionKey;
@@ -97,7 +98,7 @@ export class ProductsComponent {
   }
 
   onClickSearch() {
-    if(this.categorySelected){
+    if (this.categorySelected) {
       this.initailLoadProducts({
         Search_Text: this.getSearchtext,
         Search_Type: this.search_Type.key,
@@ -106,7 +107,7 @@ export class ProductsComponent {
         Search_DefaultType: this.searchDefaultType,
         Search_DefaultText: this.categorySelected.value
       });
-    }else{
+    } else {
       this.initailLoadProducts({
         Search_Text: this.getSearchtext,
         Search_Type: this.search_Type.key,
@@ -144,5 +145,10 @@ export class ProductsComponent {
         console.log(products);
       })
       .catch(err => this.alert.error_alert(err.Message));
+  }
+
+  changeClass() {
+    this.categorySelected = null;
+    this.onClickSearch();
   }
 }

@@ -10,6 +10,7 @@ import { IProduct } from "../../../interfaces/Product/product.interface";
 import { ISearchOption } from "../../../interfaces/search-option.interface";
 import { PageChangedEvent } from "ngx-bootstrap";
 import { IProductList } from "../../../interfaces/Product/product-list.interface";
+import { ICategory } from "src/app/interfaces/Product/product-category.interface";
 
 @Component({
   selector: "app-stocks",
@@ -32,6 +33,7 @@ export class StocksComponent {
 
   AppUrl = AppUrl;
   ProductUrl = ProductUrl;
+  classHtmlStatus: boolean = true;
 
   search_Text = "";
   search_Type: IOptionKey;
@@ -44,6 +46,7 @@ export class StocksComponent {
     { key: "Amount_Product", value: "ค้นหาด้วย จำนวนสินค้า" },
     { key: "Status", value: "ค้นหาด้วย สถานะ" }
   ];
+
 
   start_Page = 1;
   limit_Page = 8;
@@ -68,9 +71,10 @@ export class StocksComponent {
       Search_Text: this.getSearchtext,
       Search_Type: this.search_Type.key,
       Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page
+      Limit_Page: this.limit_Page,
     });
   }
+
 
   onPageChanged(page: PageChangedEvent) {
     this.initailLoadProducts({
@@ -89,5 +93,14 @@ export class StocksComponent {
         console.log(products);
       })
       .catch(err => this.alert.error_alert(err.Message));
+  }
+
+  getStatus(status: boolean) {
+    switch (status) {
+      case true:
+        return "พร้อมขาย";
+      case false:
+        return "ไม่พร้อมขาย";
+    }
   }
 }

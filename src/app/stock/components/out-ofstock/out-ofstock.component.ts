@@ -10,6 +10,7 @@ import { IProduct } from "../../../interfaces/Product/product.interface";
 import { ISearchOption } from "../../../interfaces/search-option.interface";
 import { PageChangedEvent } from "ngx-bootstrap";
 import { IProductList } from "../../../interfaces/Product/product-list.interface";
+import { ICategory } from "src/app/interfaces/Product/product-category.interface";
 
 @Component({
   selector: "app-out-ofstock",
@@ -36,6 +37,7 @@ export class OutOfstockComponent {
   ProductUrl = ProductUrl;
   start_Page = 1;
   limit_Page = 8;
+  classHtmlStatus: boolean = true;
 
   Products: IProductList;
   SearchOption: ISearchOption;
@@ -88,6 +90,7 @@ export class OutOfstockComponent {
     });
   }
 
+
   onPageChanged(page: PageChangedEvent) {
     this.initailLoadProducts({
       Start_Page: page.page,
@@ -97,5 +100,14 @@ export class OutOfstockComponent {
       Search_DefaultType: this.searchDefaultType,
       Search_DefaultText: this.searchDefaultText
     });
+  }
+
+  getStatus(status: boolean) {
+    switch (status) {
+      case true:
+        return "พร้อมขาย";
+      case false:
+        return "ไม่พร้อมขาย";
+    }
   }
 }

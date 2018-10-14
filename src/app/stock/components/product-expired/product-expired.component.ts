@@ -11,6 +11,7 @@ import { ISearchOption } from "../../../interfaces/search-option.interface";
 import { PageChangedEvent } from "ngx-bootstrap";
 import { DatePipe } from "@angular/common";
 import { IProductList } from "../../../interfaces/Product/product-list.interface";
+import { ICategory } from "src/app/interfaces/Product/product-category.interface";
 
 @Component({
   selector: "app-product-expired",
@@ -97,6 +98,7 @@ export class ProductExpiredComponent {
     });
   }
 
+
   onPageChanged(page: PageChangedEvent) {
     this.initailLoadProducts({
       Search_Text: this.getSearchtext,
@@ -116,5 +118,14 @@ export class ProductExpiredComponent {
         console.log(products);
       })
       .catch(err => this.alert.error_alert(err.Message));
+  }
+
+  getStatus(status: boolean) {
+    switch (status) {
+      case true:
+        return "พร้อมขาย";
+      case false:
+        return "ไม่พร้อมขาย";
+    }
   }
 }
