@@ -42,7 +42,7 @@ export class ProductSalesComponent {
   payment: number = 0;
   totalPrice: number = 0;
   calculateChange: number = 0;
-
+  
   productOrders: ISalesOrder[] = [];
   product: IProduct[] = [];
 

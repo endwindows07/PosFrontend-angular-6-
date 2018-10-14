@@ -2,6 +2,10 @@
 /* .form-panel {
     height: 800px;
 } */
+.dropdown dropdown-menu {
+  margin-left: 10px !important;
+  width: 900px !important;
+} 
 
 tr {
   width: 100%;
@@ -10,7 +14,6 @@ tr {
 }
 
 table {
-  /* height: 400px;  */
   margin-bottom: 50px;
   display: -moz-groupbox; 
 }
