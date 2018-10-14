@@ -3,6 +3,7 @@ import { AccessTokenService } from '../../../services/accesstoken.service';
 import { Router } from '@angular/router';
 import { AppUrl } from '../../../app.url';
 import { AlertService } from '../services/alert.service';
+import { AccountUrl } from 'src/app/account/account.url';
 
 @Component({
   selector: 'app-topbar',
@@ -19,6 +20,9 @@ export class TopbarComponent implements OnInit {
 
   ngOnInit() {
   }
+
+  AppUrl = AppUrl;
+  AccountUrl = AccountUrl;
   
   onLogout() {
     this.accessTokenService.clearAccesstokenStore();

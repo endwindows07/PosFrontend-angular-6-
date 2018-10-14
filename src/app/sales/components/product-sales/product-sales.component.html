@@ -96,7 +96,7 @@
                   <td>
                     {{item.amount_Product}}
                   </td>
-                  <td><button (click)="onRemoveProduct(i, item.id)"><span class="fas fa-trash-alt"></span></button></td>
+                  <td><button (click)="onInsertProductSelected(item)"><span class="fas fa-shopping-cart"></span></button></td>
                 </tr>
               </tbody>
             </table>
@@ -151,15 +151,21 @@
             <div class="col-lg-5">
               <div class="card">
                 <div class="box bg-cyan text-left">
-                  <h6 class="text-white">ราคารวม : {{ totalPrice }} </h6>
-                  <h6 class="text-white">ยอดชำระ : {{ payment }} </h6>
-                  <h6 class="text-white">เงินทอน : {{ payment - totalPrice}} </h6>
+                  <h6 class="text-white">ราคารวม : {{ totalPrice }} บ.</h6>
+                  <h6 class="text-white">ยอดชำระ : {{ payment }} บ.</h6>
+                  <h6 class="text-white">เงินทอน : {{ payment - totalPrice}} บ.</h6>
                 </div>
               </div>
               <div class="card">
                 <div class="row">
-                  <div class="col-lg-8">
+                  <div class="col-lg-8">                
+                    <div class="input-group">
                     <input [(ngModel)]="payment" placeholder="จำนวนเงินที่รับ" class="form-control" autofocus>
+                    <div class="input-group-append">
+                      <span class="input-group-text" id="basic-addon2">บาท</span>
+                    </div>
+                    </div>
+
                   </div>
                   <div class="col-lg-4">
                     <a class="btn-success btn-lg float-right text-white" href="javascript:void(0)" (click)="payment = totalPrice">รับพอดี</a>
@@ -168,7 +174,7 @@
               </div>
               <div class="card">
                 <a class="btn-success btn-lg float-right text-white" (click)="onAdjustSalesProduct()" type="summit">ชำระเงิน:
-                  {{ payment }} บ. <h3 style="color: #1f262d">ทอน : {{ payment - totalPrice }} บ.</h3></a>
+                  {{ payment }} บาท <h3 style="color: #1f262d">ทอน : {{ payment - totalPrice }} บาท</h3></a>
               </div>
             </div>
           </div>
