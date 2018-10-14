@@ -1,54 +1,162 @@
 <app-content>
-  <div class="form-panel row">
-    <div class="col-lg-12">
-      <div class="form-group col-lg-10">
-        <input [(ngModel)]="searchValueSelected" (input)="onSearchBarcodeProduct($event.target.value)" [typeahead]="product"
-          typeaheadOptionField="name" (typeaheadOnSelect)="onSelect($event)" [typeaheadScrollable]="true"
-          [typeaheadOptionsInScrollableView]="8" class="form-control">
-      </div>
-      <div class="col-lg-1">
-        <button type="submit" (click)="onSearchAdvand(); searchAdvandStatus = !searchAdvandStatus;" class="btn btn-theme">ค้นหาขั้นสูง</button>
-      </div>
-    </div>
-    <div class="col-lg-12">
-      <div class="col-lg-10">
-        <table class="table  table-responsive">
-          <table class="table">
-            <thead>
-              <tr class="info">
-                <th>#</th>
-                <th>รหัสแท่ง</th>
-                <th>ชื่อสินค้า</th>
-                <th>ราคาต่อหน่วย</th>
-                <th>จำนวน</th>
-                <th>option</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of productsSelect; let i = index">
-                <td>{{i+1}}</td>
-                <td>{{item.barcode}} ({{item.barcode_Custom}})</td>
-                <td> {{item.name}}</td>
-                <td>{{item.price}}</td>
-                <td>
-                  <button (click)="onMinusProductCount(item.id, i)"><span class="glyphicon glyphicon-minus"></span></button>
-                  {{item.countOrder}}
-                  <button (click)="onPlusProductCount(item.id)"><span class="glyphicon glyphicon-plus"></span></button>
-                </td>
-                <td><button (click)="onRemoveProduct(i, item.id)"><span class="glyphicon glyphicon-folder-close"></span></button></td>
-              </tr>
-            </tbody>
-          </table>
-        </table>
-      </div>
-    </div>
-    <div class="col-lg-12">
-      <div class="col-lg-8">
-        <input class="form-control" [(ngModel)]="orderName" placeholder="ชื่อใบจัดซื้อ" style="height:50px" type="text" name="" id="">
-      </div>
-      <div class="col-lg-3">
-        <button type="submit" (click)="onAdjustSalesProduct()" class="btn btn-lg btn-success">สร้างใบจัดซื้อสินค้า </button>
+  <div class="container-fluid">
+    <!-- ============================================================== -->
+    <!-- Start Page Content  fas fa-clipboard-check -->
+    <!-- ============================================================== -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card-body card-header btn-success active text-white">
+          <h3> <span class="fas fa-clipboard-check"></span> <b> เพิ่มรายการจัดซื้อสินค้า</b> <span class="pull-right"></span></h3>          
+        </div>
+        <div class="card card-body printableArea">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card-body">
+                <div class="row" *ngIf="!searchAdvandStatus">
+                  <div class="col-9">
+                    <div class="search input-field m-t-0 m-b-0">
+                      <input [(ngModel)]="searchValueSelected" (input)="onSearchBarcodeProduct($event.target.value)"
+                        [typeahead]="product" typeaheadOptionField="name" (typeaheadOnSelect)="onSelect($event)"
+                        [typeaheadScrollable]="true" [typeaheadOptionsInScrollableView]="8" class="form-control border-0"
+                        placeholder="ค้นหาข้อมูลสินค้า" autofocus>
+                    </div>
+
+                  </div>
+                  <div class="col-lg-1">
+                    <a (click)="searchValueSelected = null" class="btn-twitter btn-warning btn-lg float-right text-white"
+                      href="javascript:void(0)"><i class="mdi mdi-backspace"></i></a>
+                  </div>
+                  <div class="col-2">
+                    <a (click)="onSearchAdvand(); searchAdvandStatus = !searchAdvandStatus;" class="btn-warning  btn-lg float-right text-white"
+                      href="javascript:void(0)"><i class="fas fa-search">
+                        ค้นหาขั้นสูง</i></a>
+                  </div>
+                </div>
+                <div class="row" *ngIf="searchAdvandStatus">
+                  <div class="col-8">
+                    <div class="search input-field m-t-0 m-b-0">
+                      <input [(ngModel)]="searchValueSelected" (input)="onSearchBarcodeProduct($event.target.value)"
+                        class="form-control border-0" placeholder="ค้นหาข้อมูลสินค้าด้วยชื่อ" autofocus>
+                    </div>
+                  </div>
+                  <div class="col-lg-1">
+                    <a (click)="searchValueSelected = null" class="btn-twitter btn-warning btn-lg float-right text-white"
+                      href="javascript:void(0)"><i class="mdi mdi-backspace"></i></a>
+                  </div>
+                  <div class="col-3">
+                    <a (click)="onSearchAdvand(); searchAdvandStatus = !searchAdvandStatus;" class="btn-danger  btn-lg float-right text-white"
+                      href="javascript:void(0)">ยกเลิกค้าหาขั้นสูง</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="table-responsive m-t-40" style="clear: both;" *ngIf="searchAdvandStatus">
+                <table class="table table-striped" style=" height: 350px; ">
+                  <thead>
+                    <tr>
+                      <th>
+                        <h5> ค้นหาขั้นสูง </h5>
+                      </th>
+                      <th>
+                        <h5>รหัสแท่ง </h5>
+                      </th>
+                      <th>
+                        <h5>รูป </h5>
+                      </th>
+                      <th>
+                        <h5>ชื่อสินค้า </h5>
+                      </th>
+                      <th>
+                        <h5>ราคาต่อหน่วย </h5>
+                      </th>
+                      <th>
+                        <h5>สินค้าคงเหลือ </h5>
+                      </th>
+                      <th>
+                        <h5>option </h5>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of searchProductAdvand; let i = index">
+                      <td>{{i+1}}</td>
+                      <td>ร ูป {{ i+1}}</td>
+                      <td>{{item.barcode}} ({{item.barcode_Custom}})</td>
+                      <td>{{item.name}}</td>
+                      <td>{{item.price}}</td>
+                      <td>
+                        {{item.amount_Product}}
+                      </td>
+                      <td><button (click)="onInsertProductSelected(item)"><span class="fas fa-shopping-cart"></span></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="table-responsive m-t-40" style="clear: both;" *ngIf="!searchAdvandStatus">
+                <table class="table table-striped" style="  height: 350px; ">
+                  <thead>
+                    <tr>
+                      <th>
+                        <h5> # </h5>
+                      </th>
+                      <th>
+                        <h5> รูป </h5>
+                      </th>
+                      <th>
+                        <h5> รหัสแท่ง </h5>
+                      </th>
+                      <th>
+                        <h5> ชื่อสินค้า </h5>
+                      </th>
+                      <th>
+                        <h5> ราคาต่อหน่วย </h5>
+                      </th>
+                      <th>
+                        <h5> จำนวน </h5>
+                      </th>
+                      <th>
+                        <h5> option </h5>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of productsSelect; let i = index">
+                      <td>{{i+1}}</td>
+                      <td>ร ูป {{ i+1}}</td>
+                      <td>{{item.barcode}} ({{item.barcode_Custom}})</td>
+                      <td>{{item.name}}</td>
+                      <td>{{item.price}}</td>
+                      <td>
+                        <button (click)="onMinusProductCount(item.id, i)"><span class="fas fa-minus"></span></button>
+                        {{item.countOrder}}
+                        <!-- <input type="text" value="" style="width: 30px"> -->
+                        <button (click)="onPlusProductCount(item.id)"><span class="fas fa-plus"></span></button>
+                      </td>
+                      <td><button (click)="onRemoveProduct(i, item.id)"><span class="fas fa-trash-alt"></span></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="pull-right m-t-30 text-left">
+                <hr>
+                <div class="card-body row">
+                  <div class="col-12">
+                    <h3><b>ชื่อใบจัดซื้อ :</b> {{ orderName }} </h3>
+                  </div>
+                  <input [(ngModel)]="orderName" placeholder="ชื่อใบจัดซื้อ" class="form-control" autofocus>
+                </div>
+              </div>
+              <div class=" card-body text-left">
+                <button class="btn btn-lg btn-success" (click)="onAdjustSalesProduct()">  สร้างใบจัดซื้อสินค้า
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</app-content> 
+</app-content>
