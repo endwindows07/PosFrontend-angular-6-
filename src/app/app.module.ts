@@ -13,6 +13,7 @@ import { ProductService } from './services/product.service';
 import { SalesService } from './services/sales.service';
 import { ReportService } from './services/report.service';
 import { OrderService } from './services/order.service';
+import { ImageService } from './services/image.service';
 
 
 @NgModule({
@@ -27,7 +28,7 @@ import { OrderService } from './services/order.service';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [AccontService, ProductService, SalesService, ReportService, OrderService],
+  providers: [AccontService, ProductService, SalesService, ReportService, OrderService, ImageService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -9,6 +9,7 @@ import { IOptionKey } from '../../../interfaces/search-key.interface';
 import { ICategory } from '../../../interfaces/Product/product-category.interface';
 import { AppUrl } from '../../../app.url';
 import { ProductUrl } from '../../product.url';
+import { ImageService } from 'src/app/services/image.service';
 
 @Component({
   selector: "app-add-product",
@@ -21,7 +22,8 @@ export class AddProductComponent {
     private accessTokenService: AccessTokenService,
     private roter: Router,
     private builder: FormBuilder,
-    private alert: AlertService
+    private alert: AlertService,
+    private imageService: ImageService
   ) {
     this.typeSelected = this.typeItem[0];
     this.categorySelected = this.categoryItem[0];
@@ -66,6 +68,7 @@ export class AddProductComponent {
   
   onCreateProduct() {
     this.onSetOption();
+    console.log(this.form.value);
     this.productService
       .onAddProduct(
         this.form.value,
@@ -73,7 +76,7 @@ export class AddProductComponent {
       )
       .then(res => {
         this.alert.success_alert("Create Product Success");
-        this.roter.navigate(["/", AppUrl.Product, ProductUrl.Products]);
+        // this.roter.navigate(["/", AppUrl.Product, ProductUrl.Products]);
       })
       .catch(err => this.alert.error_alert(err.Message));
   }
@@ -97,5 +100,15 @@ export class AddProductComponent {
       type: [""],
       productCategoryId: [""]
     });
+  }
+
+  onCovertImage(input: HTMLInputElement) {
+    const imageControl = this.form.controls['image_Url'];
+    this.imageService
+      .onConvertImage(input)
+      .then(base64 => {
+        imageControl.setValue(base64);
+      })
+      .catch(err => this.alert.error_alert(err.Message));
   }
 }

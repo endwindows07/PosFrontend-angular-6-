@@ -61,7 +61,7 @@
                         <h5>ชื่อสินค้า </h5>
                       </th>
                       <th>
-                        <h5>สถานะ </h5>
+                        <h5>จำสินค้าในระบบ </h5>
                       </th>
                       <th>
                         <h5>เครื่องมือ </h5>
@@ -75,8 +75,8 @@
                       </td>
                       <td class="hidden-phone"> {{item.barcode}} ({{ item.barcode_Custom }}) </td>
                       <td>image</td>
-                      <td>{{item.name}}</td>
-                      <td>{{getStatus(item.status)}}</td>
+                      <td>{{ item.name }}</td>
+                      <td>{{ item.amount_Product }}</td>
                       <td>
                         <a class="btn btn-success btn-xs" [routerLink]="[ '/', AppUrl.Product, ProductUrl.DetailProduct, item.id ]"><i
                             class="fa fa-pencil">details</i></a>

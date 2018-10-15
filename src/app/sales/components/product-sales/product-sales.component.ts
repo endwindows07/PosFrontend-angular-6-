@@ -42,7 +42,7 @@ export class ProductSalesComponent {
   payment: number = 0;
   totalPrice: number = 0;
   calculateChange: number = 0;
-  
+
   productOrders: ISalesOrder[] = [];
   product: IProduct[] = [];
 
@@ -66,15 +66,15 @@ export class ProductSalesComponent {
   }
 
   onSearchBarcodeProduct() {
-    
+
     if (this.searchAdvandStatus) {
       let product: IProduct[];
       product = this.product.filter(
         it => it.name.includes(this.searchValueSelected)
       );
-      
+
       if (product) {
-        this.searchProductAdvand = product ;
+        this.searchProductAdvand = product;
       }
     } else {
       let product: IProduct;
@@ -133,10 +133,9 @@ export class ProductSalesComponent {
     this.salesService.onAdjustProduct(
       this.productSales,
       this.accessTokenService.getAccesstokenStore()).then(res => {
-        this.productsSelect = [];
-        this.productOrders = [];
         this.alert.success_alert("sales product success");
         window.open('http://localhost:4200/sales/detail-bill/' + res.id);
+        this.onResetValue();
       })
       .catch(err => {
         this.productsSelect = null;
@@ -184,5 +183,18 @@ export class ProductSalesComponent {
 
   private onSearchProductSelectedById(id: string) {
     return this.productsSelect.find(it => it.id == id);
+  }
+
+  onResetValue() {
+    this.searchAdvandStatus = false;
+    this.searchValueSelected = "";
+    this.searchProductAdvand = null;
+    this.payment = 0;
+    this.totalPrice = 0;
+    this.calculateChange = 0;
+
+    this.productOrders = null;
+
+    this.productsSelect = null;
   }
 }

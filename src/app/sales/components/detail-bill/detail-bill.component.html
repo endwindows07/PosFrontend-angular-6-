@@ -23,11 +23,9 @@
           <h3> <span class="fas fa-file-alt"></span> <b> รายละเอียดใบเสร็จ</b> <span class="pull-right"></span></h3>
         </div>
         <div class="card card-body printableArea">
-          <h3><b>รายละเอียดใบเสร็จ</b> <span class="pull-right"></span></h3>
-          <hr>
           <div class="card-body row">
             <div class="col-lg-1"></div>
-            <div class="col-lg-10 row">
+            <div class="col-lg-10 row" *ngIf="salesBill">
               <div class="card-body col-lg-12">
                 <h2> เลขที่ใบเสร็จ : {{salesBill.id}} <small>#{{onGetStatsuSalesString(salesBill.status)}}</small></h2>
                 <h3> เจ้าหน้าที่ขาย : {{salesBill.member.username}}</h3>
@@ -36,7 +34,6 @@
                 <h3> เวลาขาย : {{salesBill.sales_Time | date:'medium'}}</h3>
                 <h3 *ngIf="salesBill.status == false"> เวลายกเลิกบิล : {{salesBill.cancelSales_Time |
                   date:'medium'}} <small>({{salesBill.memberCancelBill}})</small> </h3>
-                <h3>Expiredtime : {{ Product.expired }} </h3>
               </div>
               <div class="card-body col-lg-12">
                 <div class="table-responsive m-t-40" style="clear: both;">

@@ -10,6 +10,7 @@ import { ICategory } from "../../../interfaces/Product/product-category.interfac
 import { IOptionKey } from "../../../interfaces/search-key.interface";
 import { AppUrl } from "../../../app.url";
 import { ProductUrl } from "../../product.url";
+import { ImageService } from "src/app/services/image.service";
 
 @Component({
   selector: "app-update-product",
@@ -23,7 +24,8 @@ export class UpdateProductComponent {
     private alert: AlertService,
     private accessTokenService: AccessTokenService,
     private builder: FormBuilder,
-    private nativeRoute: ActivatedRoute
+    private nativeRoute: ActivatedRoute,
+    private imageService: ImageService
   ) {
     this.nativeRoute.params.forEach(query => {
       this.ProductId = query.id;
@@ -78,6 +80,7 @@ export class UpdateProductComponent {
     this.productService
       .onGetProductById(id, this.accessTokenService.getAccesstokenStore())
       .then(product => {
+        this.Product = product;
         this.typeSelected = this.typeItem[product.type - 1];
         this.categorySelected = this.categoryItem[parseInt(product.productCategoryId) - 1];
 
@@ -139,5 +142,14 @@ export class UpdateProductComponent {
       type: [""],
       productCategoryId: [""]
     });
+  }
+  onCovertImage(input: HTMLInputElement) {
+    const imageControl = this.form.controls['image_Url'];
+    this.imageService
+      .onConvertImage(input)
+      .then(base64 => {
+        imageControl.setValue(base64);
+      })
+      .catch(err => this.alert.error_alert(err.Message));
   }
 }
