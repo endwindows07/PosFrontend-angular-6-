@@ -82,6 +82,7 @@ export class ProductSalesComponent {
         it => it.barcode == this.searchValueSelected.trim()
       );
       if (product) {
+        this.searchValueSelected = null;
         this.onInsertProductSelected(product);
       }
     }
@@ -94,9 +95,10 @@ export class ProductSalesComponent {
   }
 
   onInsertProductSelected(product: IProduct) {
+    this.searchValueSelected = "";
     let productSelected = this.onSearchProductSelectedById(product.id);
-
     if (this.onSearchProductSelectedById(product.id) != null) {
+
       product.countOrder++;
     } else {
       product.countOrder = 1;

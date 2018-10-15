@@ -17,6 +17,9 @@
                                     <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Sales, SalesUrl.ProductSales]"
                                                 class="sidebar-link"><i class="far fa-keyboard"></i><span class="hide-menu">
                                                       ขายสินค้า </span></a></li>
+                                    <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Sales, SalesUrl.SalesBill]"
+                                                class="sidebar-link"><i class="fas fa-list-ol"></i><span class="hide-menu">
+                                                      รายงานขายสินค้า </span></a></li>
                                     <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Sales, SalesUrl.CancelProductSales ]"
                                                 class="sidebar-link"><i class="fas fa-dolly-flatbed"></i><span class="hide-menu">
                                                       คืนสินค้า</span></a></li>
@@ -29,7 +32,7 @@
                                     <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Product, ProductUrl.Products]"
                                                 class="sidebar-link"><i class="fas fa-boxes"></i><span class="hide-menu">
                                                       รายการสินค้า </span></a></li>
-                                    <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Product, ProductUrl.AddProduct]"
+                                    <li *ngIf="MemberProfile.role == checkRole" class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Product, ProductUrl.AddProduct]"
                                                 class="sidebar-link"><i class="mdi mdi-hospital"></i><span class="hide-menu">
                                                       เพิ่มรายการสินค้า</span></a></li>
                               </ul>
@@ -54,13 +57,11 @@
                                                       สินนค้ามีปัญหาติดลบ</span></a></li>
                               </ul>
                         </li>
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                                    aria-expanded="false"><i class="fas fa-chart-area"></i><span class="hide-menu">
+                        <li *ngIf="MemberProfile.role == 1" class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                    href="javascript:void(0)" aria-expanded="false"><i class="fas fa-chart-area"></i><span
+                                          class="hide-menu">
                                           รายงานของร้าน </span></a>
                               <ul aria-expanded="false" class="collapse  first-level">
-                                    <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Sales, SalesUrl.SalesBill]"
-                                                class="sidebar-link"><i class="fas fa-list-ol"></i><span class="hide-menu">
-                                                      รายงานขายสินค้า </span></a></li>
                                     <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Report, ReportUrl.ReportSales]"
                                                 class="sidebar-link"><i class="fas fa-chart-area"></i><span class="hide-menu">
                                                       รายงานยอดขาย</span></a></li>
@@ -77,7 +78,7 @@
                                     aria-expanded="false"><i class="fas fa-truck"></i><span class="hide-menu">
                                           การจัดซื้อสินค้า </span></a>
                               <ul aria-expanded="false" class="collapse  first-level">
-                                    <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Order, OrderUrl.OrderInsert]"
+                                    <li *ngIf="MemberProfile.role == 1" class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Order, OrderUrl.OrderInsert]"
                                                 class="sidebar-link"><i class="fas fa-clipboard-check"></i><span class="hide-menu">
                                                       เพิ่มการจัดซื้อ </span></a></li>
                                     <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Order, OrderUrl.Orders]"
@@ -86,8 +87,9 @@
                               </ul>
                         </li>
 
-                        <li class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark" href="javascript:void(0)"
-                                    aria-expanded="false"><i class="fas fa-address-book"></i><span class="hide-menu">
+                        <li *ngIf="MemberProfile.role == 1" class="sidebar-item"> <a class="sidebar-link has-arrow waves-effect waves-dark"
+                                    href="javascript:void(0)" aria-expanded="false"><i class="fas fa-address-book"></i><span
+                                          class="hide-menu">
                                           จัดการสมาชิก </span></a>
                               <ul aria-expanded="false" class="collapse  first-level">
                                     <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Account, AccountUrl.Members]"

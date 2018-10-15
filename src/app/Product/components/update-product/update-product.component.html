@@ -23,7 +23,7 @@
             <div class="col-md-2">
               <div class="card-body">
                 <span *ngIf="!Product.image_Url && !form.value.image_Url" class="fas fa-box fa-7x"></span>
-                <img  *ngIf="Product.image_Url" [src]="Product.image_Url" class="img-fluid img-thumbnail" alt="Responsive image">
+                <img *ngIf="Product.image_Url" [src]="Product.image_Url" class="img-fluid img-thumbnail" alt="Responsive image">
                 <img *ngIf="form.value.image_Url" [src]="form.value.image_Url" class="img-fluid img-thumbnail" alt="Responsive image">
               </div>
             </div>
@@ -65,8 +65,13 @@
                 <div class="form-group row">
                   <label for="cono1" class="col-sm-2 text-right control-label col-form-label">วันหมดอายุ </label>
                   <div class="col-sm-9">
-                    <input type="text" placeholder="dd/mm/yyyy" formControlName="expired" class="form-control"
-                      bsDatepicker>
+                    <div class="input-group">
+                      <input type="text" class="form-control datepicker-orient-top" placement="top" id="datepicker-autoclose"
+                        formControlName="expired" placeholder="mm/dd/yyyy" bsDatepicker>
+                      <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="row">
@@ -75,7 +80,7 @@
                 <div class="form-group row">
                   <label for="cono1" class="col-sm-2 text-right control-label col-form-label">จำนวนสินค้า </label>
                   <div class="col-sm-2">
-                    <input type="text" class="form-control" id="cono1" placeholder="Contact No Here">
+                    <input type="text" class="form-control" formControlName="amount_Product" id="cono1" placeholder="">
                   </div>
                   <label for="cono1" class="col-sm-2 text-right control-label col-form-label">หน่วยสินค้า </label>
                   <div class="col-lg-1">
@@ -119,11 +124,19 @@
                   </div>
                 </div>
                 <div class="form-group row">
+                  <label for="cono1" class="col-sm-2 text-right control-label col-form-label">สถานะสินค้า </label>
+                  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                    <button aria-pressed="false" autocomplete="off" [ngClass]="{'active': statusProduct === 'true', 'unactive': statusProduct === 'false'}"  type="button" class="btn btn-md btn-secondary btn-toggle" data-toggle="button" (click)="test(i)" #i>
+                      <div class="handle"></div>
+                    </button>
+                  </div>
+                </div>
+                <div class="form-group row">
                   <label for="cono1" class="col-sm-2 text-right control-label col-form-label"></label>
                   <div class="col-sm-3">
                     <button class="btn btn-info btn-lg" type="submit">บันทึกข้อมูลสินค้า</button>
                   </div>
-                  <div class="col-sm-3">
+                  <div class="col-sm-1">
                     <button type="button" class="btn btn-info btn-lg">กลับ</button>
                   </div>
                 </div>

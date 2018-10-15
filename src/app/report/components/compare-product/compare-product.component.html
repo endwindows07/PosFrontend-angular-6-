@@ -13,8 +13,13 @@
                 <div class="row">
                   <div class="col-lg-1"></div>
                   <div class="col-lg-9">
-                    <input placeholder="ค้นหาเวลาขาย" type="text" class="form-control btn-lg" [(ngModel)]="Search_Text"
-                      bsDaterangepicker #dpr="bsDaterangepicker">
+                    <div class="input-group">
+                      <input placeholder="ค้นหาเวลาขาย" type="text" class="form-control btn-lg" [(ngModel)]="Search_Text" bsDaterangepicker
+                        #dpr="bsDaterangepicker">
+                      <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                      </div>
+                    </div>
                   </div>
                   <div class="col-2">
                     <a (click)="onSearchSalesProductTime()" class="btn-cyan  btn-lg float-right text-white" href="javascript:void(0)"><i

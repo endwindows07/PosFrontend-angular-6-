@@ -10,6 +10,9 @@ import { ICategory } from "../../../interfaces/Product/product-category.interfac
 import { TypeProduct } from "../../../interfaces/Product/product-type.interface";
 import { StockUrl } from "../../../stock/stock.url";
 import { ReportUrl } from "../../../report/report.url";
+import { IProfile } from "src/app/interfaces/profile.interface";
+import { IRoleAccount } from "src/app/interfaces/role";
+import { AccontService } from "src/app/services/account.service";
 
 @Component({
   selector: "app-detail-product",
@@ -22,14 +25,28 @@ export class DetailProductComponent {
     private router: Router,
     private alert: AlertService,
     private accessTokenService: AccessTokenService,
-    private nativeRoute: ActivatedRoute
+    private nativeRoute: ActivatedRoute,
+    private account: AccontService
   ) {
     this.nativeRoute.params.forEach(query => {
       this.ProductId = query.id;
     });
     this.initailLoadProduct(this.ProductId);
+    this.initailLoadUserLogin();
   }
 
+  userLogin: IProfile;
+  checkRole: IRoleAccount;
+
+  initailLoadUserLogin() {
+    this.account
+      .onGetProfile(this.accessTokenService.getAccesstokenStore())
+      .then(user => {
+        this.userLogin = user;
+      })
+      .catch(err => this.accessTokenService.clearAccesstokenStore());
+  }
+  
   AppUrl = AppUrl;
   ProductUrl = ProductUrl;
   StockUrl = StockUrl;

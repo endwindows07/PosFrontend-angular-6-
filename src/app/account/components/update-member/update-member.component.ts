@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AppUrl } from '../../../app.url';
 import { AccountUrl } from '../../account.url';
 import { AccontService } from '../../../services/account.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AccessTokenService } from '../../../services/accesstoken.service';
 import { AlertService } from '../../../layout/components/services/alert.service';
 import { IRoleAccount } from '../../../interfaces/role';
@@ -39,6 +39,7 @@ export class UpdateMemberComponent implements OnInit {
   ngOnInit() {}
 
   initailLoadMember(id: number) {
+
     this.account
       .onGetMemberByID(id, this.accessTokenService.getAccesstokenStore())
       .then(member => {
@@ -53,17 +54,19 @@ export class UpdateMemberComponent implements OnInit {
 
   initailLoadForm() {
     this.form = this.builder.group({
-      username: [],
-      fristname: [],
-      lastname: [],
-      role: [],
-      image: [],
-      status: []
+      username: ["", [Validators.required]],
+      fristname: ["", [Validators.required]],
+      lastname: ["", [Validators.required]],
+      role: [""],
+      image: [""],
+      status: [""]
     });
   }
 
   onSubmitUpdate() {
-    
+    if (this.form.invalid) {
+      return this.alert.error_alert("กรุณากรอกข้อมูล");
+    }
     this.account
       .onRegister(
         this.form.value,

@@ -54,7 +54,7 @@ export class AlertService {
   error_alert(
     message: string,
     type: string = 'danger',
-    title: string = 'Error : '
+    title: string = 'พบข้อผิดพลาด : '
   ) {
     this.notify(message, type, title);
   }

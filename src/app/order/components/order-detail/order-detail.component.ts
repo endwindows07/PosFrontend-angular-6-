@@ -7,6 +7,9 @@ import { IOrderList } from 'src/app/interfaces/order/order-list.interface';
 import { AppUrl } from 'src/app/app.url';
 import { OrderUrl } from '../../order.url';
 import { ProductUrl } from 'src/app/Product/product.url';
+import { IProfile } from 'src/app/interfaces/profile.interface';
+import { IRoleAccount } from 'src/app/interfaces/role';
+import { AccontService } from 'src/app/services/account.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -19,14 +22,15 @@ export class OrderDetailComponent {
     private alert: AlertService,
     private router: Router,
     private accessTokenService: AccessTokenService,
-    private nativeRoute: ActivatedRoute
+    private nativeRoute: ActivatedRoute,
+    private account: AccontService
 
   ) {
     this.nativeRoute.params.forEach(query => {
       this.orderId = query.id;
     });
-    this.onIitailLoadOrderDetail()
-
+    this.onIitailLoadOrderDetail();
+    this.initailLoadUserLogin();
   }
 
   AppUrl = AppUrl;
@@ -35,6 +39,18 @@ export class OrderDetailComponent {
   
   orderId: number;
   order: IOrderList;
+
+  userLogin: IProfile;
+  checkRole: IRoleAccount;
+
+  initailLoadUserLogin() {
+    this.account
+      .onGetProfile(this.accessTokenService.getAccesstokenStore())
+      .then(user => {
+        this.userLogin = user;
+      })
+      .catch(err => this.accessTokenService.clearAccesstokenStore());
+  }
 
   onIitailLoadOrderDetail() {
     this.orderService.onGetOrderById(this.orderId, this.accessTokenService.getAccesstokenStore())

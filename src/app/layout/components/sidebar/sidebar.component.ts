@@ -27,12 +27,13 @@ export class SidebarComponent implements OnInit {
   ) {
     this.inittalLoadForm();
     setTimeout(() => App.loadCommonScript(), 100);
-    setTimeout(() => sidebar.loadSideScript(), 10);
-    setTimeout(() => waves.loadCommonScript(), 0);
+    setTimeout(() => sidebar.loadSideScript(), 100);
+    setTimeout(() => waves.loadCommonScript(), 100);
   }
 
   MemberProfile: IProfile;
-
+  checkRole: IRoleAccount;
+  
   AppUrl = AppUrl;
   AccountUrl = AccountUrl;
   ProductUrl = ProductUrl;
@@ -42,6 +43,7 @@ export class SidebarComponent implements OnInit {
   roleAccount = IRoleAccount;
   OrderUrl = OrderUrl;
   
+
   ngOnInit() {
   }
 

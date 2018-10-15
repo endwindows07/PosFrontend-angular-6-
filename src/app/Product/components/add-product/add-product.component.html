@@ -66,8 +66,13 @@
                 <div class="form-group row">
                   <label for="cono1" class="col-sm-2 text-right control-label col-form-label">วันหมดอายุ </label>
                   <div class="col-sm-9">
-                    <input type="text" placeholder="dd/mm/yyyy" formControlName="expired" class="form-control"
-                      bsDatepicker>
+                    <div class="input-group">
+                      <input type="text" class="form-control datepicker-orient-top" placement="top" id="datepicker-autoclose"
+                        formControlName="expired" placeholder="วว / ดด / ปปปป" bsDatepicker>
+                      <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div class="row">
@@ -76,7 +81,7 @@
                 <div class="form-group row">
                   <label for="cono1" class="col-sm-2 text-right control-label col-form-label">จำนวนสินค้า </label>
                   <div class="col-sm-2">
-                    <input type="text" class="form-control" id="cono1" formControlName="amount_Product" placeholder="Contact No Here">
+                    <input type="text" class="form-control" id="cono1" formControlName="amount_Product" placeholder="">
                   </div>
                   <label for="cono1" class="col-sm-2 text-right control-label col-form-label">หน่วยสินค้า </label>
                   <div class="col-lg-1">

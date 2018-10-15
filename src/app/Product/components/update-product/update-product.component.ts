@@ -4,7 +4,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { AlertService } from "../../../layout/components/services/alert.service";
 import { AccessTokenService } from "../../../services/accesstoken.service";
 import { IProduct } from "../../../interfaces/Product/product.interface";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TypeProduct } from "../../../interfaces/Product/product-type.interface";
 import { ICategory } from "../../../interfaces/Product/product-category.interface";
 import { IOptionKey } from "../../../interfaces/search-key.interface";
@@ -39,7 +39,7 @@ export class UpdateProductComponent {
   form: FormGroup;
   ProductId: number;
   Product: IProduct;
-
+  statusProduct: boolean;
   expired: string[];
 
   type = TypeProduct;
@@ -91,6 +91,7 @@ export class UpdateProductComponent {
           this.expired[1] + "/" + this.expired[2] + "/" + this.expired[0]
         );
         
+        this.statusProduct = product.status;
         this.form.controls["name"].setValue(product.name);
         this.form.controls["barcode"].setValue(product.barcode);
         this.form.controls["barcode_Custom"].setValue(product.barcode_Custom);
@@ -110,7 +111,10 @@ export class UpdateProductComponent {
   }
 
   onUpdateProduct() {
-    this.onSetOption();
+    this.onSetValueProductOther();
+    if(this.form.invalid){
+      return this.alert.error_alert("กรุณากรอกข้อมูล");
+    }
     this.productService
       .onUpdateProduct(this.form.value, this.ProductId, this.accessTokenService.getAccesstokenStore())
       .then(res => {
@@ -123,22 +127,24 @@ export class UpdateProductComponent {
       });
   }
 
-  onSetOption() {
+  onSetValueProductOther() {
     this.form.controls["type"].setValue(this.typeSelected.key);
     this.form.controls["productCategoryId"].setValue(this.categorySelected.key);
+    this.form.controls["status"].setValue(this.statusProduct);
   }
 
   initailLoadFormCreateProduct() {
     this.form = this.builder.group({
-      barcode: [""],
-      barcode_Custom: [""],
-      name: [""],
-      description: [""],
+      barcode: ["", [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
+      barcode_Custom: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(5)]],
+      name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      description: ["", [Validators.required, Validators.minLength(0), Validators.maxLength(100)]],
       image_Url: [""],
+      status: [],
       expired: [""],
-      cost_Product: [""],
-      price: [""],
-      amount_Product: [""],
+      cost_Product: ["", [Validators.required]],
+      price: ["", [Validators.required]],
+      amount_Product: ["", [Validators.required]],
       type: [""],
       productCategoryId: [""]
     });
@@ -151,5 +157,11 @@ export class UpdateProductComponent {
         imageControl.setValue(base64);
       })
       .catch(err => this.alert.error_alert(err.Message));
+  }
+
+  test(i:HTMLInputElement){
+    console.log(i.class.value);
+    this.statusProduct = !this.statusProduct; 
+    console.log(this.statusProduct);
   }
 }

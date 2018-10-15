@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../../services/product.service';
 import { AccessTokenService } from '../../../services/accesstoken.service';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, RequiredValidator } from '@angular/forms';
+import { FormBuilder, FormGroup, RequiredValidator, Validators } from '@angular/forms';
 import { AlertService } from '../../../layout/components/services/alert.service';
 import { TypeProduct, TypeProductList } from '../../../interfaces/Product/product-type.interface';
 import { IOptionKey } from '../../../interfaces/search-key.interface';
@@ -68,7 +68,10 @@ export class AddProductComponent {
   
   onCreateProduct() {
     this.onSetOption();
-    console.log(this.form.value);
+    if(this.form.invalid){
+      return this.alert.error_alert("กรุณากรอกข้อมูล");
+    }
+
     this.productService
       .onAddProduct(
         this.form.value,
@@ -76,7 +79,7 @@ export class AddProductComponent {
       )
       .then(res => {
         this.alert.success_alert("Create Product Success");
-        // this.roter.navigate(["/", AppUrl.Product, ProductUrl.Products]);
+        this.roter.navigate(["/", AppUrl.Product, ProductUrl.Products]);
       })
       .catch(err => this.alert.error_alert(err.Message));
   }
@@ -88,15 +91,15 @@ export class AddProductComponent {
 
   initailLoadFormCreateProduct() {
     this.form = this.builder.group({
-      barcode: [""],
-      barcode_Custom: [""],
-      name: [""],
-      description: [""],
+      barcode: ["", [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
+      barcode_Custom: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(5)]],
+      name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
+      description: ["", [Validators.required, Validators.minLength(0), Validators.maxLength(100)]],
       image_Url: [""],
       expired: [""],
-      cost_Product: [""],
-      price: [""],
-      amount_Product: [""],
+      cost_Product: ["", [Validators.required]],
+      price: ["", [Validators.required]],
+      amount_Product: ["", [Validators.required]],
       type: [""],
       productCategoryId: [""]
     });
