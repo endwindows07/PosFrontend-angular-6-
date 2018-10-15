@@ -1,43 +1,60 @@
 <app-content>
-  <div class="row content-panel">
+  <div class="container-fluid">
     <div class="row">
-      <div class="">
-        <div class="col-lg-1"></div>
-        <div class="col-lg-8">
-          <input placeholder="" type="text" class="form-control" [(ngModel)]="Search_Text" bsDaterangepicker #dpr="bsDaterangepicker"
-            placement="bottom">
+      <div class="col-md-12">
+        <div class="card-body card-header btn-cyan active text-white">
+          <h3> <span class="fas fa-chart-area"></span> <b> รายงานยอดขาย</b> <span class="pull-right"></span></h3>
         </div>
-        <div class="">
-          <button class="form-control" class="btn btn-info" type="button" (click)="onClickSearch()">
-            <i class="fa  fa-search"></i>
-            ค้นหา
-          </button>
+        <div class="card card-body printableArea">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-1"></div>
+                  <div class="col-lg-9">
+                    <input placeholder="ค้นหาเวลาขาย" type="text" class="form-control btn-lg" [(ngModel)]="Search_Text"
+                      bsDaterangepicker #dpr="bsDaterangepicker">
+                  </div>
+                  <div class="col-2">
+                    <a (click)="onClickSearch()" class="btn-cyan  btn-lg float-right text-white" href="javascript:void(0)"><i
+                        class="fas fa-search">
+                        ค้นหา</i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <canvas id="lineChart"></canvas>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="table-responsive m-t-40" style="clear: both;">
+                <table class="table table-striped" style=" height: 350px; ">
+                  <thead>
+                    <tr>
+                      <th>
+                        <h5> ยอดขาย </h5>
+                      </th>
+                      <th>
+                        <h5> วันที่ </h5>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of totalSalesReportList.reportSales_List">
+                      <td>{{item.total_Price}} บาท</td>
+                      <td>{{item.sales_Time| date:'dd/MM/yyyy'}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
         </div>
-        <br>
       </div>
     </div>
-    <br>
-    <div class="row">
-      <div class="col-lg-10">
-        <canvas id="lineChart"></canvas>
-      </div>
-      <div class="col-lg-2">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>ยอดขาย</th>
-              <th>วันที่</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of totalSalesReportList.reportSales_List">
-              <td>{{item.total_Price}} บาท</td>
-              <td>{{item.sales_Time| date:'dd/MM/yyyy'}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
   </div>
 </app-content>

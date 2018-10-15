@@ -1,77 +1,74 @@
 <app-content>
-  <div class="row content-panel" *ngIf="salesProductReportList" style="height: 900px">
-    <div class="page-header">
-      <h1>รายงานยอดขายสินค้า</h1>
-      <h4><small>รายงานยอดขายสินค้าจะแสดงยอดขายสินค้า ที่กำหนดออกมาในรูปแบบกราฟ (ค่าเริ่มต้นการค้นหาคือ เดือนปัจจุบัน)</small></h4>
-    </div>
+
+  <div class="container-fluid" *ngIf="salesProductReportList">
     <div class="row">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-8">
-        <input placeholder="ค้นหาด้วยเวลา mm/dd/yyy" type="text" class="form-control" [(ngModel)]="Search_Text"
-          bsDaterangepicker #dpr="bsDaterangepicker" placement="bottom">
-      </div>
-      <div class="">
-        <button class="form-control" class="btn btn-info" type="button" (click)="onSearchSalesProductTime()">
-          <i class="fa  fa-search"></i> ค้นหา </button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-10">
-        <canvas id="lineChart"></canvas>
-      </div>
-      <div class="col-lg-2">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>ยอดขาย</th>
-              <th>วันที่</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of salesProductReportList.salesProduct_List">
-              <td>{{item.sales_Count}}</td>
-              <td>{{item.sales_Time | date:'dd/MM/yyyy'}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-8">
-        <input placeholder="ค้นหาด้วยรหัสแท่ง" [(ngModel)]="productBarcodeSearch" (input)="onSearchProduct($event.target.value)"
-          type="text" class="form-control" placement="bottom">
-      </div>
-      <div class="">
-        <button class="form-control" class="btn btn-info" type="button" (click)="onLoadProductSelectToChart()">
-          <i class="fa  fa-search"></i> ค้นหา </button>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-lg-1"></div>
-      <div class="col-lg-9">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>รูปภาพ</th>
-              <th>รหัสแท่ง</th>
-              <th>ชื่อสินค้า</th>
-              <th>จำนวนสินค้าในระบบ</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody *ngIf="productsSelect">
-            <tr *ngFor="let item of productsSelect; let i = index">
-              <td>{{i+1}}</td>
-              <td>pic</td>
-              <td>{{item.barcode}}</td>
-              <td>{{item.name}}</td>
-              <td>{{item.amount_Product}}</td>
-              <td><button (click)="onRemoveProductSelected(i)"><span class="glyphicon glyphicon-folder-close"></span></button></td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="col-md-12">
+        <div class="card-body card-header btn-cyan active text-white">
+          <h3> <span class="fas fa-chart-area"></span> <b> รายงานยอดขาย</b> <span class="pull-right"></span></h3>
+        </div>
+        <div class="card card-body printableArea">
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-lg-1"></div>
+                  <div class="col-lg-9">
+                    <input placeholder="ค้นหาเวลาขาย" type="text" class="form-control btn-lg" [(ngModel)]="Search_Text"
+                      bsDaterangepicker #dpr="bsDaterangepicker">
+                  </div>
+                  <div class="col-2">
+                    <a (click)="onSearchSalesProductTime()" class="btn-cyan  btn-lg float-right text-white" href="javascript:void(0)"><i
+                        class="fas fa-search">
+                        ค้นหา</i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <canvas id="lineChart"></canvas>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="table-responsive m-t-40" style="clear: both;">
+                <table class="table table-striped" style=" height: 350px; ">
+                  <thead>
+                    <tr>
+                      <th>
+                        <h5> # </h5>
+                      </th>
+                      <th>
+                        <h5> รูปภาพ </h5>
+                      </th>
+                      <th>
+                        <h5> รหัสแท่ง </h5>
+                      </th>
+                      <th>
+                        <h5> ชื่อสินค้า </h5>
+                      </th>
+                      <th>
+                        <h5> จำนวนสินค้าในระบบ </h5>
+                      </th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="productsSelect">
+                    <tr *ngFor="let item of productsSelect; let i = index">
+                      <td>{{i+1}}</td>
+                      <td>pic</td>
+                      <td>{{item.barcode}}</td>
+                      <td>{{item.name}}</td>
+                      <td>{{item.amount_Product}}</td>
+                      <td><button (click)="onRemoveProductSelected(i)"><span class="glyphicon glyphicon-folder-close"></span></button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>

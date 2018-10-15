@@ -14,7 +14,7 @@ import { SalesUrl } from '../../sales.url';
   styleUrls: ['./cancel-billsales.component.css']
 })
 export class CancelBillsalesComponent {
-  constructor (
+  constructor(
     private salesService: SalesService,
     private alert: AlertService,
     private router: Router,
@@ -27,20 +27,27 @@ export class CancelBillsalesComponent {
   AppUrl = AppUrl;
   ProductUrl = ProductUrl;
 
-  onCancelSalesBill(){
+  onCancelSalesBill() {
     this.salesService.onCancelBillProduct(this.salesBillId, this.accessTokenService.getAccesstokenStore())
-                     .then(res => {
-                       this.alert.success_alert("ยกเลิกใบเสร็จสำเร็จ");
-                       this.router.navigate(['/', AppUrl.Sales, SalesUrl.ProductSales]);
-                     })
-                     .catch(err => this.alert.error_alert(err.Message));
+      .then(res => {
+        this.alert.success_alert("ยกเลิกใบเสร็จสำเร็จ");
+        this.router.navigate(['/', AppUrl.Sales, SalesUrl.ProductSales]);
+      })
+      .catch(err => this.alert.error_alert(err.Message));
   }
 
-  onSearch(){
+  onSearch() {
     this.salesService.onGetSalesBillProductById(this.salesBillId, this.accessTokenService.getAccesstokenStore())
-                     .then(salesBill => {
-                       this.salesBill = salesBill;
-                     })
-                     .catch(err => this.alert.error_alert(err.Message));
+      .then(salesBill => {
+        this.salesBill = salesBill;
+      })
+      .catch(err => this.alert.error_alert(err.Message));
+  }
+  onGetStatsuSalesString(status: boolean) {
+    if (status) {
+      return "ลงระบบ"
+    } else {
+      return "ยกเลิกใบเสร็จ";
+    }
   }
 }
