@@ -5,6 +5,7 @@ import { AlertService } from 'src/app/layout/components/services/alert.service';
 import { AccessTokenService } from 'src/app/services/accesstoken.service';
 import { ISearchOption } from 'src/app/interfaces/search-option.interface';
 import { IBestsalesList } from 'src/app/interfaces/report/report.bestsalesList.interface';
+import { PageChangedEvent } from 'ngx-bootstrap';
 
 @Component({
   selector: 'app-product-bestsales',
@@ -22,20 +23,18 @@ export class ProductBestsalesComponent {
     this.onInitailloadProductBestSales({
       Start_Page: this.Start_Page,
       Limit_Page: this.Limit_Page,
-      Search_DefaultText: this.Search_DefaultText,
-      Search_DefaultType: this.Search_DefaultType
+      Search_DefaultText: 'SalesNow',
+      Search_DefaultType:  'SalesNow'
     });
    }
   Start_Page: number = 1;
   Limit_Page: number = 10;
 
-  Search_Text: string;
-  Search_Type: string;
 
   productBestSalesList: IBestsalesList ;
 
-  Search_DefaultType: string = 'SalesNow';
-  Search_DefaultText: string = "SalesNow";
+  Search_DefaultText: string ;
+  Search_DefaultType: string ;
   // SalesTime 
 
   onInitailloadProductBestSales(option: ISearchOption){
@@ -48,4 +47,45 @@ export class ProductBestsalesComponent {
           this.alert.error_alert(err.Message);
          });
   }
+
+  onClickSearch(){
+    if(this.Search_DefaultText){
+      this.onInitailloadProductBestSales({
+        Start_Page: this.Start_Page,
+        Limit_Page: this.Limit_Page,
+        Search_DefaultText: this.onDateCut(this.Search_DefaultText[0].toString(), this.Search_DefaultText[1].toString()),
+        Search_DefaultType: "SalesTime"
+      });
+    }else{
+      this.onInitailloadProductBestSales({
+        Start_Page: this.Start_Page,
+        Limit_Page: this.Limit_Page,
+        Search_DefaultText: "SalesNow",
+        Search_DefaultType: "SalesNow"
+      });
+    }
+  }
+
+  onPageChanged(page: PageChangedEvent) {
+    if (this.Search_DefaultText) {
+      this.onInitailloadProductBestSales({
+        Start_Page: page.page,
+        Limit_Page: page.itemsPerPage,
+        Search_DefaultText: this.onDateCut(this.Search_DefaultText[0].toString(), this.Search_DefaultText[1].toString()),
+        Search_DefaultType: "SalesTime"
+      });
+    } else {
+      this.onInitailloadProductBestSales({
+        Start_Page: page.page,
+        Limit_Page: page.itemsPerPage,
+        Search_DefaultText: "SalesNow",
+        Search_DefaultType: "SalesNow"
+      });
+    }
+  }
+
+  onDateCut(dateTo: string, dateFrom: string) {
+    return dateTo.replace(" GMT+0700 (เวลาอินโดจีน)", "") + "&" + dateFrom.replace(" GMT+0700 (เวลาอินโดจีน)", "");
+  }
+
 }

@@ -3,16 +3,25 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card card-body printableArea" >
-          <h3><b>รายการสินค้า</b> <span class="pull-right"></span></h3>
+          <h3><b>สินค้าขายดี</b> <span class="pull-right"></span></h3>
           <hr>
           <div class="row">
             <div class="col-md-12">
               <div class="card-body" *ngIf="true">
                 <div class="row">
-                  <div class="col-8">
+                  <!-- <div class="col-7">
                     <div class="search input-field m-t-0 m-b-0">
                       <input [(ngModel)]="search_Text" type="text" class="form-control" placeholder=""
                         class="form-control border-0" placeholder="ค้นหาข้อมูลสินค้า" autofocus>
+                    </div>
+                  </div> -->
+                  <div class="col-lg-10">
+                    <div class="input-group">
+                      <input placeholder="ค้นหาเวลาขาย" type="text" class="form-control btn-lg" [(ngModel)]="Search_DefaultText" bsDaterangepicker
+                        #dpr="bsDaterangepicker">
+                      <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                      </div>
                     </div>
                   </div>
                   <div class="col-2">
