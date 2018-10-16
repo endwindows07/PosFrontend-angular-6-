@@ -1,5 +1,76 @@
 <app-content>
-  <p>
-    product-bestsales works!
-  </p>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card card-body printableArea" >
+          <h3><b>รายการสินค้า</b> <span class="pull-right"></span></h3>
+          <hr>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card-body" *ngIf="true">
+                <div class="row">
+                  <div class="col-8">
+                    <div class="search input-field m-t-0 m-b-0">
+                      <input [(ngModel)]="search_Text" type="text" class="form-control" placeholder=""
+                        class="form-control border-0" placeholder="ค้นหาข้อมูลสินค้า" autofocus>
+                    </div>
+                  </div>
+                  <div class="col-2">
+                    <a (click)="onClickSearch()" class="btn-cyan  btn-lg float-right text-white" href="javascript:void(0)"><i
+                        class="fas fa-search">
+                        ค้นหา</i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="table-responsive m-t-40" style="clear: both;">
+                <table class="table table-striped" style=" height: 350px; ">
+                  <thead>
+                    <tr>
+                      <th>
+                        <h5> ลำดับ </h5>
+                      </th>
+                      <th>
+                        <h5>ชื่อสินค้า </h5>
+                      </th>
+                      <th>
+                        <h5>จำนวน </h5>
+                      </th>
+                      <th> options </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of productBestSalesList.bestSaler_List; let i = index">
+                      <td>
+                        <p>{{ i + 1 }}</p>
+                      </td>
+                      <td> {{item.product_Name}} </td>
+                      <td> {{item.product_TotalSales}}</td>
+                      <td> ||| </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- <div class="col-md-2" *ngIf="!classHtmlStatus">
+              <div class="radio" *ngFor="let item of categoryItem">
+                <table class="table">
+                  <thead>
+                    <label><input type="radio" name="optradio" (click)="categorySelected = item; onClickSearch(); "
+                        checked>
+                      {{item.value}}</label>
+                  </thead>
+                </table>
+              </div>
+            </div> -->
+          </div>
+          <pagination [(ngModel)]="start_Page" [itemsPerPage]="limit_Page" (pageChanged)="onPageChanged($event)"
+            [rotate]="false" [maxSize]="10" previousText="หน้าก่อนหน้า" nextText="หน้าถัดไป" [totalItems]="productBestSalesList.total_BestSaler"></pagination>
+        </div>
+      </div>
+    </div>
+  </div>
 </app-content>
