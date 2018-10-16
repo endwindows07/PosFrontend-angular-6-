@@ -39,16 +39,16 @@
                 <h4>Price : <small> {{ Product.price }} บาท</small> </h4>
                 <h4>Expiredtime : <small> {{ Product.expired }} </small> </h4>
               </div>
-              <div *ngIf="userLogin.role 1" class="card-body col-3">
+              <div *ngIf="userLogin.role == 1" class="card-body col-3">
                 <a class="btn btn-warning btn-md" [routerLink]="[ '/', AppUrl.Product, ProductUrl.UpdateProduct, Product.id]"><i
                     class="fa fa-pencil">แก้ไขรายละเอียด</i></a>
               </div>
-              <div *ngIf="userLogin.role 1" class="card-body col-3">
+              <div *ngIf="userLogin.role == 1" class="card-body col-3">
                 <a class="btn btn-warning btn-md" [routerLink]="[ '/', AppUrl.Stock, StockUrl.AdjsutStock, Product.id]"><i
                     class="fa fa-pencil">
                     ปรับจำนวนสินค้า</i></a>
               </div>
-              <div *ngIf="userLogin.role 1 class="card-body col-3">
+              <div *ngIf="userLogin.role == 1" class="card-body col-3">
                 <a class="btn btn-warning btn-md" [routerLink]="[ '/', AppUrl.Report, ReportUrl.ReportProductSales, Product.id]"><i
                     class="fa fa-pencil">
                     ยอดขายสินค้า</i></a>

@@ -7,6 +7,7 @@ import { ReportRouting } from './report.routing';
 import { LayoutModule } from '../layout/layout.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompareProductComponent } from './components/compare-product/compare-product.component';
+import { ProductBestsalesComponent } from './components/product-bestsales/product-bestsales.component';
 
 @NgModule({
   imports: [
@@ -17,6 +18,6 @@ import { CompareProductComponent } from './components/compare-product/compare-pr
     FormsModule,
     ReactiveFormsModule 
   ],
-  declarations: [ReportSalesComponent, ReportProductsalesComponent, CompareProductComponent]
+  declarations: [ReportSalesComponent, ReportProductsalesComponent, CompareProductComponent, ProductBestsalesComponent]
 })
 export class ReportModule { }

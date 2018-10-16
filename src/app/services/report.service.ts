@@ -4,6 +4,7 @@ import { IReportSaleList } from "../interfaces/report/report-salesList";
 import { ISearchOption } from "../interfaces/search-option.interface";
 import { IReportSalesProductList } from "../interfaces/report/report-salesProductList";
 import { IReportCompareSalesProduct } from "../interfaces/report/report-compareSalesProduct";
+import { IBestsalesList } from "../interfaces/report/report.bestsalesList.interface";
 declare let $;
 
 @Injectable()
@@ -24,4 +25,10 @@ export class ReportService {
         return this.http.requestGet(`api/Report/compare-product?${$.param(options)}`, accessToken)
             .toPromise() as Promise<IReportCompareSalesProduct>;
     }
+
+    onGetProductBestSales(options: ISearchOption, accessToken: string) {
+        return this.http.requestGet(`api/Report/best-sales?${$.param(options)}`, accessToken)
+            .toPromise() as Promise<IBestsalesList>;
+    }
+    
 }

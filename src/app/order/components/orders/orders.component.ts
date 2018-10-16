@@ -30,6 +30,8 @@ export class OrdersComponent {
   AppUrl = AppUrl;
   OrderUrl = OrderUrl;
 
+  Search_Text: string = "";
+  Search_Type: string = "Id";
   Start_Page: number = 1;
   Limit_Page: number = 8;
   orderList: IOrderList[] = [];
@@ -38,11 +40,19 @@ export class OrdersComponent {
     this.orderService.onGetOrders(option, this.accessTokenService.getAccesstokenStore())
       .then(orders => {
         this.orderList = orders;
-        console.log(this.orderList);
       })
       .catch(err => {
         this.alert.error_alert(err.Message);
       });
+  }
+
+  onClickSearch(){
+    this.onIitailLoadOrders({
+      Start_Page: this.Start_Page,
+      Limit_Page: this.Limit_Page,
+      Search_Text: this.Search_Text,
+      Search_Type: this.Search_Type
+    })
   }
 
   onGetStatsuSalesString(status: boolean) {

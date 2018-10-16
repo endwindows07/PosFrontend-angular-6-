@@ -32,7 +32,7 @@
                                     <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Product, ProductUrl.Products]"
                                                 class="sidebar-link"><i class="fas fa-boxes"></i><span class="hide-menu">
                                                       รายการสินค้า </span></a></li>
-                                    <li *ngIf="MemberProfile.role == checkRole" class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Product, ProductUrl.AddProduct]"
+                                    <li *ngIf="MemberProfile.role == 1" class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Product, ProductUrl.AddProduct]"
                                                 class="sidebar-link"><i class="mdi mdi-hospital"></i><span class="hide-menu">
                                                       เพิ่มรายการสินค้า</span></a></li>
                               </ul>
@@ -71,6 +71,9 @@
                                     <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Report, ReportUrl.ReportCompareProductSale]"
                                                 class="sidebar-link"><i class="fas fa-chart-line"></i><span class="hide-menu">
                                                       รายงานเปรียบเทียบยอดขายสินค้า</span></a></li>
+                                    <li class="sidebar-item"><a [routerLink]="[ '/', AppUrl.Report, ReportUrl.ReportProductBestSales]" class="sidebar-link"><i
+                                                      class="fas fa-chart-line"></i><span class="hide-menu">
+                                                      รายงานยอดขายสูงสุด</span></a></li>
                               </ul>
                         </li>
 
