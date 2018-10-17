@@ -6,6 +6,7 @@ import { ReportProductsalesComponent } from "./components/report-productsales/re
 import { ProductsComponent } from "../Product/components/products/products.component";
 import { CompareProductComponent } from "./components/compare-product/compare-product.component";
 import { ProductBestsalesComponent } from "./components/product-bestsales/product-bestsales.component";
+import { ReportDashboardComponent } from "./components/report-dashboard/report-dashboard.component";
 
 const RouteLists: Routes = [
     { path: '', redirectTo: ReportUrl.ReportSales, pathMatch: 'full' },
@@ -30,6 +31,11 @@ const RouteLists: Routes = [
     {
         path: ReportUrl.ReportProductBestSales,
         component: ProductBestsalesComponent,
+        data: { role: [IRoleAccount.Admin] }
+    },
+    {
+        path: ReportUrl.ReportDashboard,
+        component: ReportDashboardComponent,
         data: { role: [IRoleAccount.Admin] }
     }
 ];

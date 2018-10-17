@@ -87,10 +87,10 @@ export class CompareProductComponent implements OnInit {
     this.reportService.onCompareProductSales(options, this.accessTokenService.getAccesstokenStore())
       .then(salesProductReport => {
 
-        let sales_TimeP1: string[] = salesProductReport.salesProduct_First.map(it => it.sales_Time);
+        let sales_TimeP1: string[] = salesProductReport.salesProduct_First.map(it => it.sales_Time.split("T")[0]);
         let sales_CountP1: string[] = salesProductReport.salesProduct_First.map(it => it.sales_Count);
 
-        let sales_TimeP2: string[] = salesProductReport.salesProduct_Second.map(it => it.sales_Time);
+        let sales_TimeP2: string[] = salesProductReport.salesProduct_Second.map(it => it.sales_Time.split("T")[0]);
         let sales_CountP2: string[] = salesProductReport.salesProduct_Second.map(it => it.sales_Count);
 
         if (sales_TimeP1.length > sales_TimeP2.length) {

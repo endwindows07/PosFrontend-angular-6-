@@ -47,7 +47,6 @@ export class ProductBestsalesComponent {
     this.reportService.onGetProductBestSales(option, this.accessTokenService.getAccesstokenStore())
          .then(bestSalesList => {
            this.productBestSalesList = bestSalesList;
-           console.log(bestSalesList);
          })
          .catch(err => {
           this.alert.error_alert(err.Message);

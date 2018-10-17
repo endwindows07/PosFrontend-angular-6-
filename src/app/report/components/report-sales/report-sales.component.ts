@@ -39,7 +39,9 @@ export class ReportSalesComponent {
 
   Search_Text: string;
   Search_Type: string;
-
+  Search_DefaultText: string;
+  Search_DefaultType: string;
+  
   CostAndProfitList: ICostAndProfitList = {
     costAndProfit_List: null,
     total_CostAndProfit: null
@@ -73,7 +75,7 @@ export class ReportSalesComponent {
               
               this.CostAndProfitList = res;
 
-              let sales_Time = res.costAndProfit_List.map(res => res.sales_Time);
+              let sales_Time = res.costAndProfit_List.map(res => res.sales_Time.split("T")[0]);
 
               let total_Sales = res.costAndProfit_List.map(res => res.total_Sales);
 

@@ -121,7 +121,7 @@ export class ReportProductsalesComponent implements OnInit {
 
 
   onLoadProductSelectToChart() {
-    let sales_Time: string[] = this.salesProductReportList.salesProduct_List.map(it => it.sales_Time);
+    let sales_Time: string[] = this.salesProductReportList.salesProduct_List.map(it => it.sales_Time.split("T")[0]);
     let sales_Count: string[] = this.salesProductReportList.salesProduct_List.map(it => it.sales_Count);
     this.onSetChart(sales_Time, sales_Count);
   }
