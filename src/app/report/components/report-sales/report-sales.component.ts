@@ -10,6 +10,7 @@ import { ISearchOption } from '../../../interfaces/search-option.interface';
 import { ISalesList } from '../../../interfaces/sales/sales-list.interface';
 import { IReportSales } from '../../../interfaces/report/report-sales.interface';
 import { Chart } from 'chart.js';
+import { ICostAndProfitList } from 'src/app/interfaces/report/report-costAndProfitList';
 declare let ctx;
 
 @Component({
@@ -24,7 +25,12 @@ export class ReportSalesComponent {
     private alert: AlertService,
     private accessTokenService: AccessTokenService,
   ) {
-    this.onIitailLoadReportSales({
+    // this.onIitailLoadReportSales({
+    //   Search_DefaultText: "SalesNow",
+    //   Search_DefaultType: "SalesNow"
+    // });
+
+    this.onInitailLoadCostAndProfitSales({
       Search_DefaultText: "SalesNow",
       Search_DefaultType: "SalesNow"
     });
@@ -33,6 +39,11 @@ export class ReportSalesComponent {
 
   Search_Text: string;
   Search_Type: string;
+
+  CostAndProfitList: ICostAndProfitList = {
+    costAndProfit_List: null,
+    total_CostAndProfit: null
+  };
 
   totalSalesReportList: IReportSaleList = {
     report_Count: null,
@@ -43,49 +54,78 @@ export class ReportSalesComponent {
 
   onClickSearch() {
     if(!this.Search_Text){
-      this.onIitailLoadReportSales({
+      this.onInitailLoadCostAndProfitSales({
         Search_DefaultText: "SalesNow",
         Search_DefaultType: "SalesNow",
       });
     } else {
-      this.onIitailLoadReportSales({
-        Search_Text: this.onDateCut(this.Search_Text[0].toString(), this.Search_Text[1].toString()),
-        Search_Type: this.Search_Type
+      this.onInitailLoadCostAndProfitSales({
+        Search_DefaultText: this.onDateCut(this.Search_Text[0].toString(), this.Search_Text[1].toString()),
+        Search_DefaultType: this.Search_Type
       });
     }
+
   }
 
-  onIitailLoadReportSales(options: ISearchOption) {
-    this.reportService.onGetReportSales(options, this.accessTokenService.getAccesstokenStore())
-      .then(reportSales => {
+  onInitailLoadCostAndProfitSales(options: ISearchOption) {
+    this.reportService.onGetCostAndProfitSales(options, this.accessTokenService.getAccesstokenStore())
+            .then(res => {
+              
+              this.CostAndProfitList = res;
 
-        this.totalSalesReportList = reportSales;
-        let sales_Time = reportSales.reportSales_List.map(res => res.sales_Time);
+              let sales_Time = res.costAndProfit_List.map(res => res.sales_Time);
 
-        let total_Price = reportSales.reportSales_List.map(res => res.total_Price);;
+              let total_Sales = res.costAndProfit_List.map(res => res.total_Sales);
 
-        this.onSetTotalSalesReportChart(sales_Time, total_Price)
+              let cost = res.costAndProfit_List.map(res => res.cost);
 
-      })
-      .catch(err => this.alert.error_alert(err.Message));
+              let profit = res.costAndProfit_List.map(res => res.profit);
+
+              this.onSetTotalSalesReportChart(sales_Time, total_Sales, cost, profit)
+            })
+            .catch(err => {
+              this.alert.error_alert(err.Message);
+            })
   }
+
+  // onIitailLoadReportSales(options: ISearchOption) {
+  //   this.reportService.onGetReportSales(options, this.accessTokenService.getAccesstokenStore())
+  //     .then(reportSales => {
+  //       this.totalSalesReportList = reportSales;
+  //     })
+  //     .catch(err => this.alert.error_alert(err.Message));
+  // }
 
   onDateCut(dateTo: string, dateFrom: string) {
     return dateTo.replace(" GMT+0700 (เวลาอินโดจีน)", "") + "&" + dateFrom.replace(" GMT+0700 (เวลาอินโดจีน)", "");
   }
 
-  onSetTotalSalesReportChart(sales_Time: string[], total_Price: string[]) {
+  onSetTotalSalesReportChart(sales_Time: string[], total_Price: string[], cost: string[], profir: string[]) {
     this.LineChart = new Chart('lineChart', {
       type: 'line',
       data: {
         labels: sales_Time,
         datasets: [{
-          label: 'รายงานยอดขาย',
+          label: 'ยอดขาย',
           data: total_Price,
           // backgroundColor: '#4ecdc4',
-          borderColor: '#00c2e0',
-          borderWidth: 3
-        }]
+          borderColor: '#8DB1AB',
+          borderWidth: 1
+        },
+          {
+            label: 'ต้นทุน',
+            data: cost,
+            borderColor: '#587792',
+            borderWidth: 2
+          },
+          {
+            label: 'กำไร',
+            data: profir,
+            // backgroundColor: '#4ecdc4',
+            borderColor: '#3A678E',
+            borderWidth: 3
+          },
+      ]
       },
       options: {
         scales: {

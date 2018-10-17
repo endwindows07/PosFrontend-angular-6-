@@ -58,23 +58,12 @@
                       </td>
                       <td> {{item.product_Name}} </td>
                       <td> {{item.product_TotalSales}}</td>
-                      <td> ||| </td>
+                      <td> <a class="btn btn-success btn-xs" [routerLink]="[ '/', AppUrl.Product, ProductUrl.DetailProduct, item.productId ]"><i class="fa fa-pencil">details</i></a> </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
             </div>
-            <!-- <div class="col-md-2" *ngIf="!classHtmlStatus">
-              <div class="radio" *ngFor="let item of categoryItem">
-                <table class="table">
-                  <thead>
-                    <label><input type="radio" name="optradio" (click)="categorySelected = item; onClickSearch(); "
-                        checked>
-                      {{item.value}}</label>
-                  </thead>
-                </table>
-              </div>
-            </div> -->
           </div>
           <pagination [(ngModel)]="start_Page" [itemsPerPage]="limit_Page" (pageChanged)="onPageChanged($event)"
             [rotate]="false" [maxSize]="10" previousText="หน้าก่อนหน้า" nextText="หน้าถัดไป" [totalItems]="productBestSalesList.total_BestSaler"></pagination>

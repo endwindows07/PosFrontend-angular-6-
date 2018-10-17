@@ -128,7 +128,7 @@ export class ReportProductsalesComponent implements OnInit {
 
   onSetChart(sales_Time?: string[], sales_CountP1?: string[]) {
     this.LineChart = new Chart('lineChart', {
-      type: 'line',
+      type: 'bar',
       data: {
         labels: sales_Time,
         datasets: [{

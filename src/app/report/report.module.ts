@@ -8,6 +8,7 @@ import { LayoutModule } from '../layout/layout.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompareProductComponent } from './components/compare-product/compare-product.component';
 import { ProductBestsalesComponent } from './components/product-bestsales/product-bestsales.component';
+import { ReportDashboardComponent } from './components/report-dashboard/report-dashboard.component';
 
 @NgModule({
   imports: [
@@ -18,6 +19,6 @@ import { ProductBestsalesComponent } from './components/product-bestsales/produc
     FormsModule,
     ReactiveFormsModule 
   ],
-  declarations: [ReportSalesComponent, ReportProductsalesComponent, CompareProductComponent, ProductBestsalesComponent]
+  declarations: [ReportSalesComponent, ReportProductsalesComponent, CompareProductComponent, ProductBestsalesComponent, ReportDashboardComponent]
 })
 export class ReportModule { }

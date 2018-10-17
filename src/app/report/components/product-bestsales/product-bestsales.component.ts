@@ -6,6 +6,8 @@ import { AccessTokenService } from 'src/app/services/accesstoken.service';
 import { ISearchOption } from 'src/app/interfaces/search-option.interface';
 import { IBestsalesList } from 'src/app/interfaces/report/report.bestsalesList.interface';
 import { PageChangedEvent } from 'ngx-bootstrap';
+import { AppUrl } from 'src/app/app.url';
+import { ProductUrl } from 'src/app/Product/product.url';
 
 @Component({
   selector: 'app-product-bestsales',
@@ -27,6 +29,10 @@ export class ProductBestsalesComponent {
       Search_DefaultType:  'SalesNow'
     });
    }
+
+  AppUrl = AppUrl;
+  ProductUrl = ProductUrl;
+  
   Start_Page: number = 1;
   Limit_Page: number = 10;
 

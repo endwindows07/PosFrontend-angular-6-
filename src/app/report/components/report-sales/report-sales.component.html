@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
-        <div class="card-body card-header btn-cyan active text-white">
+        <div class="card-body card-header btn-secondary active text-white">
           <h3> <span class="fas fa-chart-area"></span> <b> รายงานยอดขาย</b> <span class="pull-right"></span></h3>
         </div>
         <div class="card card-body printableArea">
@@ -41,17 +41,29 @@
                   <thead>
                     <tr>
                       <th>
+                        <h5> วันที่ </h5>
+                      </th>
+                      <th>
                         <h5> ยอดขาย </h5>
                       </th>
                       <th>
-                        <h5> วันที่ </h5>
+                        <h5> ต้นทุน </h5>
+                      </th>
+                      <th>
+                        <h5> กำไร </h5>
+                      </th>
+                      <th>
+                        <h5> กำไร : % </h5>
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let item of totalSalesReportList.reportSales_List">
-                      <td>{{item.total_Price}} บาท</td>
+                    <tr *ngFor="let item of CostAndProfitList.costAndProfit_List">
                       <td>{{item.sales_Time| date:'dd/MM/yyyy'}}</td>
+                      <td>{{item.total_Sales}} บาท</td>
+                      <td>{{item.cost}} บาท</td>
+                      <td>{{item.profit}} บาท</td>
+                      <td>{{ (item.profit / item.cost) * 100}} %</td>
                     </tr>
                   </tbody>
                 </table>
