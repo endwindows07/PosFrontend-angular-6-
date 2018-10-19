@@ -116,77 +116,113 @@
           <div class="card-body">
             <div class="d-md-flex align-items-center">
               <div>
-                <h4 class="card-title">ยอดขายในเดือนนี้</h4>
-                <h5 class="card-subtitle">ภาพรวมยอดขาย กำไร และต้นทุนในเดือนนี้ </h5>
+                <h3 class="card-title"> ยอดขายในเดือนนี้ </h3>
+                <h5 class="card-subtitle"> ภาพรวมยอดขาย กำไร และต้นทุนในเดือนนี้ </h5>
               </div>
             </div>
             <div class="row">
               <!-- column -->
-            <div class="col-lg-9">
-                <div class="flot-chart">
-                  <canvas id="lineChart" class="flot-chart-content" ></canvas>
-                </div>
+              <div class="col-lg-9">
+                <br>
+                <canvas id="lineChart" class="flot-chart-content"></canvas>
               </div>
-              <div class="col-lg-3">
+              <div class="col-lg-3 sales">
                 <div class="row">
                   <div class="col-6 text-center">
-                    <h5>
+                    <h3>
                       วันนี้
-                    </h5>
+                    </h3>
                   </div>
-                  <div class="col-6 text-center" >
-                    <h5>
+                  <div class="col-6 text-center">
+                    <h3>
                       เดือนนี้
-                    </h5>
+                    </h3>
                   </div>
 
                   <div class="col-6">
                     <div class="bg-dark p-10 text-white text-center">
-                      <i class="fa fa-user m-b-5 font-16"></i>
+                      <i class="mdi mdi-cash m-b-5 font-16"></i>
                       <h5 class="m-b-0 m-t-5">{{ OverviewThisDay[0].total_Sales }}</h5>
                       <small class="font-light">ยอดขาย</small>
                     </div>
                   </div>
                   <div class="col-6">
                     <div class="bg-dark p-10 text-white text-center">
-                      <i class="fa fa-plus m-b-5 font-16"></i>
+                      <i class="mdi mdi-cash m-b-5 font-16"></i>
                       <h5 class="m-b-0 m-t-5"> {{ totalSalesThisMonth }} </h5>
                       <small class="font-light">ยอดขาย</small>
                     </div>
                   </div>
                   <div class="col-6 m-t-15">
                     <div class="bg-dark p-10 text-white text-center">
-                      <i class="fa fa-cart-plus m-b-5 font-16"></i>
-                      <h5 class="m-b-0 m-t-5"> {{ OverviewThisDay[0].profit }}  </h5>
+                      <i class="mdi mdi-cash-multiple m-b-5 font-16"></i>
+                      <h5 class="m-b-0 m-t-5"> {{ OverviewThisDay[0].profit }} </h5>
                       <small class="font-light">กำไร</small>
                     </div>
                   </div>
                   <div class="col-6 m-t-15">
                     <div class="bg-dark p-10 text-white text-center">
-                      <i class="fa fa-tag m-b-5 font-16"></i>
+                      <i class="mdi mdi-cash-multiple m-b-5 font-16"></i>
                       <h5 class="m-b-0 m-t-5"> {{ totalProfitThisMonth }}</h5>
                       <small class="font-light">กำไร</small>
                     </div>
                   </div>
                   <div class="col-6 m-t-15">
                     <div class="bg-dark p-10 text-white text-center">
-                      <i class="fa fa-table m-b-5 font-16"></i>
+                      <i class="mdi mdi-cash-usd m-b-5 font-16"></i>
                       <h5 class="m-b-0 m-t-5"> {{ OverviewThisDay[0].cost }} </h5>
                       <small class="font-light">ต้นทุน</small>
                     </div>
                   </div>
                   <div class="col-6 m-t-15">
                     <div class="bg-dark p-10 text-white text-center">
-                      <i class="fa fa-globe m-b-5 font-16"></i>
+                      <i class="mdi mdi-cash-usd m-b-5 font-16"></i>
                       <h5 class="m-b-0 m-t-5"> {{ totalCostThisMonth }} </h5>
                       <small class="font-light">ต้นทุน</small>
                     </div>
                   </div>
                 </div>
-
               </div>
-              <div class="col-12">
-                <hr>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+              <div class="card-body col-lg-9">
+                <h4>สินค้าขายดี</h4>
+                <h5 class="card-subtitle">10 อันดับสินค้าขายดี ขายดีประจำเดือน</h5>
+
+                <div class="col-lg-12 table-responsive " style="clear: both;">
+                  <table class="table table-striped" style=" height: 350px; ">
+                    <thead>
+                      <tr>
+                        <th>
+                          <h5> ลำดับ </h5>
+                        </th>
+                        <th>
+                          <h5>ชื่อสินค้า </h5>
+                        </th>
+                        <th>
+                          <h5>จำนวน </h5>
+                        </th>
+                        <th> options </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of productBestSalesList.bestSaler_List; let i = index">
+                        <td>
+                          <p>{{ i + 1 }}</p>
+                        </td>
+                        <td> {{item.product_Name}} </td>
+                        <td> {{item.product_TotalSales}}</td>
+                        <td> <a class="btn btn-success btn-xs" [routerLink]="[ '/', AppUrl.Product, ProductUrl.DetailProduct, item.productId ]"><i
+                              class="fa fa-pencil">details</i></a> </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <div class="card-body col-lg-3 text-center">
+                <h4>หมวดหมู่</h4>
               </div>
             </div>
           </div>

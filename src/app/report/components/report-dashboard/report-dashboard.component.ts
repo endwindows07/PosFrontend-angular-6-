@@ -7,6 +7,9 @@ import { ICostAndProfitList } from 'src/app/interfaces/report/report-costAndProf
 import { ISearchOption } from 'src/app/interfaces/search-option.interface';
 import { Chart } from 'chart.js';
 import { ICostAndProfit } from 'src/app/interfaces/report/report-costAndProfit';
+import { IBestsalesList } from 'src/app/interfaces/report/report.bestsalesList.interface';
+import { AppUrl } from 'src/app/app.url';
+import { ProductUrl } from 'src/app/Product/product.url';
 
 @Component({
   selector: 'app-report-dashboard',
@@ -29,7 +32,20 @@ export class ReportDashboardComponent {
       Search_DefaultText: "SalesDay",
       Search_DefaultType: "SalesDay"
     });
+
+    this.onInitailloadProductBestSales({
+      Start_Page: this.Start_Page,
+      Limit_Page: this.Limit_Page,
+      Search_DefaultText: "SalesNow",
+      Search_DefaultType: "SalesNow"
+    })
+
    }
+  AppUrl = AppUrl;
+  ProductUrl = ProductUrl;
+
+  Start_Page: number = 1;
+  Limit_Page: number = 10;
 
   Search_Text: string;
   Search_Type: string;
@@ -49,6 +65,9 @@ export class ReportDashboardComponent {
   };
 
   OverviewThisDay: ICostAndProfit[] = [];
+
+  productBestSalesList: IBestsalesList;
+
 
   onInitailLoadOverviewThisMonth(options: ISearchOption) {
 
@@ -86,6 +105,16 @@ export class ReportDashboardComponent {
       });
   }
 
+  onInitailloadProductBestSales(option: ISearchOption) {
+    this.reportService.onGetProductBestSales(option, this.accessTokenService.getAccesstokenStore())
+      .then(bestSalesList => {
+        this.productBestSalesList = bestSalesList;
+      })
+      .catch(err => {
+        this.alert.error_alert(err.Message);
+      });
+  }
+
   private getSum(array: string[]){
     let answer: number = 0;
     for(let i = 0; i < array.length; i++ ){      
@@ -93,8 +122,6 @@ export class ReportDashboardComponent {
     }
     return answer;
   }
-
-
 
   onSetTotalSalesReportChart(sales_Time: string[], total_Price: string[], cost: string[], profir: string[]) {
     this.LineChart = new Chart('lineChart', {

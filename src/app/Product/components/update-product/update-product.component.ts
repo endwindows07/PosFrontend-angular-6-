@@ -149,8 +149,13 @@ export class UpdateProductComponent {
       productCategoryId: [""]
     });
   }
+
   onCovertImage(input: HTMLInputElement) {
     const imageControl = this.form.controls['image_Url'];
+    if (input.files[0].size > 307200){
+      return this.alert.error_alert("ขนาดรูปต้องไม่เกิน 300 kb");
+    }
+
     this.imageService
       .onConvertImage(input)
       .then(base64 => {
@@ -160,7 +165,7 @@ export class UpdateProductComponent {
   }
 
   test(i:HTMLInputElement){
-    console.log(i.class.value);
+    console.log(i.value);
     this.statusProduct = !this.statusProduct; 
     console.log(this.statusProduct);
   }

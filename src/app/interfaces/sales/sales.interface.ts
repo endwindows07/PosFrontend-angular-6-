@@ -8,9 +8,12 @@ export interface ISales {
   id?: string;
   total_Price?: string;
   status?: string;
+
   sales_Time?: string;
-  cancelSales_Time?: string;
+
   memberId?: string;
-  member?: IProfile;
+  cancelSales_Time?: string;
   memberCancelBill?: string;
+
+  member?: IProfile;
 }
