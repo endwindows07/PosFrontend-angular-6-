@@ -10,6 +10,7 @@ import { ProductUrl } from 'src/app/Product/product.url';
 import { IProfile } from 'src/app/interfaces/profile.interface';
 import { IRoleAccount } from 'src/app/interfaces/role';
 import { AccontService } from 'src/app/services/account.service';
+import { PrintBill } from 'src/app/services/print.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -23,7 +24,8 @@ export class OrderDetailComponent {
     private router: Router,
     private accessTokenService: AccessTokenService,
     private nativeRoute: ActivatedRoute,
-    private account: AccontService
+    private account: AccontService,
+    private printService: PrintBill
 
   ) {
     this.nativeRoute.params.forEach(query => {
@@ -79,5 +81,9 @@ export class OrderDetailComponent {
     } else {
       return "ยังไม่ลงระบบ";
     }
+  }
+
+  print(){
+    this.printService.onPrint();
   }
 }

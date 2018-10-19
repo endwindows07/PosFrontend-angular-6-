@@ -56,7 +56,7 @@
             </div>
           </div>
           <hr>
-          <div class="row">
+          <div class="row hided">
             <div *ngIf="userLogin.role == 1" class="col-lg-8">
               <button class="btn btn-lg btn-outline-danger" type="submit"> <span class="fas fa-trash-alt"></span>
                 ลบใบจัดซื้อ
@@ -69,7 +69,7 @@
             </div>
 
             <div class="col-lg-2 text-right">
-              <button class="btn btn-lg btn-outline-warning" type="submit"> <span class="fas fa-print"></span>
+              <button class="btn btn-lg btn-outline-warning" (click)="print()" type="submit"> <span class="fas fa-print"></span>
                 พิมพ์ใบเสร็จ
               </button>
             </div>

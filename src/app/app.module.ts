@@ -14,6 +14,7 @@ import { SalesService } from './services/sales.service';
 import { ReportService } from './services/report.service';
 import { OrderService } from './services/order.service';
 import { ImageService } from './services/image.service';
+import { PrintBill } from './services/print.service';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent],
@@ -27,7 +28,7 @@ import { ImageService } from './services/image.service';
     FormsModule,
     ReactiveFormsModule,
   ],
-  providers: [AccontService, ProductService, SalesService, ReportService, OrderService, ImageService],
+  providers: [AccontService, ProductService, SalesService, ReportService, OrderService, ImageService, PrintBill],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

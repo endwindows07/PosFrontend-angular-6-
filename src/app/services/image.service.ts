@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 
-export class ImageService{
+export class ImageService {
 
     //image: แปลงไฟล์รูปเป็น Base64
     onConvertImage(input: HTMLInputElement) {

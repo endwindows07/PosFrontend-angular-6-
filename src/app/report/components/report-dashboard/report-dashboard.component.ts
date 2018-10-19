@@ -10,6 +10,12 @@ import { ICostAndProfit } from 'src/app/interfaces/report/report-costAndProfit';
 import { IBestsalesList } from 'src/app/interfaces/report/report.bestsalesList.interface';
 import { AppUrl } from 'src/app/app.url';
 import { ProductUrl } from 'src/app/Product/product.url';
+import { IRoleAccount } from 'src/app/interfaces/role';
+import { AccountUrl } from 'src/app/account/account.url';
+import { StockUrl } from 'src/app/stock/stock.url';
+import { SalesUrl } from 'src/app/sales/sales.url';
+import { ReportUrl } from '../../report.url';
+import { OrderUrl } from 'src/app/order/order.url';
 
 @Component({
   selector: 'app-report-dashboard',
@@ -41,8 +47,15 @@ export class ReportDashboardComponent {
     })
 
    }
+
   AppUrl = AppUrl;
+  AccountUrl = AccountUrl;
   ProductUrl = ProductUrl;
+  StockUrl = StockUrl;
+  SalesUrl = SalesUrl;
+  ReportUrl = ReportUrl;
+  roleAccount = IRoleAccount;
+  OrderUrl = OrderUrl;
 
   Start_Page: number = 1;
   Limit_Page: number = 10;

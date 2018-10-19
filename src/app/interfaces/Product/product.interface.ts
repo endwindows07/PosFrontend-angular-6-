@@ -8,6 +8,7 @@ export interface IProduct {
     name: string,
     description: string,
     image_Url: string,
+    image: string;
     expired: string,
     cost_Product?: string,
     price?: string,

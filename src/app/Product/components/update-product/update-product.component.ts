@@ -139,7 +139,8 @@ export class UpdateProductComponent {
       barcode_Custom: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(5)]],
       name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       description: ["", [Validators.required, Validators.minLength(0), Validators.maxLength(100)]],
-      image_Url: [""],
+      image_Url: [],
+      image: [],
       status: [],
       expired: [""],
       cost_Product: ["", [Validators.required]],
@@ -152,10 +153,6 @@ export class UpdateProductComponent {
 
   onCovertImage(input: HTMLInputElement) {
     const imageControl = this.form.controls['image_Url'];
-    if (input.files[0].size > 307200){
-      return this.alert.error_alert("ขนาดรูปต้องไม่เกิน 300 kb");
-    }
-
     this.imageService
       .onConvertImage(input)
       .then(base64 => {
@@ -164,9 +161,9 @@ export class UpdateProductComponent {
       .catch(err => this.alert.error_alert(err.Message));
   }
 
-  test(i:HTMLInputElement){
-    console.log(i.value);
-    this.statusProduct = !this.statusProduct; 
-    console.log(this.statusProduct);
-  }
+  // test(i:HTMLInputElement){
+  //   console.log(i.value);
+  //   this.statusProduct = !this.statusProduct; 
+  //   console.log(this.statusProduct);
+  // }
 }

@@ -22,8 +22,8 @@
           <div class="card-body row">
             <div class="col-md-2">
               <div class="card-body">
-                <span *ngIf="!Product.image_Url && !form.value.image_Url" class="fas fa-box fa-7x"></span>
-                <img *ngIf="Product.image_Url" [src]="Product.image_Url" class="img-fluid img-thumbnail" alt="Responsive image">
+                <span *ngIf="!Product.image && !form.value.image" class="fas fa-box fa-7x"></span>
+                <img *ngIf="Product.image && !form.value.image_Url" [src]="Product.image" class="img-fluid img-thumbnail" alt="Responsive image">
                 <img *ngIf="form.value.image_Url" [src]="form.value.image_Url" class="img-fluid img-thumbnail" alt="Responsive image">
               </div>
             </div>
