@@ -29,3 +29,7 @@
 .ng-invalid.ng-touched{
   border-color: orangered;
 }
+
+body {
+  -webkit-print-color-adjust: exact;
+}

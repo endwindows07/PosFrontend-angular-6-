@@ -7,6 +7,7 @@ import { ContentComponent } from './components/content/content.component';
 import { RouterModule } from '@angular/router';
 import { AlertModule, BsDropdownModule, PaginationModule, BsDatepickerModule, TypeaheadModule } from 'ngx-bootstrap';
 import { AlertService } from './components/services/alert.service';
+import { AngularPrint } from 'angular-print'
 
 @NgModule({
   imports: [

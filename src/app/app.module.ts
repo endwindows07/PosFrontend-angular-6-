@@ -15,7 +15,6 @@ import { ReportService } from './services/report.service';
 import { OrderService } from './services/order.service';
 import { ImageService } from './services/image.service';
 
-
 @NgModule({
   declarations: [AppComponent, LoginComponent],
   imports: [
@@ -26,7 +25,7 @@ import { ImageService } from './services/image.service';
     HttpClientModule,
     LayoutModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [AccontService, ProductService, SalesService, ReportService, OrderService, ImageService],
   bootstrap: [AppComponent]
