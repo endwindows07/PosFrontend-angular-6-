@@ -12,14 +12,18 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-lg-1"></div>
-                  <div class="col-lg-9">
+                  <div class="col-lg-8">
                     <div class="input-group">
-                      <input placeholder="ค้นหาเวลาขาย" type="text" class="form-control btn-lg" [(ngModel)]="Search_Text" bsDaterangepicker
-                        #dpr="bsDaterangepicker">
+                      <input placeholder="ค้นหาเวลาขาย" type="text" class="form-control btn-lg" [(ngModel)]="Search_Text"
+                        bsDaterangepicker #dpr="bsDaterangepicker">
                       <div class="input-group-append">
                         <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                       </div>
                     </div>
+                  </div>
+                  <div class="col-lg-1 text-right">
+                    <a (click)="Search_Text = null;" class="btn btn-secondary btn-lg float-right" href="javascript:void(0)"><span
+                        class="mdi mdi-backspace mdi-18px"></span></a>
                   </div>
                   <div class="col-2">
                     <a (click)="onSearchSalesProductTime()" class="btn-cyan  btn-lg float-right text-white" href="javascript:void(0)"><i
@@ -39,17 +43,20 @@
             <div class="col-md-12">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-8">
+                  <div class="col-11">
                     <div class="search input-field m-t-0 m-b-0">
                       <input type="text" class="form-control" placeholder="ค้นหาด้วยรหัสแท่ง" [(ngModel)]="productBarcodeSearch"
                         (input)="onSearchProduct($event.target.value)" class="form-control border-0" autofocus>
                     </div>
                   </div>
-                  <div class="col-2">
+                  <div class="col-lg-1 text-right">
+                    <a (click)="Search_Text = null; productsSelect = []" class="btn btn-secondary btn-lg float-right" href="javascript:void(0)"><span class="mdi mdi-backspace mdi-18px"></span></a>
+                  </div>
+                  <!-- <div class="col-2">
                     <a (click)="onLoadProductSelectToChart()" class="btn-cyan  btn-lg float-right text-white" href="javascript:void(0)"><i
                         class="fas fa-search">
                         ค้นหา</i></a>
-                  </div>
+                  </div> -->
                 </div>
               </div>
             </div>

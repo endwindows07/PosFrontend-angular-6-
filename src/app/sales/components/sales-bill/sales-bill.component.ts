@@ -26,9 +26,12 @@ export class SalesBillComponent {
   ) {
     this.onIitailLoadSalesBill({
       Start_Page: this.start_Page,
-      Limit_Page: this.limit_Page
+      Limit_Page: this.limit_Page,
+      Search_DefaultText: 'SalesNow',
+      Search_DefaultType: 'SalesNow'
     });
     this.search_Type = 'Id';
+    this.searchDefaultText = 'SalesNow';
     this.searchDefaultType = 'SalesNow';
   }
 

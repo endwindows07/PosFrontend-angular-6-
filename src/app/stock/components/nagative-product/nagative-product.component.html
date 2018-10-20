@@ -11,27 +11,15 @@
             <div class="col-md-12">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-8">
+                  <div class="col-9">
                     <div class="search input-field m-t-0 m-b-0">
                       <input [(ngModel)]="search_Text" type="text" class="form-control" placeholder=" {{ search_Type.value}}"
                         class="form-control border-0" placeholder="ค้นหาข้อมูลสินค้า" autofocus>
                     </div>
                   </div>
-                  <div class="col-lg-2">
-                    <div class="btn-group" dropdown>
-                      <button dropdownToggle type="dropdown" class="btn btn-lg btn-outline-secondary dropdown-toggle"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        {{ search_Type.value}}
-                        <span class="caret"></span>
-                      </button>
-                      <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                        <li role="menuitem" *ngFor="let item of search_TypeItem">
-                          <a class="dropdown-item" (click)="search_Type = item">
-                            {{ item.value }}
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
+                  <div class="col-lg-1 text-right">
+                    <a (click)="search_Text = null;" class="btn btn-secondary btn-lg float-right"
+                      href="javascript:void(0)"><span class="mdi mdi-backspace mdi-18px"></span></a>
                   </div>
                   <div class="col-2">
                     <a (click)="onClickSearch()" class="btn-cyan  btn-lg float-right text-white" href="javascript:void(0)"><i

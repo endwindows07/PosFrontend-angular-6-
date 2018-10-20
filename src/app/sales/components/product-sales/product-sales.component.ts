@@ -27,6 +27,7 @@ export class ProductSalesComponent {
     this.inittailLoadProductLocalStore({
       Start_Page: this.start_Page,
       Limit_Page: this.limit_Page
+      
     });
   }
 
@@ -94,7 +95,8 @@ export class ProductSalesComponent {
     }
   }
 
-  onInsertProductSelected(product: IProduct) {
+  onInsertProductSelected(product: IProduct) {    
+    if(product.status == false) return this.alert.error_alert("สิ้นค้าห้ามขาย");
     this.searchValueSelected = "";
     let productSelected = this.onSearchProductSelectedById(product.id);
     if (this.onSearchProductSelectedById(product.id) != null) {

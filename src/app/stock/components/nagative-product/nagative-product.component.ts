@@ -24,7 +24,6 @@ export class NagativeProductComponent {
     private router: RouterModule,
     private accessTokenService: AccessTokenService
   ) {
-    this.search_Type = this.search_TypeItem[0];
     this.initailLoadProducts({
       Start_Page: this.start_Page,
       Limit_Page: this.limit_Page,
@@ -38,40 +37,18 @@ export class NagativeProductComponent {
   searchDefaultType = "Amount_Product";
   searchDefaultText = -1;
 
-  search_Text = "";
-  search_Type: IOptionKey;
-  search_TypeItem: IOptionKey[] = [
-    { key: "Name", value: "ค้นหาด้วย ชื่อสินค้า" },
-    { key: "Barcode", value: "ค้นหาด้วย รหัสแท่ง" },
-    { key: "Barcode_Custom", value: "ค้นหาด้วย รหัสกำหนดเอง" },
-    { key: "Cost_Product", value: "ค้นหาด้วย ราคาทุนสินค้า" },
-    { key: "Price", value: "ค้นหาด้วย ราคาขายสินค้า" },
-    { key: "Amount_Product", value: "ค้นหาด้วย จำนวนสินค้า" },
-    { key: "Status", value: "ค้นหาด้วย สถานะ" }
-  ];
+  search_Text: string = "";
+  search_Type: string = "Name";
 
   start_Page = 1;
   limit_Page = 8;
   Products: IProductList;
   SearchOption: ISearchOption;
 
-  private get getSearchtext() {
-    let responseSearch = null;
-    switch (this.search_Type.key) {
-      case "updated":
-        responseSearch = { from: this.search_Text[0], to: this.search_Text[1] };
-        break;
-      default:
-        responseSearch = this.search_Text;
-        break;
-    }
-    return responseSearch;
-  }
-  
   onClickSearch() {
     this.initailLoadProducts({
-      Search_Text: this.getSearchtext,
-      Search_Type: this.search_Type.key,
+      Search_Text: this.search_Text,
+      Search_Type: this.search_Type,
       Start_Page: this.start_Page,
       Limit_Page: this.limit_Page,
       Search_DefaultType: this.searchDefaultType,
@@ -79,12 +56,14 @@ export class NagativeProductComponent {
     });
   }
 
+
+
   onPageChanged(page: PageChangedEvent) {
     this.initailLoadProducts({
+      Search_Text: this.search_Text,
+      Search_Type: this.search_Type,
       Start_Page: page.page,
       Limit_Page: page.itemsPerPage,
-      Search_Text: this.getSearchtext,
-      Search_Type: this.search_Type.key,
       Search_DefaultType: this.searchDefaultType,
       Search_DefaultText: this.searchDefaultText
     });

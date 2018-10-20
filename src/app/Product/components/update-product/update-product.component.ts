@@ -100,9 +100,11 @@ export class UpdateProductComponent {
         this.form.controls["price"].setValue(product.price);
         this.form.controls["amount_Product"].setValue(product.amount_Product);
         this.form.controls["type"].setValue(this.typeSelected.key);
+        this.form.controls["image_Url"].setValue(product.image);
         this.form.controls["productCategoryId"].setValue(
           this.categorySelected.key
         );
+        this.changeStatusProduct();
       })
       .catch(err => {
         this.alert.error_alert(err.Message);
@@ -161,9 +163,15 @@ export class UpdateProductComponent {
       .catch(err => this.alert.error_alert(err.Message));
   }
 
-  // test(i:HTMLInputElement){
-  //   console.log(i.value);
-  //   this.statusProduct = !this.statusProduct; 
-  //   console.log(this.statusProduct);
-  // }
+  changeStatusProduct(){
+    
+    console.log(this.statusProduct);
+    if(this.statusProduct == true){
+      document.getElementById('changeStatusProduct').className = "btn btn-md btn-secondary btn-toggle active";
+    }else{
+      document.getElementById('changeStatusProduct').className = "btn btn-md btn-secondary btn-toggle unactive";    
+    }
+    this.statusProduct = !this.statusProduct; 
+  }
+  
 }

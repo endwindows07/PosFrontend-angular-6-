@@ -46,7 +46,7 @@
           <div class="row">
             <div [ngClass]="{'col-lg-12': classHtmlStatus === true, 'col-lg-10': classHtmlStatus === false}">
               <div class="table-responsive m-t-40" style="clear: both;">
-                <table class="table table-striped" style=" height: 350px; ">
+                <table  class="table table-striped" style=" height: 350px; ">
                   <thead>
                     <tr>
                       <th>
@@ -75,7 +75,8 @@
                         <p>{{ i + 1 }}</p>
                       </td>
                       <td class="hidden-phone"> {{item.barcode}} ({{ item.barcode_Custom }}) </td>
-                      <td>image</td>
+                      <td *ngIf="item.image"><img src="{{item.image}}" height="50" width="50" alt="Responsive image"></td>
+                      <td *ngIf="!item.image"><span class="fas fa-box fa-3x"></span></td>
                       <td>{{item.name}}</td>
                       <td>{{getStatus(item.status)}}</td>
                       <td>

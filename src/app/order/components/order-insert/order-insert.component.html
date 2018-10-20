@@ -6,7 +6,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card-body card-header btn-success active text-white">
-          <h3> <span class="fas fa-clipboard-check"></span> <b> เพิ่มรายการจัดซื้อสินค้า</b> <span class="pull-right"></span></h3>          
+          <h3> <span class="fas fa-clipboard-check"></span> <b> เพิ่มรายการจัดซื้อสินค้า</b> <span class="pull-right"></span></h3>
         </div>
         <div class="card card-body printableArea">
           <div class="row">
@@ -22,12 +22,12 @@
                     </div>
 
                   </div>
-                  <div class="col-lg-1">
-                    <a (click)="searchValueSelected = null" class="btn-twitter btn-warning btn-lg float-right text-white"
-                      href="javascript:void(0)"><i class="mdi mdi-backspace"></i></a>
+                  <div class="col-lg-1 text-right">
+                    <a (click)="searchValueSelected = null;" class="btn btn-secondary btn-lg float-right" href="javascript:void(0)"><span
+                        class="mdi mdi-backspace mdi-18px"></span></a>
                   </div>
                   <div class="col-2">
-                    <a (click)="onSearchAdvand(); searchAdvandStatus = !searchAdvandStatus;" class="btn-warning  btn-lg float-right text-white"
+                    <a (click)="onSearchAdvand(); searchAdvandStatus = !searchAdvandStatus;" class="btn btn-outline-cyan  btn-lg float-right"
                       href="javascript:void(0)"><i class="fas fa-search">
                         ค้นหาขั้นสูง</i></a>
                   </div>
@@ -150,7 +150,7 @@
                 </div>
               </div>
               <div class=" card-body text-left">
-                <button class="btn btn-lg btn-success" (click)="onAdjustSalesProduct()">  สร้างใบจัดซื้อสินค้า
+                <button class="btn btn-lg btn-success" (click)="onAdjustSalesProduct()"> สร้างใบจัดซื้อสินค้า
                 </button>
               </div>
             </div>

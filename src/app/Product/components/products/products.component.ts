@@ -11,13 +11,17 @@ import { AppUrl } from '../../../app.url';
 import { ProductUrl } from '../../product.url';
 import { ICategory } from '../../../interfaces/Product/product-category.interface';
 import { IProductList } from '../../../interfaces/Product/product-list.interface';
+declare let $;
 
 @Component({
   selector: "app-products",
   templateUrl: "./products.component.html",
   styleUrls: ["./products.component.css"]
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
+  ngOnInit(): void {
+
+  }
   constructor(
     private productService: ProductService,
     private alert: AlertService,

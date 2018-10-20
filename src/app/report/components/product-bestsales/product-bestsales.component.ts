@@ -25,11 +25,15 @@ export class ProductBestsalesComponent {
     this.onInitailloadProductBestSales({
       Start_Page: this.Start_Page,
       Limit_Page: this.Limit_Page,
-      Search_DefaultText: 'SalesNow',
-      Search_DefaultType:  'SalesNow'
+      Search_Text: 'SalesNow',
+      Search_Type: 'SalesNow',
+      // Search_DefaultText: 'เครื่องเขียน',
+      // Search_DefaultType:  'roductCategoryId'
     });
    }
 
+  
+  
   AppUrl = AppUrl;
   ProductUrl = ProductUrl;
   
