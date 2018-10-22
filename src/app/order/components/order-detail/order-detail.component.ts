@@ -58,6 +58,7 @@ export class OrderDetailComponent {
     this.orderService.onGetOrderById(this.orderId, this.accessTokenService.getAccesstokenStore())
       .then(order => {
         this.order = order;
+        console.log(order);
       })
       .catch(err => {
         this.alert.error_alert(err.Message);
@@ -85,5 +86,14 @@ export class OrderDetailComponent {
 
   print(){
     this.printService.onPrint();
+  }
+
+  onDeleteOrder(){
+    this.orderService.onDeleteOrderById(this.orderId, this.accessTokenService.getAccesstokenStore())
+      .then(res => {
+        this.alert.success_alert("ลบใบจัดซื้อสำเร็จ");
+        this.router.navigate(['/', AppUrl.Order, OrderUrl.Orders]);
+      })
+      .catch(err => this.alert.error_alert(err.Message))
   }
 }

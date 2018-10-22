@@ -38,4 +38,9 @@ export class OrderService {
         return this.http.requestPost(`api/Order/cancel-order/${id}`, accessToken)
             .toPromise() as Promise<IOrderList>;
     }
+
+    onDeleteOrderById(id: any, accessToken: string) {
+        return this.http.requestGet(`api/Order/delete-order/${id}`, accessToken)
+            .toPromise() as Promise<IOrderList>;
+    }
 }

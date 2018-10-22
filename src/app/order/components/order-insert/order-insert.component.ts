@@ -54,7 +54,7 @@ export class OrderInsertComponent {
     if (this.productsSelect != null) {
       this.productsSelect.forEach(it => {
         let order: IOrder = {
-          product_Id: it.id,
+          productId: it.id,
           order_Count: it.countOrder.toString()
         };
         this.orderProducts.push(order);

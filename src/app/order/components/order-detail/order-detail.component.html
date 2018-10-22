@@ -44,10 +44,8 @@
                   <tbody *ngIf="order">
                     <tr *ngFor="let item of order.product_List; let i = index;">
                       <td>{{i + 1}}</td>
-                      <td>item.product.barcode</td>
-                      <td class="text-left"><a [routerLink]="['/', AppUrl.Product, ProductUrl.DetailProduct, item.product_Id]">{{
-                          item.product_Id
-                          }}</a> </td>
+                      <td>{{item.product.barcode}}</td>
+                      <td class="text-left"><a [routerLink]="['/', AppUrl.Product, ProductUrl.DetailProduct, item.productId]">{{item.product.name}}</a> </td>
                       <td class="text-center"> {{item.order_Count}} </td>
                     </tr>
                   </tbody>
@@ -57,17 +55,23 @@
           </div>
           <hr>
           <div class="row hided">
-            <div *ngIf="userLogin.role == 1" class="col-lg-8">
-              <button class="btn btn-lg btn-outline-danger" type="submit"> <span class="fas fa-trash-alt"></span>
+            <div *ngIf="userLogin.role == 1" class="col-lg-6">
+              <button class="btn btn-lg btn-outline-danger" (click)="onDeleteOrder()" type="submit"> <span class="fas fa-trash-alt"></span>
                 ลบใบจัดซื้อ
               </button>
+            </div>
+            <div *ngIf="userLogin.role == 1" class="col-lg-2">
+              <a [routerLink]="[ '/', AppUrl.Order, OrderUrl.OrderUpdate, order.id]">
+                <button class="btn btn-lg btn-cyan"  type="submit"> <span class="fas fa-edit"></span>
+                  แก้ไขใบสั่งซื้อ
+                </button>
+              </a>
             </div>
             <div *ngIf="userLogin.role == 1" class="col-lg-2">
               <button class="btn btn-lg btn-cyan" (click)="onAdjustOrder()" type="submit"> <span class="fas fa-cloud-upload-alt"></span>
                 นำข้อมูลลงระบบ
               </button>
             </div>
-
             <div class="col-lg-2 text-right">
               <button class="btn btn-lg btn-outline-warning" (click)="print()" type="submit"> <span class="fas fa-print"></span>
                 พิมพ์ใบเสร็จ
