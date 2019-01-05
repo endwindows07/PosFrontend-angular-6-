@@ -12,6 +12,7 @@ import { PageChangedEvent } from "ngx-bootstrap";
 import { DatePipe } from "@angular/common";
 import { IProductList } from "../../../interfaces/Product/product-list.interface";
 import { ICategory } from "src/app/interfaces/Product/product-category.interface";
+import { StockUrl } from "../../stock.url";
 
 @Component({
   selector: "app-product-expired",
@@ -34,6 +35,7 @@ export class ProductExpiredComponent {
   }
 
   AppUrl = AppUrl;
+  StockUrl = StockUrl;
   ProductUrl = ProductUrl;
   searchDefaultType = "Expired";
   searchDefaultText = 30;

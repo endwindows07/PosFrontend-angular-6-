@@ -1,18 +1,4 @@
 <app-content>
-  <div class="page-breadcrumb">
-    <div class="row">
-      <div class="col-2 d-flex no-block align-items-center">
-        <div class="ml-auto text-left">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">หน้าร้าน</a></li>
-              <li class="breadcrumb-item active" aria-current="page">หน้าขายสินค้า</li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="container-fluid">
     <!-- ============================================================== -->
     <!-- Start Page Content -->
@@ -20,7 +6,16 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="card-body card-header btn-secondary active text-white">
-          <h3> <span class="fas fa-file-alt"></span> <b> รายละเอียดใบเสร็จ</b> <span class="pull-right"></span></h3>
+          <div class="row">
+            <div class="col-lg-9">
+              <h3> <span class="fas fa-file-alt"></span> <b> รายละเอียดใบเสร็จ</b> <span class="pull-right"></span></h3>
+            </div>
+            <div class="col-lg-3  text-right">
+              <a [routerLink]="[ '/', AppUrl.Sales, SalesUrl.SalesBill]">
+                <button class="btn btn-outline-light hided" type="submit"> <span class="fas fa-home"></span></button>
+              </a>
+            </div>
+          </div>
         </div>
         <div class="card card-body printableArea">
           <div class="row">
@@ -40,8 +35,8 @@
                   ค้นหา</i></a>
             </div>
           </div>
-          <div class="card-body row">
-
+          <div class="card-body row" *ngIf="salesBill">
+            <hr>
             <div class="col-lg-1"></div>
             <div class="col-lg-10 row">
               <div class="card-body col-lg-12">
@@ -79,10 +74,10 @@
                   </table>
                 </div>
               </div>
-              <div class="card-body col-lg-2">
+              <!-- <div class="card-body col-lg-2">
                 <button class="btn btn-lg btn-secondary" type="submit"> <span class="fas fa-angle-left"></span> กลับ
                 </button>
-              </div>
+              </div> -->
               <div class="card-body col-lg-3">
                 <button class="btn btn-lg btn-outline-secondary" type="submit" (click)="onCancelSalesBill()">
                   ยกเลิกใบเสร็จ

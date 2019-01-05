@@ -8,7 +8,9 @@
               <h3><b>เลขที่ใบเสร็จ</b> <span class="pull-right">#{{salesBill.id}}</span> <small class="hided"> ({{onGetStatsuSalesString(salesBill.status)}}) </small></h3>
             </div>
             <div class="col-lg-3  text-right">
-              <button class="btn btn-outline-success hided" type="submit"> <span class="fas fa-home"></span></button>
+              <a [routerLink]="[ '/', AppUrl.Sales, SalesUrl.SalesBill]">
+                <button class="btn btn-outline-success hided" type="submit" > <span class="fas fa-home"></span></button>
+              </a>
             </div>
           </div>
           <hr>

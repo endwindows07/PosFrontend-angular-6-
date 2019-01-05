@@ -94,7 +94,7 @@ export class UpdateProductComponent {
         this.statusProduct = product.status;
         this.form.controls["name"].setValue(product.name);
         this.form.controls["barcode"].setValue(product.barcode);
-        this.form.controls["barcode_Custom"].setValue(product.barcode_Custom);
+        // this.form.controls["barcode_Custom"].setValue(product.barcode_Custom);
         this.form.controls["description"].setValue(product.description);
         this.form.controls["cost_Product"].setValue(product.cost_Product);
         this.form.controls["price"].setValue(product.price);
@@ -138,7 +138,7 @@ export class UpdateProductComponent {
   initailLoadFormCreateProduct() {
     this.form = this.builder.group({
       barcode: ["", [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
-      barcode_Custom: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(5)]],
+      // barcode_Custom: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(5)]],
       name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
       description: ["", [Validators.required, Validators.minLength(0), Validators.maxLength(100)]],
       image_Url: [],

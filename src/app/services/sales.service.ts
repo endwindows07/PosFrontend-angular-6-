@@ -10,7 +10,6 @@ declare let $;
 export class SalesService {
   constructor(private http: HttpService) {}
 
-
   onGetProduct(options: ISearchOption, accessToken: string) {
     return this.http
       .requestGet(`api/product/products?${$.param(options)}`, accessToken)

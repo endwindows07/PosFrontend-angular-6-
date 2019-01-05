@@ -29,7 +29,7 @@ export class ProductsComponent implements OnInit {
     private accessTokenService: AccessTokenService
   ) {
     this.categorySelected = null;
-    this.search_Type = this.search_TypeItem[0];
+    this.search_Type = this.search_TypeItem[1];
     this.initailLoadProducts({
       Start_Page: this.start_Page,
       Limit_Page: this.limit_Page,

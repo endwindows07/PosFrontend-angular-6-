@@ -4,23 +4,26 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card-body card-header btn-orange active text-white">
-          <h3> <span class="fas fa-exclamation-circle"></span> <b> รายการสินค้าใกล้หมดอายุ</b> <span class="pull-right"></span></h3>
+          <div class="row">
+            <div class="col-lg-9">
+              <h3> <span class="fas fa-exclamation-circle"></span> <b> รายการสินค้าใกล้หมดอายุ</b> <span class="pull-right"></span></h3>
+            </div>
+          </div>
         </div>
         <div class="card card-body printableArea" *ngIf="Products">
-          <hr>
           <div class="row">
             <div class="col-md-12">
               <div class="card-body">
                 <div class="row">
                   <div class="col-9">
                     <div class="search input-field m-t-0 m-b-0">
-                      <input [(ngModel)]="search_Text" type="text" class="form-control" placeholder=" {{ search_Type.value}}"
-                        class="form-control border-0" placeholder="ค้นหาข้อมูลสินค้า" autofocus>
+                      <input [(ngModel)]="search_Text" type="text" class="form-control"
+                        class="form-control border-0" placeholder="ค้นหาชื่อสินค้า" autofocus>
                     </div>
                   </div>
                   <div class="col-lg-1 text-right">
-                    <a (click)="search_Text = null;" class="btn btn-secondary btn-lg float-right"
-                      href="javascript:void(0)"><span class="mdi mdi-backspace mdi-18px"></span></a>
+                    <a (click)="search_Text = null;" class="btn btn-secondary btn-lg float-right" href="javascript:void(0)"><span
+                        class="mdi mdi-backspace mdi-18px"></span></a>
                   </div>
                   <div class="col-2">
                     <a (click)="onClickSearch()" class="btn-cyan  btn-lg float-right text-white" href="javascript:void(0)"><i
@@ -62,8 +65,9 @@
                       <td>
                         <p>{{ i + 1 }}</p>
                       </td>
-                      <td class="hidden-phone"> {{item.barcode}} ({{ item.barcode_Custom }}) </td>
-                      <td>image</td>
+                      <td class="hidden-phone"> {{item.barcode}} </td>
+                      <td *ngIf="item.image"><img src="{{item.image}}" height="50" width="50" alt="Responsive image"></td>
+                      <td *ngIf="!item.image"><span class="fas fa-box fa-3x"></span></td>
                       <td>{{item.name}}</td>
                       <td>{{item.expired | date: 'medium'}} ( {{getTimeRemaining(item.expired)}} )</td>
                       <td>

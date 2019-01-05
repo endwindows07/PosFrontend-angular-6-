@@ -8,6 +8,7 @@ import { AppUrl } from "../../../app.url";
 import { ProductUrl } from "../../../Product/product.url";
 import { ProductService } from "../../../services/product.service";
 import { PrintBill } from "src/app/services/print.service";
+import { SalesUrl } from "../../sales.url";
 
 @Component({
   selector: "app-detail-bill",
@@ -32,7 +33,8 @@ export class DetailBillComponent {
 
   AppUrl = AppUrl;
   ProductUrl = ProductUrl;
-
+  SalesUrl = SalesUrl;
+  
   productName: string;
   salesBillId: string;
   salesBill: ISales;

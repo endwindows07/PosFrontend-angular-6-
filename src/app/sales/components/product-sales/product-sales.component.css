@@ -41,7 +41,7 @@ tbody {
 }
 
 input {
-    height: 50px;
+    height: 40px;
     padding: 0 10px;
 }
 
@@ -49,4 +49,15 @@ input::-webkit-input-placeholder {
 
     font-size: 20px;
     line-height: 6;
+}
+
+
+#Payment {
+  height: 70px;
+  font: 28px sans-serif;
+}
+
+#amount {
+    padding: 0 1px;
+    width: 30%;
 }

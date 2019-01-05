@@ -19,8 +19,8 @@
                     </div>
                   </div>
                   <div class="col-lg-1">
-                    <a (click)="searchValueSelected = null" class="btn btn-secondary btn-lg float-right"
-                      href="javascript:void(0)"><span class="mdi mdi-backspace mdi-18px"></span></a>
+                    <a (click)="searchValueSelected = null" class="btn btn-secondary btn-lg float-right" href="javascript:void(0)"><span
+                        class="mdi mdi-backspace mdi-18px"></span></a>
                   </div>
                   <div class="col-2">
                     <a (click)="onSearchAdvand(); searchAdvandStatus = !searchAdvandStatus;" class="btn btn-outline-cyan  btn-lg float-right"
@@ -81,13 +81,13 @@
                         <img *ngIf="item.image" [src]="item.image" class="img-fluid img-thumbnail" alt="Responsive image">
                         <span *ngIf="!item.image" class="fas fa-box fa-3x"></span>
                       </td>
-                      <td>{{item.barcode}} ({{item.barcode_Custom}})</td>
+                      <td>{{item.barcode}} </td>
                       <td>{{item.name}}</td>
                       <td>{{item.price}}</td>
                       <td>
                         {{item.amount_Product}}
                       </td>
-                      <td><button (click)="onInsertProductSelected(item)"><span class="fas fa-shopping-cart"></span></button></td>
+                      <td><button (click)="onInsertProductSelected(item)"><span class="fas fa-2x fa-shopping-cart"></span></button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -123,18 +123,21 @@
                     <tr *ngFor="let item of productsSelect; let i = index">
                       <td width="10%">{{i+1}}</td>
                       <td width="15%">
-                        <img *ngIf="item.image" height="55" width="55" [src]="item.image" class="img-fluid img-thumbnail" alt="Responsive image">
+                        <img *ngIf="item.image" height="55" width="55" [src]="item.image" class="img-fluid img-thumbnail"
+                          alt="Responsive image">
                         <span *ngIf="!item.image" class="fas fa-box fa-3x"></span>
                       </td>
-                      <td width="15%">{{item.barcode}} ({{item.barcode_Custom}})</td>
+                      <td width="15%">{{item.barcode}} </td>
                       <td width="15%">{{item.name}}</td>
                       <td width="15%">{{item.price}}</td>
                       <td width="15%">
-                        <button (click)="onMinusProductCount(item.id, i)"><span class="fas fa-minus"></span></button>
-                        {{item.countOrder}}
-                        <button (click)="onPlusProductCount(item.id)"><span class="fas fa-plus"></span></button>
+                        <div class="row col-12">
+                          <button (click)="onMinusProductCount(item.id, i)"><span class="fas fa-minus"></span></button>
+                          <input type="input" [(ngModel)]="item.countOrder" (input)="onGetTotalPrice($event.target.value)" id="amount" value="{{item.countOrder}}">
+                          <button (click)="onPlusProductCount(item.id)"><span class="fas fa-plus"></span></button>
+                        </div>
                       </td>
-                      <td width="15%"><button (click)="onRemoveProduct(i, item.id)"><span class="fas fa-trash-alt"></span></button></td>
+                      <td width="15%"><button id="pointer" (click)="onRemoveProduct(i, item.id)"><span class="fas fa-2x fa-trash-alt"></span></button></td>
                     </tr>
                   </tbody>
                 </table>
@@ -142,15 +145,14 @@
             </div>
             <div class="col-md-12">
               <div class="pull-right m-t-30 text-right">
-                <h5>ราคารวม : {{ totalPrice }} บ.</h5>
-                <h5>ยอดชำระ : {{ payment }} บ. </h5>
+                <h4>ราคารวม : {{ totalPrice }} บ.</h4>
+                <h4>ยอดชำระ : {{ payment }} บ. </h4>
                 <hr>
                 <div class="row">
                   <div class="col-lg-8"></div>
-
                   <div class="col-lg-4">
                     <div class="input-group">
-                      <input [(ngModel)]="payment" placeholder="จำนวนเงินที่รับ" class="form-control" autofocus>
+                      <input  [(ngModel)]="payment" placeholder="จำนวนเงินที่รับ" class="form-control" autofocus>
                       <div class="input-group-append">
                         <span class="input-group-text" id="basic-addon2">บาท</span>
                       </div>
@@ -158,14 +160,25 @@
                   </div>
                 </div>
                 <hr>
-                <h3><b>เงินทอน :</b> {{ payment - totalPrice}} บ.</h3>
+                <h2><b>เงินทอน :</b> {{ payment - totalPrice}} บ.</h2>
                 <hr>
-              <div class="text-right">
-                <button class="btn btn-lg btn-danger" (click)="onAdjustSalesProduct()" type="submit"> <span class="fas fa-laptop"></span>
-                  ชำละเงิน
-                </button>
-                <button class="btn btn-lg btn-secondary" type="submit" (click)="payment = totalPrice"> รับพอดี </button>
-              </div>
+                <div class="row">
+                  <div class="col-7"></div>
+                  <div class="col-md-3">
+                    <div class="card" >
+                      <button id="Payment" class="btn btn-lg btn-skype" (click)="onAdjustSalesProduct()" type="submit"> <span class="fas fa-laptop"></span>
+                        ชำละเงิน
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="card">
+                      <button id="Payment" class="btn btn-lg btn-success" type="submit" (click)="payment = totalPrice"> รับพอดี
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
               </div>
               <div class="clearfix"></div>
             </div>

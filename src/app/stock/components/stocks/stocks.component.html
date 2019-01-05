@@ -73,8 +73,9 @@
                       <td>
                         <p>{{ i + 1 }}</p>
                       </td>
-                      <td class="hidden-phone"> {{item.barcode}} ({{ item.barcode_Custom }}) </td>
-                      <td>image</td>
+                      <td class="hidden-phone"> {{item.barcode}}</td>
+                      <td *ngIf="item.image"><img src="{{item.image}}" height="50" width="50" alt="Responsive image"></td>
+                      <td *ngIf="!item.image"><span class="fas fa-box fa-3x"></span></td>
                       <td>{{ item.name }}</td>
                       <td>{{ item.amount_Product }}</td>
                       <td>

@@ -11,6 +11,7 @@ import { IProfile } from 'src/app/interfaces/profile.interface';
 import { IRoleAccount } from 'src/app/interfaces/role';
 import { AccontService } from 'src/app/services/account.service';
 import { PrintBill } from 'src/app/services/print.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-order-detail',
@@ -38,7 +39,7 @@ export class OrderDetailComponent {
   AppUrl = AppUrl;
   OrderUrl = OrderUrl;
   ProductUrl = ProductUrl;
-  
+
   orderId: number;
   order: IOrderList;
 
@@ -84,16 +85,27 @@ export class OrderDetailComponent {
     }
   }
 
-  print(){
+  print() {
     this.printService.onPrint();
   }
 
-  onDeleteOrder(){
-    this.orderService.onDeleteOrderById(this.orderId, this.accessTokenService.getAccesstokenStore())
-      .then(res => {
-        this.alert.success_alert("ลบใบจัดซื้อสำเร็จ");
-        this.router.navigate(['/', AppUrl.Order, OrderUrl.Orders]);
-      })
-      .catch(err => this.alert.error_alert(err.Message))
+  onDeleteOrder() {
+    swal({
+      title: 'คุณมั่นใจ ?',
+      text: 'ว่าจะลบใบจัดซื้อนี้ รายการจัดซื้อนี้จะถูกนำออกจากระบบ',
+      icon: 'warning',
+      buttons: ["ยกเลิก", true],
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        this.orderService.onDeleteOrderById(this.orderId, this.accessTokenService.getAccesstokenStore())
+          .then(res => {
+            this.alert.success_alert("ลบใบจัดซื้อสำเร็จ");
+            this.router.navigate(['/', AppUrl.Order, OrderUrl.Orders]);
+          })
+          .catch(err => this.alert.error_alert(err.Message))
+      }
+    });
   }
 }

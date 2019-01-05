@@ -82,7 +82,7 @@
                     <tr *ngFor="let item of searchProductAdvand; let i = index">
                       <td>{{i+1}}</td>
                       <td>ร ูป {{ i+1}}</td>
-                      <td>{{item.barcode}} ({{item.barcode_Custom}})</td>
+                      <td>{{item.barcode}} </td>
                       <td>{{item.name}}</td>
                       <td>{{item.price}}</td>
                       <td>
@@ -127,16 +127,17 @@
                         <img *ngIf="item.image" [src]="item.image" class="img-fluid img-thumbnail" alt="Responsive image">
                         <span *ngIf="!item.image" class="fas fa-box fa-3x"></span>
                       </td>
-                      <td>{{item.barcode}} ({{item.barcode_Custom}})</td>
+                      <td>{{item.barcode}} </td>
                       <td>{{item.name}}</td>
                       <td>{{item.price}}</td>
-                      <td>
-                        <button (click)="onMinusProductCount(item.id, i)"><span class="fas fa-minus"></span></button>
-                        {{item.countOrder}}
-                        <!-- <input type="text" value="" style="width: 30px"> -->
-                        <button (click)="onPlusProductCount(item.id)"><span class="fas fa-plus"></span></button>
+                      <td width="15%">
+                        <div class="row col-12">
+                          <button (click)="onMinusProductCount(item.id, i)"><span class="fas fa-minus"></span></button>
+                          <input type="input" [(ngModel)]="item.countOrder" (input)="onGetTotalPrice($event.target.value)" id="amount" value="{{item.countOrder}}">
+                          <button (click)="onPlusProductCount(item.id)"><span class="fas fa-plus"></span></button>
+                        </div>
                       </td>
-                      <td><button (click)="onRemoveProduct(i, item.id)"><span class="fas fa-trash-alt"></span></button></td>
+                    <td width="15%"><button id="pointer" (click)="onRemoveProduct(i, item.id)"><span class="fas fa-2x fa-trash-alt"></span></button></td>
                     </tr>
                   </tbody>
                 </table>

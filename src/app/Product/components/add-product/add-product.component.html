@@ -1,35 +1,29 @@
 <app-content>
-  <div class="page-breadcrumb">
-    <div class="row">
-      <div class="col-12 d-flex no-block align-items-center">
-        <div class="ml-auto text-left">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item"><a href="#">หน้าร้าน</a></li>
-              <li class="breadcrumb-item active" aria-current="page">หน้าขายสินค้า</li>
-            </ol>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </div>
   <div class="container-fluid">
     <div class="row">
       <div class="col-lg-12">
+        <div class="card-body card-header btn-tumblr active text-white">
+          <div class="row">
+            <div class="col-lg-9">
+              <h3><b>เพิ่มรายการสินค้า</b> <span class="pull-right"></span></h3>
+            </div>
+            <div class="col-lg-3  text-right">
+              <a [routerLink]="[ '/', AppUrl.Product, ProductUrl.Products]">
+                <button class="btn btn-outline-light hided" type="submit"> <span class="fas fa-home"></span></button>
+              </a>
+            </div>
+          </div>
+        </div>
         <div class="card card-body printableArea">
-          <h3><b>เพิ่มรายการสินค้า</b> <span class="pull-right"></span></h3>
-          <hr>
           <div class="card-body row">
             <div class="col-md-3">
               <div class="card-img card-img-overlay">
-                <img *ngIf="!form.value.image" class="img-fluid img-thumbnail" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/PjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgdmlld0JveD0iMCAwIDE0MCAxNDAiIHByZXNlcnZlQXNwZWN0UmF0aW89Im5vbmUiPjwhLS0KU291cmNlIFVSTDogaG9sZGVyLmpzLzE0MHgxNDAKQ3JlYXRlZCB3aXRoIEhvbGRlci5qcyAyLjYuMC4KTGVhcm4gbW9yZSBhdCBodHRwOi8vaG9sZGVyanMuY29tCihjKSAyMDEyLTIwMTUgSXZhbiBNYWxvcGluc2t5IC0gaHR0cDovL2ltc2t5LmNvCi0tPjxkZWZzPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+PCFbQ0RBVEFbI2hvbGRlcl8xNjYyMDFjN2E4NSB0ZXh0IHsgZmlsbDojQUFBQUFBO2ZvbnQtd2VpZ2h0OmJvbGQ7Zm9udC1mYW1pbHk6QXJpYWwsIEhlbHZldGljYSwgT3BlbiBTYW5zLCBzYW5zLXNlcmlmLCBtb25vc3BhY2U7Zm9udC1zaXplOjEwcHQgfSBdXT48L3N0eWxlPjwvZGVmcz48ZyBpZD0iaG9sZGVyXzE2NjIwMWM3YTg1Ij48cmVjdCB3aWR0aD0iMTQwIiBoZWlnaHQ9IjE0MCIgZmlsbD0iI0VFRUVFRSIvPjxnPjx0ZXh0IHg9IjQ0LjA1NDY4NzUiIHk9Ijc0LjUiPjE0MHgxNDA8L3RleHQ+PC9nPjwvZz48L3N2Zz4="
-                  alt="Responsive image">
-                <img *ngIf="form.value.image" [src]="form.value.image" class="img-fluid img-thumbnail" alt="Responsive image">
+                <span *ngIf="!form.value.image_Url" class="fas fa-box fa-7x"></span>
+                <img *ngIf="form.value.image_Url" [src]="form.value.image_Url" class="img-fluid img-thumbnail" alt="Responsive image">
               </div>
             </div>
             <div class="card-body col-lg-9">
               <form class="form-horizontal" [formGroup]="form" (submit)="onCreateProduct()">
-
                 <div class="form-group row">
                   <label for="fname" class="col-sm-2 text-right control-label col-form-label">รูปสินค้า</label>
                   <div class=" col-sm-9">
@@ -38,11 +32,14 @@
                 </div>
                 <div class="form-group row">
                   <label for="fname" class="col-sm-2 text-right control-label col-form-label">รหัสแท่ง</label>
-                  <div class="col-sm-9">
-                    <input class=" form-control" formControlName="barcode" type="text" />
+                  <div class="col-sm-7">
+                    <input class=" form-control" formControlName="barcode" autofocus type="text" />
+                  </div>
+                  <div class="col-sm-2">
+                    <button type="button" (click)="randomBarcode()" class="btn btn-md btn-outline-info">สุ่มรหัส</button>
                   </div>
                 </div>
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label for="lname" class="col-sm-2 text-right control-label col-form-label">รหัสธรรมดา</label>
                   <div class="col-sm-7">
                     <input class=" form-control" formControlName="barcode_Custom" type="text" />
@@ -50,20 +47,20 @@
                   <div class="col-sm-2">
                     <button type="button" class="btn btn-md btn-outline-info">สุ่มรหัส</button>
                   </div>
-                </div>
+                </div> -->
                 <div class="form-group row">
                   <label for="lname" class="col-sm-2 text-right control-label col-form-label">ชื่อสินค้า</label>
                   <div class="col-sm-9">
                     <input class="form-control" formControlName="name" type="text" />
                   </div>
                 </div>
-                <div class="form-group row">
+                <!-- <div class="form-group row">
                   <label for="email1" class="col-sm-2 text-right control-label col-form-label">รายละเอียดสินค้า</label>
                   <div class="col-sm-9">
                     <textarea class="form-control " formControlName="description"></textarea>
                   </div>
-                </div>
-                <div class="form-group row">
+                </div> -->
+                <!-- <div class="form-group row">
                   <label for="cono1" class="col-sm-2 text-right control-label col-form-label">วันหมดอายุ </label>
                   <div class="col-sm-9">
                     <div class="input-group">
@@ -74,7 +71,7 @@
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> -->
                 <div class="row">
                 </div>
 
@@ -93,7 +90,7 @@
                       </button>
                       <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                         <li role="menuitem" *ngFor="let item of typeItem">
-                          <a class="dropdown-item" (click)="typeSelected = item">{{ item.value }}</a>
+                          <a class="dropdown-item" id="pointer" (click)="typeSelected = item">{{ item.value }}</a>
                         </li>
                       </ul>
                     </div>
@@ -108,7 +105,7 @@
                       </button>
                       <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                         <li role="menuitem" *ngFor="let item of categoryItem">
-                          <a class="dropdown-item" (click)="categorySelected = item">{{ item.value }}</a>
+                          <a class="dropdown-item" id="pointer" (click)="categorySelected = item">{{ item.value }}</a>
                         </li>
                       </ul>
                     </div>
@@ -130,7 +127,7 @@
                     <button class="btn btn-info btn-lg" type="submit">บันทึกข้อมูลสินค้า</button>
                   </div>
                   <div class="col-sm-3">
-                    <button type="button" class="btn btn-info btn-lg">กลับ</button>
+                    <!-- <button type="button" class="btn btn-info btn-lg">กลับ</button> -->
                   </div>
                 </div>
               </form>

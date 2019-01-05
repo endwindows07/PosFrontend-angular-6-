@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import swal from 'sweetalert';
+
 declare let $: any;
 @Injectable()
 
@@ -61,5 +63,15 @@ export class AlertService {
 
   success_alert(message: string, type: string = 'info', title: string = '') {
     this.notify(message, type, title);
+  }
+
+  confrimAlert(_title: string = "คุณมั่นใจ ?", _text: string = "ว่าจะดำเนินการต่อ", _icon: string = 'warning', _alertSuccess: string = 'ดำเนินการเสร็จสิ้น') {
+    swal({
+      title: _title,
+      text: _text,
+      icon: _icon,
+      buttons: ["ยกเลิก", true],
+      dangerMode: true,
+    });
   }
 }

@@ -71,7 +71,7 @@ export class OrderUpdateComponent {
         // find product data and set value to productSelected
         order.product_List.forEach(it => {
           console.log(it);
-          let productsOrder = this.products.find(pd => pd.id == it.product_Id);
+          let productsOrder = this.products.find(pd => pd.id == it.productId);
           productsOrder.countOrder = Number.parseInt(it.order_Count);
           this.productsSelect.push(productsOrder);
         });
@@ -104,7 +104,7 @@ export class OrderUpdateComponent {
     if (this.productsSelect != null) {
       this.productsSelect.forEach(it => {
         let order: IOrder = {
-          product_Id: it.id,
+          productId: it.id,
           order_Count: it.countOrder.toString()
         };
         this.orders.push(order);

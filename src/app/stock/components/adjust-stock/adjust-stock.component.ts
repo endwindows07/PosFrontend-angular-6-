@@ -36,20 +36,32 @@ export class AdjustStockComponent {
   form: FormGroup;
 
   onAdjustAmountProduct() {
-    this.productService
-      .onUpdateProductInStock(
-        this.form.value,
-        this.productId,
-        this.accessTokenService.getAccesstokenStore()
-      )
-      .then(res => {
-        this.alert.success_alert("ปรับยอดสินเค้าสำเร็จ");
-        this.router.navigate(["/", AppUrl.Product, ProductUrl.DetailProduct, this.productId]);
-      })
-      .catch(err => {
-        this.alert.error_alert(err.Message);
-        this.router.navigate(["/", AppUrl.Stock, StockUrl.Stocks]);
+    swal({
+      title: 'คุณมั่นใจ ?',
+      text: 'ว่าจะปรับปรุงจำนวนสินค้าในระบบ',
+      icon: 'warning',
+      buttons: ["ยกเลิก", true],
+      dangerMode: true,
+    })
+      .then((willDelete) => {
+        if (willDelete) {
+          this.productService
+            .onUpdateProductInStock(
+              this.form.value,
+              this.productId,
+              this.accessTokenService.getAccesstokenStore()
+            )
+            .then(res => {
+              this.alert.success_alert("ปรับยอดสินเค้าสำเร็จ");
+              this.router.navigate(["/", AppUrl.Product, ProductUrl.DetailProduct, this.productId]);
+            })
+            .catch(err => {
+              this.alert.error_alert(err.Message);
+              this.router.navigate(["/", AppUrl.Stock, StockUrl.Stocks]);
+            });
+        }
       });
+
   }
 
   initailLoadProduct(id: number) {
@@ -66,7 +78,7 @@ export class AdjustStockComponent {
     this.form = this.builder.group({ amount_Product: [""] });
   }
 
-  
+
   getType(typeNumber: TypeProduct) {
     return TypeProduct[typeNumber];
   }

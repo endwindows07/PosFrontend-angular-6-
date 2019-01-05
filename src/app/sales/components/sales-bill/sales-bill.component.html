@@ -3,7 +3,11 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card-body card-header btn-tumblr active text-white">
-          <h3> <span class="fas fa-list-ol"></span> <b> รายการขายสินค้า</b> <span class="pull-right"></span></h3>
+          <div class="row">
+            <div class="col-lg-9">
+              <h3> <span class="fas fa-list-ol"></span> <b> รายการขายสินค้า</b> <span class="pull-right"></span></h3>
+            </div>
+          </div>
         </div>
         <div class="card card-body printableArea">
           <div class="row">
@@ -21,8 +25,8 @@
                       bsDaterangepicker #dpr="bsDaterangepicker">
                   </div>
                   <div class="col-lg-1 text-right">
-                    <a (click)="search_Text = null; dateSearch = null;" class="btn btn-secondary btn-lg float-right" href="javascript:void(0)"><span
-                        class="mdi mdi-backspace mdi-18px"></span></a>
+                    <a (click)="search_Text = null; dateSearch = null;" class="btn btn-secondary btn-lg float-right"
+                      href="javascript:void(0)"><span class="mdi mdi-backspace mdi-18px"></span></a>
                   </div>
                   <div class="col-2">
                     <a (click)="onClickSearch()" class="btn-cyan  btn-lg float-right text-white" href="javascript:void(0)"><i

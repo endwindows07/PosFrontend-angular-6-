@@ -67,7 +67,6 @@ export class ProductSalesComponent {
   }
 
   onSearchBarcodeProduct() {
-
     if (this.searchAdvandStatus) {
       let product: IProduct[];
       product = this.product.filter(
@@ -142,8 +141,7 @@ export class ProductSalesComponent {
         this.onResetValue();
       })
       .catch(err => {
-        this.productsSelect = null;
-        this.productOrders = null;
+        this.onResetValue();
         this.alert.error_alert(err.Message);
       });
   }
@@ -172,7 +170,8 @@ export class ProductSalesComponent {
     this.productsSelect.splice(index, 1);
   }
 
-  private onGetTotalPrice() {
+ onGetTotalPrice() {
+   console.log('this.');
     this.totalPrice = 0;
     if (this.productsSelect.length != 0) {
       this.productsSelect.forEach(it => {
@@ -197,8 +196,8 @@ export class ProductSalesComponent {
     this.totalPrice = 0;
     this.calculateChange = 0;
 
-    this.productOrders = null;
+    this.productOrders = [];
 
-    this.productsSelect = null;
+    this.productsSelect = [];
   }
 }

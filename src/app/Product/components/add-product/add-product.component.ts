@@ -29,7 +29,9 @@ export class AddProductComponent {
     this.categorySelected = this.categoryItem[0];
     this.initailLoadFormCreateProduct();
   }
-
+  AppUrl = AppUrl;
+  ProductUrl = ProductUrl;
+  
   form: FormGroup;
   type = TypeProduct;
   category = ICategory;
@@ -67,6 +69,10 @@ export class AddProductComponent {
   ];
   
   onCreateProduct() {
+    this.form.controls["description"].setValue("รายละเอียดสินค้าเพิ่มเติม");
+    this.form.controls["expired"].setValue("2022-06-18");
+    this.form.controls["status"].setValue(true);
+    console.log(this.form);
     this.onSetOption();
     if(this.form.invalid){
       return this.alert.error_alert("กรุณากรอกข้อมูล");
@@ -92,17 +98,23 @@ export class AddProductComponent {
   initailLoadFormCreateProduct() {
     this.form = this.builder.group({
       barcode: ["", [Validators.required, Validators.minLength(13), Validators.maxLength(13)]],
-      barcode_Custom: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(5)]],
+      // barcode_Custom: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(5)]],
       name: ["", [Validators.required, Validators.minLength(3), Validators.maxLength(30)]],
-      description: ["", [Validators.required, Validators.minLength(0), Validators.maxLength(100)]],
+      description: [""],
       image_Url: [""],
       expired: [""],
       cost_Product: ["", [Validators.required]],
       price: ["", [Validators.required]],
       amount_Product: ["", [Validators.required]],
       type: [""],
-      productCategoryId: [""]
+      productCategoryId: [""],
+      status: [""]
     });
+  }
+
+  randomBarcode(){
+    this.form.controls["barcode"].setValue(Math.floor(1000000000000 + Math.random() * 9000000000000));
+    console.log(Math.floor(1000000000000 + Math.random() * 9000000000000));
   }
 
   onCovertImage(input: HTMLInputElement) {

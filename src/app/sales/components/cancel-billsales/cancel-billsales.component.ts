@@ -23,9 +23,10 @@ export class CancelBillsalesComponent {
 
   salesBillId: string;
   salesBill: ISales;
-
+  
   AppUrl = AppUrl;
   ProductUrl = ProductUrl;
+  SalesUrl = SalesUrl;
 
   onCancelSalesBill() {
     this.salesService.onCancelBillProduct(this.salesBillId, this.accessTokenService.getAccesstokenStore())

@@ -3,7 +3,11 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card card-body printableArea" *ngIf="Products">
-          <h3><b>รายการสินค้า</b> <span class="pull-right"></span></h3>
+          <div class="row">
+            <div class="col-lg-9">
+              <h3><b>รายการสินค้า</b> <span class="pull-right"></span></h3>
+            </div>
+          </div>
           <hr>
           <div class="row">
             <div class="col-md-12">
@@ -24,7 +28,7 @@
                       </button>
                       <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                         <li role="menuitem" *ngFor="let item of search_TypeItem">
-                          <a class="dropdown-item" (click)="search_Type = item">
+                          <a class="dropdown-item" id="pointer" (click)="search_Type = item">
                             {{ item.value }}
                           </a>
                         </li>
@@ -74,7 +78,7 @@
                       <td>
                         <p>{{ i + 1 }}</p>
                       </td>
-                      <td class="hidden-phone"> {{item.barcode}} ({{ item.barcode_Custom }}) </td>
+                      <td class="hidden-phone"> {{item.barcode}} </td>
                       <td *ngIf="item.image"><img src="{{item.image}}" height="50" width="50" alt="Responsive image"></td>
                       <td *ngIf="!item.image"><span class="fas fa-box fa-3x"></span></td>
                       <td>{{item.name}}</td>
