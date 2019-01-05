@@ -6,7 +6,7 @@
         <div class="card-body card-header btn-secondary active text-white">
           <h3> <span class="fas fa-clipboard-list"></span> <b> รายการจัดซื้อสินค้า</b> <span class="pull-right"></span></h3>
         </div>
-        <div class="card card-body printableArea">
+        <div class="card card-body printableArea" >
           <div class="row">
             <div class="col-md-12">
               <div class="card-body">
@@ -86,8 +86,10 @@
           <div class="row col-lg-12">
             <h5>จำนวนบิลทั้งหมด {{orderList.length}} รายการ</h5>
           </div>
-          <pagination [(ngModel)]="start_Page" [itemsPerPage]="limit_Page" (pageChanged)="onPageChanged($event)"
-            [rotate]="false" [maxSize]="10" previousText="หน้าก่อนหน้า" nextText="หน้าถัดไป" [totalItems]="orderList.length"></pagination>
+          <div *ngIf="start_Page != null">
+            <pagination [(ngModel)]="start_Page" [itemsPerPage]="limit_Page" (pageChanged)="onPageChanged($event)"
+              [rotate]="false" [maxSize]="10" previousText="หน้าก่อนหน้า" nextText="หน้าถัดไป" [totalItems]="orderList.length"></pagination>
+          </div>
         </div>
       </div>
     </div>

@@ -21,7 +21,7 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody *ngIf="MemberList != null">
                     <tr *ngFor="let item of MemberList.members">
                       <td>
                         <a> {{ item.id }} </a>
