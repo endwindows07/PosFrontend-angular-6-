@@ -64,7 +64,7 @@ export class DetailProductComponent {
       .catch(err => this.alert.error_alert(err.Message));
   }
 
-  getCategory(categoryNumber: ICategory) {
+  getCategory(categoryNumber: string) {
     return ICategory[categoryNumber];
   }
 

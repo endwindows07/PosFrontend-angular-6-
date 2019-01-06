@@ -123,7 +123,7 @@ export class ProductSalesComponent {
     this.onGetTotalPrice();
   }
 
-  private onAdjustSalesProduct() {
+  public onAdjustSalesProduct() {
     if (this.productsSelect == null) return this.alert.error_alert("กรุณาเลือกรายการขาย");
     if (this.payment < this.totalPrice) return this.alert.error_alert("ใส่จำนวนเงินให้ถูกต้อง");
 

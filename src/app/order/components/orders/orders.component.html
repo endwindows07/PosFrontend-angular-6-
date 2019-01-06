@@ -86,8 +86,8 @@
           <div class="row col-lg-12">
             <h5>จำนวนบิลทั้งหมด {{orderList.length}} รายการ</h5>
           </div>
-          <div *ngIf="start_Page != null">
-            <pagination [(ngModel)]="start_Page" [itemsPerPage]="limit_Page" (pageChanged)="onPageChanged($event)"
+          <div>
+            <pagination [(ngModel)]="Start_Page" [itemsPerPage]="Limit_Page" (pageChanged)="onPageChanged($event)"
               [rotate]="false" [maxSize]="10" previousText="หน้าก่อนหน้า" nextText="หน้าถัดไป" [totalItems]="orderList.length"></pagination>
           </div>
         </div>

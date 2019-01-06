@@ -12,7 +12,7 @@
           <div class="row">
             <div class="col-md-12">
               <div class="card-body">
-                <div class="row" *ngIf="!searchAdvandStatus">
+                <div class="row" *ngIf="false">
                   <div class="col-9">
                     <div class="search input-field m-t-0 m-b-0">
                       <input [(ngModel)]="searchValueSelected" (input)="onSearchBarcodeProduct($event.target.value)"
@@ -32,7 +32,7 @@
                         ค้นหาขั้นสูง</i></a>
                   </div>
                 </div>
-                <div class="row" *ngIf="searchAdvandStatus">
+                <div class="row" *ngIf="true">
                   <div class="col-8">
                     <div class="search input-field m-t-0 m-b-0">
                       <input [(ngModel)]="searchValueSelected" (input)="onSearchBarcodeProduct($event.target.value)"
@@ -51,7 +51,7 @@
               </div>
             </div>
             <div class="col-md-12">
-              <div class="table-responsive m-t-40" style="clear: both;" *ngIf="searchAdvandStatus">
+              <div class="table-responsive m-t-40" style="clear: both;" *ngIf="false">
                 <table class="table table-striped" style=" height: 350px; ">
                   <thead>
                     <tr>
@@ -96,7 +96,7 @@
                   </tbody>
                 </table>
               </div>
-              <div class="table-responsive m-t-40" style="clear: both;" *ngIf="!searchAdvandStatus">
+              <div class="table-responsive m-t-40" style="clear: both;">
                 <table class="table table-striped" style="  height: 350px; ">
                   <thead>
                     <tr>

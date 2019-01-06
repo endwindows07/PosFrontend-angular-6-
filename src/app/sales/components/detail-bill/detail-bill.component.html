@@ -19,10 +19,10 @@
               <div class="pull-right text-right">
                 <address>
                   <h5 class="top">เจ้าหน้าที่ขาย <small> <i> {{salesBill.member.username}} </i>  </small> </h5>
-                  <h5 *ngIf="salesBill.status == fales">เจ้าหน้าที่ยกเลิกใบเสร็จ {{salesBill.memberCancelBill}}</h5>
+                  <h5 *ngIf="salesBill.status == 'false'">เจ้าหน้าที่ยกเลิกใบเสร็จ {{salesBill.memberCancelBill}}</h5>
                   <p class="top"><b>เวลาขาย :</b> <i class="fa fa-calendar"></i> {{salesBill.sales_Time | date:
                     'medium'}}</p>
-                  <p *ngIf="salesBill.status == fales"><b>เวลายกเลิกใบเสร็จ:</b> <i class="fa fa-calendar"></i>
+                  <p *ngIf="salesBill.status == 'false'"><b>เวลายกเลิกใบเสร็จ:</b> <i class="fa fa-calendar"></i>
                     {{salesBill.cancelSales_Time |
                     date:'medium'}}</p>
                   <!-- <p class="text-muted m-l-30">E 104, Dharti-2,

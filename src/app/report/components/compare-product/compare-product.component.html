@@ -46,7 +46,8 @@
                   <div class="col-11">
                     <div class="search input-field m-t-0 m-b-0">
                       <input type="text" class="form-control" placeholder="ค้นหาด้วยรหัสแท่ง" [(ngModel)]="productBarcodeSearch"
-                        (input)="onSearchProduct($event.target.value)" class="form-control border-0" autofocus>
+                        (input)="onSearchProduct()" class="form-control border-0" autofocus>
+                        <!--(input)="onSearchProduct($event.target.value)"-->
                     </div>
                   </div>
                   <div class="col-lg-1 text-right">

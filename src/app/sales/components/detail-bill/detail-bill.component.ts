@@ -52,8 +52,8 @@ export class DetailBillComponent {
       .catch(err => this.alert.error_alert(err.Message));
   }
 
-  onGetStatsuSalesString(status: boolean) {
-    if (status) {
+  onGetStatsuSalesString(status: string) {
+    if (status == "true") {
       return "ลงระบบ"
     } else {
       return "ยกเลิกใบเสร็จ";

@@ -77,8 +77,8 @@ export class OrderDetailComponent {
       })
   }
 
-  onGetStatsuSalesString(status: boolean) {
-    if (status) {
+  onGetStatsuSalesString(status: string) {
+    if (status == "true") {
       return "ลงระบบ"
     } else {
       return "ยังไม่ลงระบบ";
