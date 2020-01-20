@@ -27,4 +27,5 @@ import { NagativeProductComponent } from "./components/nagative-product/nagative
     NagativeProductComponent
   ]
 })
+
 export class StockModule {}

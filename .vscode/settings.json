@@ -1,4 +1,11 @@
 {
     "appService.deploySubpath": "",
-    "appService.defaultWebAppToDeploy": "/subscriptions/b7181e69-1b61-471f-b886-01f1e9636a98/resourceGroups/PramotPPos/providers/Microsoft.Web/sites/PramotPPos"
+    "appService.defaultWebAppToDeploy": "/subscriptions/b7181e69-1b61-471f-b886-01f1e9636a98/resourceGroups/PramotPPos/providers/Microsoft.Web/sites/PramotPPos",
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#d3f6ee",
+        "activityBar.activeBorder": "#cc7be4",
+        "statusBar.background": "#a9eddd",
+        "statusBarItem.hoverBackground": "#7fe4cc"
+    },
+    "peacock.color": "#a9eddd"
 }
